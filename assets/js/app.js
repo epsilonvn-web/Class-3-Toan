@@ -226,6 +226,19 @@ function shuffleArray(arr) {
     return a;
 }
 
+// KHẮC PHỤC LỖI DỮ LIỆU: kho câu hỏi hiện có tới ~94% số câu luôn đặt đáp án đúng ở
+// vị trí đầu tiên (index 0 -> hiển thị là "A") do khâu sinh dữ liệu chưa xáo trộn "o".
+// Thay vì sửa lại toàn bộ file JSON, app tự xáo trộn thứ tự đáp án MỖI LẦN hiển thị
+// (không đổi dữ liệu gốc trong cache) để đảm bảo đáp án đúng rơi ngẫu nhiên vào A/B/C/D.
+function shuffleQuestionOptions(q) {
+    if (!q || !Array.isArray(q.options)) return q;
+    return { ...q, options: shuffleArray(q.options) };
+}
+
+function shuffleAllQuestionOptions(questions) {
+    return (questions || []).map(shuffleQuestionOptions);
+}
+
 function buildTrickyChoices(correctAnswer, sameGroupPool, allPool, count = 3) {
     let same = [...new Set(sameGroupPool.filter(x => x !== correctAnswer))];
     same = shuffleArray(same);
@@ -1058,7 +1071,7 @@ async function selectRoadmapWeek(weekNum) {
 function startTopicQuiz(topicNum, topicName, questions, subLabel) {
     stopSpeaking();
     clearInterval(quizTimerInterval);
-    activeQuestionsList = questions; 
+    activeQuestionsList = shuffleAllQuestionOptions(questions);
     currentQIndex = 0; 
     score = 0;
     userAnswers = {};
@@ -1478,7 +1491,7 @@ function nextQuestion() {
             alert(`🎉 Chúc mừng bé đã hoàn thành trọn vẹn 1 vòng luyện tập (${activeQuestionsList.length} câu)!\nBây giờ cô giáo Ong Vàng sẽ xáo trộn ngẫu nhiên để con bước vào vòng luyện tập tiếp theo nhé!`);
 
             const basePool = practiceCycleRawPool.length ? practiceCycleRawPool : activeQuestionsList;
-            activeQuestionsList = shuffleArray([...basePool]);
+            activeQuestionsList = shuffleAllQuestionOptions(shuffleArray([...basePool]));
             currentQIndex = 0;
             userAnswers = {};
             wrongAttemptsByQ = {};
