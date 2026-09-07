@@ -2264,6 +2264,16 @@ function speakCurrentQuestion() {
     speakVietnamese(textToRead, 0.96);
 }
 
+// Đọc to toàn bộ phần "Nhận xét sư phạm & kế hoạch bồi dưỡng" trong báo cáo tiến trình
+// (gộp text từ mọi khối con bên trong, theo đúng thứ tự hiển thị trên màn hình).
+function speakEvaluationBox() {
+    const box = document.getElementById('pedagogical-evaluation-box');
+    if (!box) return;
+    const fullText = box.innerText || box.textContent || '';
+    if (!fullText.trim()) return;
+    speakVietnamese(fullText, 0.96);
+}
+
 function playAudio(type) {
     try {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
