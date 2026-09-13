@@ -125,6 +125,12 @@ const GREETINGS_GUEST = [
 // ĐỊNH DANH MÁY CHỦ APPS SCRIPT & BIẾN TOÀN CỤC
 // ==========================================
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwb1dYNx6aIvfZ9wgOh3KDyLCwihHw3iVL6444yH2BV577cei6L1vV3-dXIw_6OKJM7-Q/exec";
+const AUTH_TOKEN_KEY = 'toan3_auth_token';
+const PREMIUM_TOPIC_IDS = new Set([11]);
+let adminAccountsCache = [];
+let adminSortKey = 'maHS';
+let adminSortDir = 'asc';
+
 let allTopicsDataCache = null;
 let allQuestionsFlatCache = null;
 // Bật/tắt đọc câu hỏi TỰ ĐỘNG khi vào câu mới — nút "Nghe câu hỏi" thủ công vẫn luôn hoạt động
@@ -360,52 +366,36 @@ async function loadExamDataFile(file) {
 async function renderDashboardGrid() {
     const container = document.getElementById('view-dashboard-grid');
     if (!container) return;
-    
     let topicsData = [];
     try { topicsData = await fetchAllTopicsData(); } catch (e) {}
-
     let html = '';
     TOPICS_CONFIG.forEach(t => {
         const topicObj = topicsData.find(item => Number(item.topic_id) === Number(t.id));
-        const totalCount = topicObj && topicObj.questions ? topicObj.questions.length : 0;
+        const totalCount = topicObj?.questions?.length || 0;
         const countLabel = totalCount > 0 ? `${totalCount} câu` : 'Đang cập nhật';
-
-        const iconHtml = t.isCustomTextIcon 
-            ? `<div class="w-8 h-8 bg-orange-100 rounded-xl flex items-center justify-center text-[11px] font-black text-orange-600 shadow-inner group-hover:scale-110 transition-transform shrink-0 tracking-tight">S/X</div>`
-            : `<div class="w-8 h-8 bg-${t.color}-100 rounded-xl flex items-center justify-center text-sm font-extrabold text-${t.color}-600 shadow-inner group-hover:scale-110 transition-transform shrink-0">${t.icon}</div>`;
-
+        const locked = PREMIUM_TOPIC_IDS.has(t.id) && !canAccessPremium();
+        const lockHtml = locked ? '<span class="absolute right-3 top-2 text-slate-400 text-sm">🔒</span>' : '';
         html += `
-            <div onclick="openTopic(${t.id}, '${t.title}', '${t.icon}')" class="pastel-card p-3 flex flex-col justify-between cursor-pointer hover:border-${t.color}-400 transition-all group min-h-[92px]">
-                <div class="flex items-center space-x-2.5">
-                    ${iconHtml}
+            <div onclick="openTopic(${t.id}, '${t.title.replace(/'/g,"\\'")}', '${t.icon}')" class="relative pastel-card p-3 flex flex-col justify-between cursor-pointer hover:border-${t.color}-400 transition-all group min-h-[92px]">
+                ${lockHtml}
+                <div class="flex items-center space-x-2.5 pr-5">
+                    <div class="w-8 h-8 bg-${t.color}-100 rounded-xl flex items-center justify-center text-sm font-extrabold text-${t.color}-600 shadow-inner group-hover:scale-110 transition-transform shrink-0">${t.icon}</div>
                     <h3 class="font-extrabold text-${t.color}-700 text-sm md:text-base leading-tight">${t.title}</h3>
                 </div>
                 <div class="flex justify-between items-center mt-1.5 pt-1 border-t border-yellow-100 text-[11px] font-bold text-gray-500">
-                    <span>${t.desc}</span>
-                    <span class="bg-${t.color}-50 text-${t.color}-600 px-2 py-0.5 rounded-full">${countLabel}</span>
+                    <span>${t.desc}</span><span class="bg-${t.color}-50 text-${t.color}-600 px-2 py-0.5 rounded-full">${countLabel}</span>
                 </div>
-            </div>
-        `;
+            </div>`;
     });
-
     let totalExamsCount = 3;
-    try {
-        const examData = await loadExamDataFile('de_thi_toan_3.json');
-        if (examData && examData.exams) totalExamsCount = examData.exams.length;
-    } catch (e) {}
-
+    try { const examData = await loadExamDataFile('de_thi_toan_3.json'); if (examData?.exams) totalExamsCount = examData.exams.length; } catch (e) {}
+    const examLocked = !canAccessPremium();
     html += `
-        <div onclick="openExamHub()" class="pastel-card p-3 flex flex-col justify-between cursor-pointer hover:border-amber-400 transition-all group bg-gradient-to-br from-white to-amber-50/50 min-h-[92px]">
-            <div class="flex items-center space-x-2.5">
-                <div class="w-8 h-8 bg-amber-100 rounded-xl flex items-center justify-center text-sm font-extrabold text-amber-600 shadow-inner group-hover:scale-110 transition-transform shrink-0">🏆</div>
-                <h3 class="font-extrabold text-amber-700 text-sm md:text-base leading-tight">12. Đấu trường đề thi</h3>
-            </div>
-            <div class="flex justify-between items-center mt-1.5 pt-1 border-t border-amber-100 text-[11px] font-bold text-gray-500">
-                <span>HK1, HK2, HSG</span>
-                <span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">${totalExamsCount} đề thi</span>
-            </div>
-        </div>
-    `;
+        <div onclick="openExamHub()" class="relative pastel-card p-3 flex flex-col justify-between cursor-pointer hover:border-amber-400 transition-all group bg-gradient-to-br from-white to-amber-50/50 min-h-[92px]">
+            ${examLocked ? '<span class="absolute right-3 top-2 text-slate-400 text-sm">🔒</span>' : ''}
+            <div class="flex items-center space-x-2.5 pr-5"><div class="w-8 h-8 bg-amber-100 rounded-xl flex items-center justify-center text-sm font-extrabold text-amber-600 shadow-inner">🏆</div><h3 class="font-extrabold text-amber-700 text-sm md:text-base leading-tight">12. Đấu trường đề thi</h3></div>
+            <div class="flex justify-between items-center mt-1.5 pt-1 border-t border-amber-100 text-[11px] font-bold text-gray-500"><span>HK1, HK2, HSG</span><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">${totalExamsCount} đề thi</span></div>
+        </div>`;
     container.innerHTML = html;
 }
 
@@ -468,15 +458,10 @@ function updateExamTimerDisplay() {
 }
 
 function openExamHub() {
-    stopSpeaking();
-    activeExamContext = null;
-    activeRoadmapContext = null;
-    activeTopicId = null;
-    pendingTopicQuiz = null;
-    updateNavTabs("12. Đấu trường đề thi", "🏆", null);
-    switchAppView('view-exam-hub');
-    showLoadingOverlay("Đang tải kho đề thi...");
-    renderExamHubGrid().finally(() => hideLoadingOverlay());
+    if (!requirePremium('Đấu trường đề thi')) return;
+    stopSpeaking(); activeExamContext = null; activeRoadmapContext = null; activeTopicId = null; pendingTopicQuiz = null;
+    updateNavTabs("12. Đấu trường đề thi", "🏆", null); switchAppView('view-exam-hub');
+    showLoadingOverlay("Đang tải kho đề thi..."); renderExamHubGrid().finally(() => hideLoadingOverlay());
 }
 
 async function renderExamHubGrid() {
@@ -605,11 +590,8 @@ function returnToTopicLecture() {
 
 function switchAppView(viewId) {
     stopSpeaking();
-    ['view-dashboard-grid', 'view-lecture', 'view-quiz', 'view-roadmap', 'view-exam-hub', 'view-result'].forEach(id => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        if (id === viewId) el.classList.remove('hidden');
-        else el.classList.add('hidden');
+    ['view-dashboard-grid','view-lecture','view-quiz','view-roadmap','view-exam-hub','view-result','view-admin'].forEach(id => {
+        const el=document.getElementById(id); if (!el) return; el.classList.toggle('hidden', id !== viewId);
     });
 }
 
@@ -666,175 +648,156 @@ async function callAppsScript(action, payload) {
 
 async function doLogin() {
     hideAuthError();
-    const maHSInput = document.getElementById('login-mahs');
-    const maPinInput = document.getElementById('login-mapin');
-    const maHS = (maHSInput?.value || '').trim().toUpperCase();
-    const maPin = (maPinInput?.value || '').trim();
-
-    if (!maHS || !maPin) {
-        const msg = 'Bé nhập đủ mã ID và mã PIN nhé!';
-        showAuthError(msg);
-        alert(msg);
-        return;
-    }
-
-    const btn = document.getElementById('btn-do-login');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang đăng nhập...';
-
+    const maHS=(document.getElementById('login-mahs')?.value||'').trim().toUpperCase();
+    const maPin=(document.getElementById('login-mapin')?.value||'').trim();
+    if (!maHS || !/^\d{4,6}$/.test(maPin)) { const msg='Bé nhập đúng mã ID và mã PIN nhé!'; showAuthError(msg); return; }
+    const btn=document.getElementById('btn-do-login'); btn.disabled=true; btn.innerHTML='<i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang đăng nhập...';
     try {
-        const result = await callAppsScript('login', { maHS, maPin });
-        if (!result.ok) {
-            const errMsg = result.error || 'Mã ID thẻ học sinh hoặc mã PIN không đúng!';
-            showAuthError(errMsg);
-            alert(errMsg);
-            return;
-        }
-        currentUser = { ...result.student, isGuest: false };
-        localStorage.setItem('tv1_mahs', maHS);
-        localStorage.setItem('tv1_mapin', maPin);
-        enterDashboard();
-    } catch (err) {
-        const connErr = 'Lỗi kết nối máy chủ: ' + err.message;
-        showAuthError(connErr);
-        alert(connErr);
-    } finally {
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-right-to-bracket mr-1"></i> Đăng nhập';
-    }
+        const result=await callAppsScript('login',{maHS,maPin});
+        if(!result.ok){showAuthError(result.error||'ID hoặc PIN không đúng!');return;}
+        currentUser={...result.student,isGuest:false};
+        if(result.token) localStorage.setItem(AUTH_TOKEN_KEY,result.token);
+        closeAuthModal(); enterDashboard();
+    } catch(err){showAuthError('Lỗi kết nối máy chủ: '+err.message);} finally {btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-right-to-bracket mr-1"></i> Đăng nhập';}
 }
 
 async function doRegister() {
     hideAuthError();
-    const hoTen = document.getElementById('reg-hoten').value.trim();
-    const ngaySinhRaw = document.getElementById('reg-ngaysinh').value;
-    const lop = document.getElementById('reg-lop').value.trim().toUpperCase();
-    const soThuTu = document.getElementById('reg-stt').value.trim();
-    const maPin = document.getElementById('reg-mapin').value.trim();
-
-    if (!hoTen || !ngaySinhRaw || !lop || !soThuTu || !maPin) {
-        const msg = 'Bé điền đủ tất cả các ô có dấu * nhé!';
-        showAuthError(msg);
-        alert(msg);
-        return;
-    }
-    if (!/^\d{4}$/.test(maPin)) {
-        const msg = 'Mã PIN phải gồm đúng 4 chữ số!';
-        showAuthError(msg);
-        alert(msg);
-        return;
-    }
-
-    const [y, m, d] = ngaySinhRaw.split('-');
-    const ngaySinh = `${d}-${m}-${y.slice(2)}`;
-    const btn = document.getElementById('btn-do-register');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang đăng ký...';
-
-    try {
-        const result = await callAppsScript('register', { hoTen, ngaySinh, lop, soThuTu, maPin });
-        if (!result.ok) {
-            showAuthError(result.error);
-            alert(result.error);
-            return;
-        }
-        alert(`Đã gửi đăng ký thành công, vui lòng chờ Admin duyệt! Mã ID của bé là: ${result.student.maHS}`);
-        document.getElementById('login-mahs').value = result.student.maHS;
+    const hoTen=document.getElementById('reg-hoten').value.trim();
+    const ngaySinhRaw=document.getElementById('reg-ngaysinh').value;
+    const lop=document.getElementById('reg-lop').value.trim().toUpperCase();
+    const soThuTu=document.getElementById('reg-stt').value.trim();
+    const maPin=document.getElementById('reg-mapin').value.trim();
+    if(!hoTen||!ngaySinhRaw||!lop||!soThuTu||!maPin){showAuthError('Bé điền đủ tất cả các ô có dấu * nhé!');return;}
+    if(!/^\d{6}$/.test(maPin)){showAuthError('Mã PIN mới phải gồm đúng 6 chữ số!');return;}
+    const [y,m,d]=ngaySinhRaw.split('-'); const ngaySinh=`${d}-${m}-${y.slice(2)}`;
+    const btn=document.getElementById('btn-do-register'); btn.disabled=true; btn.innerHTML='<i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang đăng ký...';
+    try{
+        const result=await callAppsScript('register',{hoTen,ngaySinh,lop,soThuTu,maPin});
+        if(!result.ok){showAuthError(result.error||'Không thể đăng ký.');return;}
+        document.getElementById('login-mahs').value=result.student.maHS;
+        document.getElementById('login-mapin').value='';
         switchAuthTab('login');
-    } catch (err) {
-        const connErr = 'Lỗi kết nối: ' + err.message;
-        showAuthError(connErr);
-        alert(connErr);
-    } finally {
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-user-plus mr-1"></i> Đăng ký ngay';
-    }
+        showAuthError(`Đăng ký thành công! ID của bé là ${result.student.maHS}. Hãy ghi nhớ ID này và đăng nhập bằng PIN 6 số vừa tạo.`);
+    }catch(err){showAuthError('Lỗi kết nối: '+err.message);}finally{btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-user-plus mr-1"></i> Đăng ký ngay';}
 }
 
 async function tryAutoLogin() {
-    const maHS = localStorage.getItem('tv1_mahs');
-    const maPin = localStorage.getItem('tv1_mapin');
-    if (!maHS || !maPin) return;
-
-    // Ẩn ngay màn hình đăng nhập và hiện loading, tránh hiện "chớp" màn hình đăng nhập
-    // rồi mới chuyển sang trang chủ khi đã có sẵn thông tin đăng nhập.
-    const loginScreen = document.getElementById('screen-login');
-    if (loginScreen) loginScreen.classList.add('hidden');
-    showLoadingOverlay('Đang đăng nhập lại cho bé...');
-
-    try {
-        const res = await callAppsScript('login', { maHS: maHS.toUpperCase(), maPin });
-        if (res.ok) {
-            currentUser = { ...res.student, isGuest: false };
-            enterDashboard(true);
-        } else {
-            if (loginScreen) loginScreen.classList.remove('hidden');
-        }
-    } catch (e) {
-        if (loginScreen) loginScreen.classList.remove('hidden');
-    } finally {
-        hideLoadingOverlay();
-    }
+    const token=localStorage.getItem(AUTH_TOKEN_KEY);
+    if(!token) return;
+    try{
+        const res=await callAppsScript('session',{token});
+        if(res.ok){currentUser={...res.student,isGuest:false};enterDashboard(true);} else {localStorage.removeItem(AUTH_TOKEN_KEY);}
+    }catch(e){}
 }
 
-function logout() {
-    currentUser = null;
-    localStorage.removeItem('tv1_mahs');
-    localStorage.removeItem('tv1_mapin');
-    document.getElementById('screen-dashboard').classList.add('hidden');
-    document.getElementById('screen-login').classList.remove('hidden');
-    const mahsInput = document.getElementById('login-mahs');
-    const mapinInput = document.getElementById('login-mapin');
-    if (mahsInput) mahsInput.value = '';
-    if (mapinInput) mapinInput.value = '';
-    hideAuthError();
+async function logout() {
+    const token=localStorage.getItem(AUTH_TOKEN_KEY);
+    localStorage.removeItem(AUTH_TOKEN_KEY);
+    localStorage.removeItem('tv1_mahs'); localStorage.removeItem('tv1_mapin');
+    currentUser={name:'Khách (Guest)',isGuest:true,tuanHienTai:1,hoTen:'Bé Khách',lop:'',maHS:'KHACH',vaiTro:'guest',loaiTaiKhoan:'guest'};
+    updateUserInfoBox(); resetStars(); renderDashboardGrid(); goHome();
+    if(token){try{await callAppsScript('logout',{token});}catch(e){}}
 }
 
 function handleGuestMode() {
-    currentUser = { name: "Khách (Guest)", isGuest: true, tuanHienTai: 1, hoTen: "Bé Khách", lop: "1A", maHS: "KHACH" };
-    enterDashboard();
+    currentUser={name:'Khách (Guest)',isGuest:true,tuanHienTai:1,hoTen:'Bé Khách',lop:'',maHS:'KHACH',vaiTro:'guest',loaiTaiKhoan:'guest'};
+    enterDashboard(true);
 }
 
-function enterDashboard(isSilent = false) {
-    document.getElementById('screen-login').classList.add('hidden');
-    document.getElementById('screen-dashboard').classList.remove('hidden');
-    updateUserInfoBox();
-    resetStars();
-    renderDashboardGrid();
-    renderExamHubGrid();
-    goHome();
-
-    // Phát ngẫu nhiên lời chào sư phạm (Không nhạc)
-    if (!isSilent) {
-        setTimeout(() => {
-            if (currentUser && !currentUser.isGuest) {
-                const template = GREETINGS_STUDENT[Math.floor(Math.random() * GREETINGS_STUDENT.length)];
-                const msg = template.replace('{name}', currentUser.hoTen);
-                speakVietnamese(msg, 0.96);
-            } else {
-                const msg = GREETINGS_GUEST[Math.floor(Math.random() * GREETINGS_GUEST.length)];
-                speakVietnamese(msg, 0.96);
-            }
-        }, 450);
-    }
+function enterDashboard(isSilent=false) {
+    document.getElementById('screen-dashboard')?.classList.remove('hidden');
+    updateUserInfoBox(); resetStars(); renderDashboardGrid(); renderExamHubGrid(); goHome();
+    if(!isSilent && currentUser && !currentUser.isGuest){setTimeout(()=>{const template=GREETINGS_STUDENT[Math.floor(Math.random()*GREETINGS_STUDENT.length)];speakVietnamese(template.replace('{name}',currentUser.hoTen),0.96);},350);}
 }
 
 function updateUserInfoBox() {
-    const box = document.getElementById('user-info-box');
-    if (!box) return;
-    if (currentUser && !currentUser.isGuest) {
-        box.innerHTML = `
-            <div class="flex items-center space-x-2">
-                <div class="text-right">
-                    <div class="text-yellow-600 font-extrabold text-xs md:text-sm leading-tight">${escapeHtml(currentUser.hoTen)}</div>
-                    <div class="text-gray-500 font-semibold text-[10px]">ID: ${escapeHtml(currentUser.maHS)} | Lớp ${escapeHtml(currentUser.lop)}</div>
-                </div>
-                <button onclick="logout()" title="Đăng xuất" class="w-8 h-8 flex items-center justify-center bg-orange-100 hover:bg-orange-200 text-orange-500 rounded-xl border border-orange-200 text-xs transition-shadow duration-200 hover:shadow-[0_0_12px_rgba(249,115,22,0.55)]"><i class="fa-solid fa-right-from-bracket"></i></button>
-            </div>`;
-    } else {
-        box.innerHTML = `<span class="text-amber-600 font-extrabold text-xs">Khách (Guest)</span><br><span class="text-gray-400 font-semibold text-[10px]">Chưa đăng nhập</span>`;
+    const box=document.getElementById('user-info-box'); if(!box)return;
+    if(!currentUser || currentUser.isGuest){
+        box.innerHTML=`<div class="flex items-center gap-1.5"><span class="text-amber-600 font-extrabold text-xs mr-1">Khách</span><button onclick="openAuthModal('login')" class="px-3 py-2 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-black text-xs">Sign in</button><button onclick="openAuthModal('register')" class="px-3 py-2 rounded-xl bg-white border border-orange-200 text-orange-600 font-black text-xs">Sign up</button></div>`;
+        updatePremiumButtons(); return;
     }
+    const isAdmin=String(currentUser.vaiTro||'').toLowerCase()==='admin';
+    const tier=isAdmin?'Admin':String(currentUser.loaiTaiKhoan||'regular').toUpperCase();
+    box.innerHTML=`<div class="flex items-center gap-2"><div class="text-right"><div class="text-yellow-600 font-extrabold text-xs md:text-sm leading-tight">${escapeHtml(currentUser.hoTen||currentUser.maHS)}</div><div class="text-gray-500 font-semibold text-[10px]">${escapeHtml(tier)} · ID ${escapeHtml(currentUser.maHS)}</div></div>${isAdmin?'<button onclick="openAdminManager()" class="h-9 px-3 bg-yellow-100 hover:bg-yellow-200 text-orange-700 border border-yellow-300 rounded-xl font-black text-xs"><i class="fa-solid fa-users-gear mr-1"></i>Quản lý</button>':''}<button onclick="logout()" title="Đăng xuất" class="w-8 h-8 flex items-center justify-center bg-orange-100 hover:bg-orange-200 text-orange-500 rounded-xl border border-orange-200 text-xs"><i class="fa-solid fa-right-from-bracket"></i></button></div>`;
+    updatePremiumButtons();
 }
+
+
+function openAuthModal(tab='login') {
+    const modal=document.getElementById('screen-login'); if(!modal)return;
+    modal.classList.remove('hidden'); modal.classList.add('flex'); switchAuthTab(tab); hideAuthError();
+    setTimeout(()=>document.getElementById(tab==='login'?'login-mahs':'reg-hoten')?.focus(),80);
+}
+function closeAuthModal(){const modal=document.getElementById('screen-login');if(modal){modal.classList.add('hidden');modal.classList.remove('flex');}}
+function isAdminUser(){return !!currentUser && !currentUser.isGuest && String(currentUser.vaiTro||'').toLowerCase()==='admin';}
+function canAccessPremium(){if(isAdminUser())return true;const t=String(currentUser?.loaiTaiKhoan||'').toLowerCase();return !!currentUser&&!currentUser.isGuest&&(t==='trial'||t==='vip');}
+function requirePremium(featureName){if(canAccessPremium())return true;showPremiumModal(featureName);return false;}
+function showPremiumModal(featureName){
+    const modal=document.getElementById('modal-premium'),msg=document.getElementById('premium-modal-message'),actions=document.getElementById('premium-guest-actions');if(!modal||!msg)return;
+    if(!currentUser||currentUser.isGuest){msg.innerHTML=`Đây là <strong>${escapeHtml(featureName)}</strong> dành cho tài khoản <strong>Trial hoặc VIP</strong>.<br><br>Con có thể Sign in nếu đã có tài khoản hoặc Sign up để đăng ký nhé!<br><span class="text-gray-500">Các chuyên đề cơ bản vẫn học miễn phí bình thường.</span>`;actions?.classList.remove('hidden');}
+    else{msg.innerHTML=`Tài khoản hiện tại của con là <strong class="text-orange-600">Regular</strong>.<br><br><strong>${escapeHtml(featureName)}</strong> yêu cầu tài khoản <strong>Trial hoặc VIP</strong>. Con hãy liên hệ Admin để được nâng hạng nhé!`;actions?.classList.add('hidden');}
+    modal.classList.remove('hidden');
+}
+function closePremiumModal(){document.getElementById('modal-premium')?.classList.add('hidden');}
+function premiumGoSignIn(){closePremiumModal();openAuthModal('login');}
+function premiumGoSignUp(){closePremiumModal();openAuthModal('register');}
+function updatePremiumButtons(){
+    const btn=document.querySelector('button[onclick="clickProgressOrExam(\'progress\')"]'); if(btn){const span=btn.querySelector('span');if(span)span.textContent=canAccessPremium()?'Bản đồ tuần':'Bản đồ tuần 🔒';}
+}
+async function openAdminManager(){if(!isAdminUser())return;updateNavTabs('Quản lý tài khoản','👥',null);switchAppView('view-admin');await loadAdminAccounts();}
+async function loadAdminAccounts(){
+    if(!isAdminUser())return;const token=localStorage.getItem(AUTH_TOKEN_KEY);showLoadingOverlay('Đang tải danh sách tài khoản...');
+    try{const res=await callAppsScript('adminListAccounts',{token});if(!res.ok)throw new Error(res.error||'Không thể tải dữ liệu');adminAccountsCache=res.accounts||[];renderAdminAccounts(adminAccountsCache);}catch(e){alert(e.message);}finally{hideLoadingOverlay();}
+}
+function adminSortValue(a, key) {
+    const v = a?.[key] ?? '';
+    if (key === 'hanDungThu' || key === 'hanVIP') {
+        const s = String(v).trim();
+        if (!s || s === '--') return Number.POSITIVE_INFINITY;
+        const m = s.match(/^(\d{1,2})[-\/]([0-9]{1,2})[-\/]([0-9]{2,4})$/);
+        if (m) {
+            let y = Number(m[3]); if (y < 100) y += 2000;
+            return new Date(y, Number(m[2]) - 1, Number(m[1])).getTime();
+        }
+        const t = new Date(s).getTime();
+        return Number.isNaN(t) ? Number.POSITIVE_INFINITY : t;
+    }
+    return String(v).trim();
+}
+function updateAdminSortIcons() {
+    ['maHS','hoTen','lop','loaiTaiKhoan','hanDungThu','hanVIP'].forEach(k => {
+        const el = document.getElementById(`sort-icon-${k}`);
+        if (el) el.textContent = k === adminSortKey ? (adminSortDir === 'asc' ? '▲' : '▼') : '↕';
+    });
+}
+function sortAdminAccounts(key) {
+    if (adminSortKey === key) adminSortDir = adminSortDir === 'asc' ? 'desc' : 'asc';
+    else { adminSortKey = key; adminSortDir = 'asc'; }
+    filterAdminAccounts();
+}
+function renderAdminAccounts(rows){
+    const tbody=document.getElementById('admin-account-tbody'),count=document.getElementById('admin-account-count');if(!tbody)return;
+    const students=(rows||[]).filter(x=>String(x.vaiTro||'student').toLowerCase()!=='admin');
+    const collator = new Intl.Collator('vi', { numeric: true, sensitivity: 'base' });
+    students.sort((a,b)=>{
+        const av=adminSortValue(a,adminSortKey), bv=adminSortValue(b,adminSortKey);
+        let cmp;
+        if (typeof av === 'number' && typeof bv === 'number') cmp = av - bv;
+        else cmp = collator.compare(String(av),String(bv));
+        return adminSortDir === 'asc' ? cmp : -cmp;
+    });
+    if(count)count.textContent=`${students.length} tài khoản`;
+    updateAdminSortIcons();
+    if(!students.length){tbody.innerHTML='<tr><td colspan="6" class="px-3 py-6 text-center text-gray-400">Chưa có tài khoản học sinh</td></tr>';return;}
+    tbody.innerHTML=students.map(a=>`<tr class="hover:bg-yellow-50/50"><td class="px-3 py-3 font-black text-orange-700">${escapeHtml(a.maHS)}</td><td class="px-3 py-3">${escapeHtml(a.hoTen||'')}</td><td class="px-3 py-3">${escapeHtml(a.lop||'')}</td><td class="px-3 py-3"><select onchange="adminChangeTier('${String(a.maHS).replace(/'/g,"\\'")}',this.value)" class="px-2 py-1.5 rounded-lg border border-yellow-200 font-black bg-white ${a.loaiTaiKhoan==='vip'?'text-orange-600':a.loaiTaiKhoan==='trial'?'text-amber-600':'text-gray-600'}"><option value="regular" ${a.loaiTaiKhoan==='regular'?'selected':''}>Regular</option><option value="trial" ${a.loaiTaiKhoan==='trial'?'selected':''}>Trial</option><option value="vip" ${a.loaiTaiKhoan==='vip'?'selected':''}>VIP</option></select></td><td class="px-3 py-3">${escapeHtml(a.hanDungThu||'--')}</td><td class="px-3 py-3">${escapeHtml(a.hanVIP||'--')}</td></tr>`).join('');
+}
+function filterAdminAccounts(){
+    const q=(document.getElementById('admin-search-input')?.value||'').trim().toLowerCase();
+    const rows=!q?adminAccountsCache:adminAccountsCache.filter(a=>[a.maHS,a.hoTen,a.lop,a.loaiTaiKhoan].some(v=>String(v||'').toLowerCase().includes(q)));
+    renderAdminAccounts(rows);
+}
+async function adminChangeTier(maHS,tier){const token=localStorage.getItem(AUTH_TOKEN_KEY);showLoadingOverlay('Đang cập nhật hạng tài khoản...');try{const r=await callAppsScript('adminSetTier',{token,maHS,tier});if(!r.ok)throw new Error(r.error||'Cập nhật thất bại');await loadAdminAccounts();}catch(e){alert(e.message);}finally{hideLoadingOverlay();}}
 
 function resetStars() {
     starGreenCount = 0; starRedCount = 0;
@@ -845,32 +808,18 @@ function resetStars() {
 }
 
 function clickProgressOrExam(type) {
-    if (!currentUser || currentUser.isGuest) return alert('Bé vui lòng đăng nhập để sử dụng tính năng này nhé!');
-    if (type === 'progress') openRoadmap();
-    else if (type === 'exam') openExamHub();
+    if(type==='progress'){if(!requirePremium('Bản đồ tuần'))return;openRoadmap();}
+    else if(type==='exam'){if(!requirePremium('Đấu trường đề thi'))return;openExamHub();}
 }
 
 // ==========================================
 // CHỦ ĐỀ 1: BẢNG CHỮ CÁI TƯƠNG TÁC (1.1 ĐẾN 1.4)
 // ==========================================
 function openTopic(topicNum, topicName, icon) {
-    stopSpeaking();
-    activeTopicId = topicNum; activeExamContext = null; activeRoadmapContext = null;
-    updateNavTabs(topicName, icon || '🐝', null);
-
+    if(PREMIUM_TOPIC_IDS.has(Number(topicNum)) && !requirePremium(topicName)) return;
+    stopSpeaking(); activeTopicId=topicNum; activeExamContext=null; activeRoadmapContext=null; updateNavTabs(topicName,icon||'🐝',null);
     showLoadingOverlay(`Đang tải chủ đề "${topicName}"...`);
-    fetchAllTopicsData().then(topics => {
-        hideLoadingOverlay();
-        const topicObj = topics.find(t => Number(t.topic_id) === Number(topicNum));
-        if (!topicObj || !topicObj.questions || !topicObj.questions.length) throw new Error("Chủ đề không có câu hỏi nào");
-        showLectureAndSubtopics(topicNum, topicName, topicObj);
-    }).catch(err => {
-        hideLoadingOverlay();
-        // Tải lỗi thì đưa header về đúng trạng thái trang chủ (không để lại tab/gạch breadcrumb thừa)
-        activeTopicId = null;
-        updateNavTabs(null, null, null);
-        alert(`Không thể tải chủ đề: ${err.message}`);
-    });
+    fetchAllTopicsData().then(topics=>{hideLoadingOverlay();const topicObj=topics.find(t=>Number(t.topic_id)===Number(topicNum));if(!topicObj?.questions?.length)throw new Error('Chủ đề không có câu hỏi nào');showLectureAndSubtopics(topicNum,topicName,topicObj);}).catch(err=>{hideLoadingOverlay();activeTopicId=null;updateNavTabs(null,null,null);alert(`Không thể tải chủ đề: ${err.message}`);});
 }
 
 function setSubtopicGridColumns(count) {
@@ -2446,4 +2395,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAutoSpeechButtonUI();
 });
 
+handleGuestMode();
 tryAutoLogin();
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {})); }
