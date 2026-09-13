@@ -1,0 +1,19 @@
+{
+  "name": "Toán 3 - Cô giáo Ong Vàng",
+  "short_name": "Toán 3",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fefce8",
+  "theme_color": "#f59e0b",
+  "lang": "vi",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

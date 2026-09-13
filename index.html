@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>Toán lớp 3 - Cô giáo Ong Vàng</title>
+    <meta name="theme-color" content="#f59e0b">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="manifest.json">
+    <title>Toán 3 - Cô giáo Ong Vàng</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -95,12 +100,14 @@
 
     <div class="w-full flex justify-center items-center mt-4 md:mt-6">
         <!-- 1. MÀN HÌNH ĐĂNG NHẬP / ĐĂNG KÝ -->
-        <div id="screen-login" class="w-full max-w-md pastel-card p-6 md:p-8 flex flex-col items-center text-center my-auto">
+        <div id="screen-login" class="hidden fixed inset-0 z-[70] bg-slate-900/55 backdrop-blur-sm flex items-center justify-center p-3" onclick="if(event.target===this) closeAuthModal()">
+            <div class="w-full max-w-md pastel-card p-6 md:p-8 flex flex-col items-center text-center my-auto relative max-h-[95vh] overflow-y-auto">
+                <button onclick="closeAuthModal()" class="absolute right-4 top-4 w-9 h-9 rounded-full bg-yellow-50 border border-yellow-200 text-gray-500 hover:text-orange-600 flex items-center justify-center" title="Đóng"><i class="fa-solid fa-xmark"></i></button>
             <div class="mb-2">
                 <span class="text-7xl md:text-8xl swaying select-none">🐝</span>
             </div>
 
-            <h1 class="text-2xl md:text-3xl font-extrabold text-yellow-600 tracking-wide uppercase mb-1">Toán lớp 3</h1>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-yellow-600 tracking-wide mb-1">Toán 3</h1>
             <p class="text-sm font-bold text-orange-600 mb-5">Cô giáo Ong Vàng</p>
 
             <div class="w-full grid grid-cols-2 bg-yellow-50 rounded-2xl p-1 mb-5 border border-yellow-200">
@@ -115,7 +122,7 @@
                 </div>
                 <div class="relative">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-yellow-400"><i class="fa-solid fa-lock"></i></span>
-                    <input type="password" id="login-mapin" maxlength="4" inputmode="numeric" placeholder="Mã PIN (4 số)" class="w-full pl-11 pr-4 py-3.5 rounded-2xl border-2 border-yellow-200 focus:border-yellow-400 focus:outline-none font-bold text-gray-700 placeholder-gray-300 bg-yellow-50/20 text-sm">
+                    <input type="password" id="login-mapin" maxlength="6" inputmode="numeric" placeholder="Mã PIN (6 số)" class="w-full pl-11 pr-4 py-3.5 rounded-2xl border-2 border-yellow-200 focus:border-yellow-400 focus:outline-none font-bold text-gray-700 placeholder-gray-300 bg-yellow-50/20 text-sm">
                 </div>
                 <button onclick="doLogin()" id="btn-do-login" class="w-full py-3.5 bg-gradient-to-r from-yellow-400 to-orange-400 text-white font-extrabold rounded-2xl text-sm pastel-btn shadow-md">
                     <i class="fa-solid fa-right-to-bracket mr-1"></i> Đăng nhập
@@ -143,8 +150,8 @@
                         <input type="number" id="reg-stt" placeholder="09" min="1" max="99" oninput="updateMaHSPreview()" class="w-full mt-1 px-3 py-3 rounded-2xl border-2 border-yellow-200 focus:border-yellow-400 focus:outline-none font-bold text-gray-700 placeholder-gray-300 bg-yellow-50/20 text-sm">
                     </div>
                     <div>
-                        <label class="text-xs font-extrabold text-yellow-600">Mã PIN (4 số) <span class="text-orange-400">*</span></label>
-                        <input type="password" id="reg-mapin" maxlength="4" inputmode="numeric" placeholder="••••" class="w-full mt-1 px-3 py-3 rounded-2xl border-2 border-yellow-200 focus:border-yellow-400 focus:outline-none font-bold text-gray-700 placeholder-gray-300 bg-yellow-50/20 text-sm">
+                        <label class="text-xs font-extrabold text-yellow-600">Mã PIN (6 số) <span class="text-orange-400">*</span></label>
+                        <input type="password" id="reg-mapin" maxlength="6" inputmode="numeric" placeholder="••••" class="w-full mt-1 px-3 py-3 rounded-2xl border-2 border-yellow-200 focus:border-yellow-400 focus:outline-none font-bold text-gray-700 placeholder-gray-300 bg-yellow-50/20 text-sm">
                     </div>
                 </div>
                 <div class="flex items-center justify-between bg-yellow-50 border border-yellow-200 rounded-xl px-3 py-2.5">
@@ -156,23 +163,22 @@
                 </button>
             </div>
 
-            <div class="w-full mt-4 pt-4 border-t border-yellow-100">
-                <button onclick="handleGuestMode()" class="w-full py-3 bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-700 font-extrabold rounded-2xl text-xs md:text-sm pastel-btn hover:from-yellow-200 hover:to-orange-200 border border-orange-200 flex items-center justify-center space-x-1.5">
-                    <i class="fa-solid fa-compass"></i><span>Vào học thử - không cần tài khoản (khách)</span>
-                </button>
+            <div class="w-full mt-4 pt-4 border-t border-yellow-100 text-xs font-bold text-gray-400">
+                Nội dung cơ bản vẫn có thể học miễn phí ở chế độ Khách.
             </div>
             <p id="auth-error-msg" class="text-xs font-bold text-orange-500 mt-3 hidden"></p>
+            </div>
         </div>
 
         <!-- 2. KHUNG CHÍNH CHUẨN TỶ LỆ 16:9 / 16:10 -->
-        <div id="screen-dashboard" class="w-full max-w-5xl hidden flex flex-col space-y-1.5 md:space-y-2 p-1 md:p-2">
+        <div id="screen-dashboard" class="w-full max-w-5xl flex flex-col space-y-1.5 md:space-y-2 p-1 md:p-2">
             
             <header class="w-full bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-sm border-2 border-yellow-200 flex flex-col md:flex-row justify-between items-center gap-2">
                 <div class="flex items-center space-x-2 w-full md:w-auto justify-between md:justify-start overflow-x-auto pb-0.5">
                     <button id="btn-header-home" onclick="goHome()" title="Về trang chủ" class="h-12 flex items-center gap-1.5 bg-gradient-to-br from-yellow-50 via-orange-50 to-orange-50 pl-2 pr-3 rounded-2xl border-2 border-yellow-300 shadow-sm shrink-0 transition-all duration-200 hover:border-yellow-400 hover:shadow-[0_0_18px_rgba(250,204,21,0.65)]">
                         <span class="w-8 h-8 flex items-center justify-center bg-white rounded-full text-lg shadow-inner border border-yellow-200 shrink-0">🐝</span>
-                        <span class="flex flex-col items-start leading-none">
-                            <span class="text-sm font-black bg-gradient-to-r from-yellow-600 to-orange-500 bg-clip-text text-transparent uppercase tracking-wide whitespace-nowrap">Toán lớp 3</span>
+                        <span class="flex flex-col items-center text-center leading-none">
+                            <span class="text-sm font-black bg-gradient-to-r from-yellow-600 to-orange-500 bg-clip-text text-transparent tracking-wide whitespace-nowrap">Toán 3</span>
                             <span class="text-[10px] font-bold text-orange-500 mt-0.5 whitespace-nowrap">Cô giáo Ong Vàng</span>
                         </span>
                     </button>
@@ -373,6 +379,42 @@
                     </div>
                 </div>
 
+
+                <!-- VIEW ADMIN: QUẢN LÝ TÀI KHOẢN -->
+                <div id="view-admin" class="w-full hidden pastel-card p-4 md:p-5 min-h-[480px]">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-xl md:text-2xl font-black text-orange-700"><i class="fa-solid fa-users-gear mr-2"></i>Quản lý tài khoản</h2>
+                            <span id="admin-account-count" class="px-2.5 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-black">0 tài khoản</span>
+                        </div>
+                        <div class="flex gap-2 w-full sm:w-auto">
+                            <div class="relative flex-1 sm:w-72">
+                                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                                <input id="admin-search-input" oninput="filterAdminAccounts()" placeholder="Tìm ID, họ tên, lớp, loại tài khoản..." class="w-full pl-9 pr-3 py-2.5 rounded-xl border-2 border-yellow-200 focus:border-orange-400 outline-none text-sm font-bold bg-white">
+                            </div>
+                            <button onclick="loadAdminAccounts()" class="px-3.5 py-2.5 bg-yellow-100 hover:bg-yellow-200 border border-yellow-300 text-yellow-800 rounded-xl font-black text-sm shrink-0"><i class="fa-solid fa-rotate mr-1"></i>Làm mới</button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto rounded-2xl border border-yellow-200 bg-white">
+                        <table class="w-full text-sm md:text-base text-left">
+                            <thead class="bg-yellow-50 text-orange-800 font-black">
+                                <tr>
+                                    <th onclick="sortAdminAccounts('maHS')" class="px-3 py-3 cursor-pointer select-none hover:bg-yellow-100" title="Sắp xếp theo Mã HS">Mã HS <span id="sort-icon-maHS" class="text-[10px] text-orange-400">↕</span></th>
+                                    <th onclick="sortAdminAccounts('hoTen')" class="px-3 py-3 cursor-pointer select-none hover:bg-yellow-100" title="Sắp xếp theo Họ tên">Họ tên <span id="sort-icon-hoTen" class="text-[10px] text-orange-400">↕</span></th>
+                                    <th onclick="sortAdminAccounts('lop')" class="px-3 py-3 cursor-pointer select-none hover:bg-yellow-100" title="Sắp xếp theo Lớp">Lớp <span id="sort-icon-lop" class="text-[10px] text-orange-400">↕</span></th>
+                                    <th onclick="sortAdminAccounts('loaiTaiKhoan')" class="px-3 py-3 cursor-pointer select-none hover:bg-yellow-100" title="Sắp xếp theo Loại tài khoản">Loại tài khoản <span id="sort-icon-loaiTaiKhoan" class="text-[10px] text-orange-400">↕</span></th>
+                                    <th onclick="sortAdminAccounts('hanDungThu')" class="px-3 py-3 cursor-pointer select-none hover:bg-yellow-100" title="Sắp xếp theo Hạn dùng thử">Hạn dùng thử <span id="sort-icon-hanDungThu" class="text-[10px] text-orange-400">↕</span></th>
+                                    <th onclick="sortAdminAccounts('hanVIP')" class="px-3 py-3 cursor-pointer select-none hover:bg-yellow-100" title="Sắp xếp theo Hạn VIP">Hạn VIP <span id="sort-icon-hanVIP" class="text-[10px] text-orange-400">↕</span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-account-tbody" class="divide-y divide-yellow-100 font-bold text-gray-700"></tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 text-xs md:text-sm font-bold text-gray-500 flex flex-wrap gap-x-5 gap-y-1">
+                        <span><strong class="text-gray-700">Regular:</strong> miễn phí</span><span><strong class="text-amber-600">Trial:</strong> Premium 1 tháng</span><span><strong class="text-orange-600">VIP:</strong> Premium 1 năm</span>
+                    </div>
+                </div>
+
                 <!-- VIEW 6: MÀN HÌNH KẾT QUẢ & BÁO CÁO -->
                 <div id="view-result" class="w-full hidden flex flex-col space-y-3">
                     
@@ -429,6 +471,25 @@
                 </div>
 
             </main>
+        </div>
+    </div>
+
+
+    <!-- MODAL PREMIUM -->
+    <div id="modal-premium" class="hidden fixed inset-0 z-[80] bg-slate-900/55 backdrop-blur-sm flex items-center justify-center p-3">
+        <div class="w-full max-w-md bg-white rounded-3xl border-2 border-yellow-200 shadow-2xl overflow-hidden">
+            <div class="bg-gradient-to-r from-yellow-50 to-orange-50 px-5 py-4 text-center border-b border-yellow-100">
+                <div class="mx-auto w-14 h-14 rounded-2xl bg-white border border-yellow-200 flex items-center justify-center text-2xl shadow-sm mb-2">🔒</div>
+                <h3 class="text-lg font-black text-orange-700">Nội dung Premium</h3>
+            </div>
+            <div class="p-5 text-center">
+                <p id="premium-modal-message" class="text-sm md:text-base font-bold text-gray-700 leading-relaxed"></p>
+                <div id="premium-guest-actions" class="mt-5 grid grid-cols-2 gap-2">
+                    <button onclick="premiumGoSignIn()" class="py-2.5 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-black">Sign in</button>
+                    <button onclick="premiumGoSignUp()" class="py-2.5 rounded-xl bg-white border-2 border-orange-200 text-orange-600 font-black">Sign up</button>
+                </div>
+                <button onclick="closePremiumModal()" class="mt-3 w-full py-3 text-base font-black text-gray-600 hover:text-orange-600 rounded-xl hover:bg-yellow-50">Để sau nhé</button>
+            </div>
         </div>
     </div>
 
@@ -586,6 +647,6 @@
     </footer>
 
     <!-- NẠP ENGINE JAVASCRIPT ĐỒNG BỘ -->
-    <script src="assets/js/app.js?v=6.6"></script>
+    <script src="assets/js/app.js?v=7.0"></script>
 </body>
 </html>
