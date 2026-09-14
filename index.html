@@ -125,24 +125,30 @@
                 grid-row: 2;
                 grid-column: 1;
                 justify-self: start;
-                margin-right: -0.15rem;
+                margin: 0;
             }
 
             #header-star-box {
                 grid-row: 2;
                 grid-column: 1;
-                justify-self: end;
-                transform: translateX(2.75rem);
-                margin-left: 0;
+                justify-self: start;
+                margin-left: 2.7rem;
+                transform: none;
             }
 
             #user-info-box {
                 grid-row: 2;
                 grid-column: 2 / 4;
-                justify-self: stretch;
-                width: 100%;
+                justify-self: end;
+                width: auto;
                 min-width: 0;
+                margin-left: auto;
                 text-align: right;
+            }
+
+            #user-info-box > div,
+            #user-info-box > span {
+                margin-left: auto;
             }
 
             /* Trên mobile, để phần user/account có nhiều không gian hơn */
