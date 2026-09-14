@@ -149,8 +149,10 @@
                 grid-row: 2;
                 grid-column: 1;
                 justify-self: start;
-                margin-left: 2.7rem;
-                transform: none;
+                margin-left: 0 !important;
+                /* Dịch cụm sao sang phải bằng transform để KHÔNG làm rộng cột logo.
+                   Nhờ vậy tab chuyên mục ở hàng trên bám sát ngay cạnh logo. */
+                transform: translateX(2.7rem);
             }
 
             #user-info-box {
