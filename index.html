@@ -79,6 +79,64 @@
         ::-webkit-scrollbar-thumb { background: #facc15; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #eab308; }
 
+
+        /* Mobile header: row 1 = account/status, row 2 = learning navigation */
+        @media (max-width: 767px) {
+            .app-main-header {
+                display: grid !important;
+                grid-template-columns: auto auto minmax(0, 1fr) auto;
+                grid-template-rows: auto auto;
+                gap: 0.4rem 0.45rem !important;
+                align-items: center;
+                padding: 0.35rem 0.45rem !important;
+            }
+
+            #header-nav-zone,
+            #header-info-zone {
+                display: contents !important;
+            }
+
+            #btn-toggle-autospeech {
+                grid-row: 1;
+                grid-column: 1;
+            }
+
+            #header-star-box {
+                grid-row: 1;
+                grid-column: 2;
+            }
+
+            #user-info-box {
+                grid-row: 1;
+                grid-column: 3 / 5;
+                justify-self: end;
+                min-width: 0;
+            }
+
+            #btn-header-home {
+                grid-row: 2;
+                grid-column: 1;
+            }
+
+            #header-learning-tabs {
+                grid-row: 2;
+                grid-column: 2 / 4;
+                min-width: 0;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scrollbar-width: none;
+            }
+            #header-learning-tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            #btn-progress-week {
+                grid-row: 2;
+                grid-column: 4;
+                justify-self: end;
+            }
+        }
+
         @media print {
             body * { visibility: hidden; }
             #printable-report-area, #printable-report-area * { visibility: visible; }
@@ -173,12 +231,13 @@
         <!-- 2. KHUNG CHÍNH CHUẨN TỶ LỆ 16:9 / 16:10 -->
         <div id="screen-dashboard" class="w-full max-w-5xl flex flex-col space-y-1.5 md:space-y-2 p-1 md:p-2">
             
-            <header class="w-full bg-white/95 backdrop-blur-md px-2 py-1 rounded-2xl shadow-sm border-2 border-yellow-200 flex flex-col md:flex-row justify-between items-center gap-2">
-                <div class="flex items-center space-x-2 w-full md:w-auto justify-between md:justify-start overflow-x-auto">
+            <header class="app-main-header w-full bg-white/95 backdrop-blur-md px-2 py-1 rounded-2xl shadow-sm border-2 border-yellow-200 flex flex-col md:flex-row justify-between items-center gap-2">
+                <div id="header-nav-zone" class="flex items-center space-x-2 w-full md:w-auto justify-between md:justify-start overflow-x-auto">
                     <button id="btn-header-home" onclick="goHome()" title="Về trang chủ" class="w-[62px] h-[62px] flex items-center justify-center bg-white rounded-xl border border-yellow-300 shadow-sm shrink-0 overflow-hidden p-0 transition-shadow duration-200 hover:border-yellow-400 hover:shadow-[0_0_18px_rgba(250,204,21,0.75)]">
                         <img src="icon-192.png" alt="Trang chủ Toán 3" class="w-full h-full object-cover">
                     </button>
 
+                    <div id="header-learning-tabs" class="flex items-center space-x-1 min-w-0">
                     <div id="header-level2-tab" class="hidden items-center">
                         <button onclick="returnToTopicLecture()" class="h-10 px-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-extrabold rounded-xl text-xs md:text-sm flex items-center space-x-1.5 shadow-sm border border-yellow-300 shrink-0 max-w-[200px] md:max-w-[260px] transition-shadow duration-200 hover:shadow-[0_0_14px_rgba(249,115,22,0.65)]">
                             <span id="header-level2-icon">🔢</span>
@@ -199,14 +258,15 @@
                             <span id="header-level4-title" class="truncate">Chủ đề tuần</span>
                         </div>
                     </div>
+                    </div>
                 </div>
 
-                <div class="flex items-center space-x-1.5 md:space-x-2 w-full md:w-auto justify-between md:justify-end ml-auto shrink-0">
+                <div id="header-info-zone" class="flex items-center space-x-1.5 md:space-x-2 w-full md:w-auto justify-between md:justify-end ml-auto shrink-0">
                     <button id="btn-toggle-autospeech" onclick="toggleAutoSpeech()" title="Bật/tắt tự động đọc câu hỏi" class="h-10 w-10 shrink-0 flex items-center justify-center bg-yellow-50 text-yellow-600 border border-yellow-200 rounded-xl shadow-inner transition-colors">
                         <i class="fa-solid fa-volume-high"></i>
                     </button>
 
-                    <div class="flex flex-col space-y-0.5 bg-yellow-50/90 px-1.5 md:px-2.5 py-1 rounded-xl border border-yellow-200 shadow-inner">
+                    <div id="header-star-box" class="flex flex-col space-y-0.5 bg-yellow-50/90 px-1.5 md:px-2.5 py-1 rounded-xl border border-yellow-200 shadow-inner">
                         <div class="flex items-center justify-between space-x-2 font-extrabold">
                             <span class="px-1.5 py-0.5 bg-emerald-500 text-white rounded text-[10px] shadow-sm flex items-center justify-center"><i class="fa-solid fa-star md:mr-0.5"></i><span class="hidden md:inline"> Đúng</span></span>
                             <span class="text-emerald-600 font-extrabold text-xs" id="star-green-count">0</span>
@@ -219,7 +279,7 @@
 
                     <div id="user-info-box" class="text-xs font-bold text-gray-600 text-right"></div>
 
-                    <button onclick="clickProgressOrExam('progress')" class="h-10 px-2.5 md:px-3 bg-gradient-to-r from-orange-500 to-orange-700 text-white font-extrabold rounded-xl text-xs md:text-sm shadow-md hover:from-orange-600 hover:to-orange-700 flex items-center space-x-1 md:space-x-1.5 shrink-0 transition-shadow duration-200 hover:shadow-[0_0_14px_rgba(249,115,22,0.65)]">
+                    <button id="btn-progress-week" onclick="clickProgressOrExam('progress')" class="h-10 px-2.5 md:px-3 bg-gradient-to-r from-orange-500 to-orange-700 text-white font-extrabold rounded-xl text-xs md:text-sm shadow-md hover:from-orange-600 hover:to-orange-700 flex items-center space-x-1 md:space-x-1.5 shrink-0 transition-shadow duration-200 hover:shadow-[0_0_14px_rgba(249,115,22,0.65)]">
                         <i class="fa-solid fa-map-location-dot"></i>
                         <span id="progress-label-mobile" class="md:hidden">Tuần</span>
                         <span id="progress-label-desktop" class="hidden md:inline">Bản đồ tuần</span>
