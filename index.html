@@ -80,13 +80,13 @@
         ::-webkit-scrollbar-thumb:hover { background: #eab308; }
 
 
-        /* Mobile header: row 1 = account/status, row 2 = learning navigation */
+        /* Mobile header: row 1 = learning navigation, row 2 = status/account */
         @media (max-width: 767px) {
             .app-main-header {
                 display: grid !important;
-                grid-template-columns: auto auto minmax(0, 1fr) auto;
+                grid-template-columns: auto minmax(0, 1fr) auto;
                 grid-template-rows: auto auto;
-                gap: 0.4rem 0.45rem !important;
+                gap: 0.35rem 0.4rem !important;
                 align-items: center;
                 padding: 0.35rem 0.45rem !important;
             }
@@ -96,31 +96,15 @@
                 display: contents !important;
             }
 
-            #btn-toggle-autospeech {
-                grid-row: 1;
-                grid-column: 1;
-            }
-
-            #header-star-box {
-                grid-row: 1;
-                grid-column: 2;
-            }
-
-            #user-info-box {
-                grid-row: 1;
-                grid-column: 3 / 5;
-                justify-self: end;
-                min-width: 0;
-            }
-
+            /* Hàng trên: Home + chuyên mục học + Tuần */
             #btn-header-home {
-                grid-row: 2;
+                grid-row: 1;
                 grid-column: 1;
             }
 
             #header-learning-tabs {
-                grid-row: 2;
-                grid-column: 2 / 4;
+                grid-row: 1;
+                grid-column: 2;
                 min-width: 0;
                 overflow-x: auto;
                 overflow-y: hidden;
@@ -131,9 +115,39 @@
             }
 
             #btn-progress-week {
-                grid-row: 2;
-                grid-column: 4;
+                grid-row: 1;
+                grid-column: 3;
                 justify-self: end;
+            }
+
+            /* Hàng dưới: loa + sao + thông tin tài khoản */
+            #btn-toggle-autospeech {
+                grid-row: 2;
+                grid-column: 1;
+                justify-self: start;
+                margin-right: -0.15rem;
+            }
+
+            #header-star-box {
+                grid-row: 2;
+                grid-column: 1;
+                justify-self: end;
+                transform: translateX(2.75rem);
+                margin-left: 0;
+            }
+
+            #user-info-box {
+                grid-row: 2;
+                grid-column: 2 / 4;
+                justify-self: stretch;
+                width: 100%;
+                min-width: 0;
+                text-align: right;
+            }
+
+            /* Trên mobile, để phần user/account có nhiều không gian hơn */
+            #user-info-box > * {
+                max-width: 100%;
             }
         }
 
