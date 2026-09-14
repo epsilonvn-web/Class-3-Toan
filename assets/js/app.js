@@ -714,7 +714,7 @@ function enterDashboard(isSilent=false) {
 function updateUserInfoBox() {
     const box=document.getElementById('user-info-box'); if(!box)return;
     if(!currentUser || currentUser.isGuest){
-        box.innerHTML=`<div class="flex items-center gap-1.5"><span class="text-amber-600 font-extrabold text-xs mr-1">Khách</span><button onclick="openAuthModal('login')" class="px-3 py-2 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-black text-xs">Sign in</button><button onclick="openAuthModal('register')" class="px-3 py-2 rounded-xl bg-white border border-orange-200 text-orange-600 font-black text-xs">Sign up</button></div>`;
+        box.innerHTML=`<div class="flex items-center gap-1.5"><span class="text-amber-600 font-extrabold text-xs mr-0.5 md:mr-1">Khách</span><div class="flex flex-col md:flex-row gap-1 md:gap-1.5"><button onclick="openAuthModal('login')" class="px-2.5 md:px-3 py-1.5 md:py-2 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-black text-[11px] md:text-xs leading-none">Sign in</button><button onclick="openAuthModal('register')" class="px-2.5 md:px-3 py-1.5 md:py-2 rounded-xl bg-white border border-orange-200 text-orange-600 font-black text-[11px] md:text-xs leading-none">Sign up</button></div></div>`;
         updatePremiumButtons(); return;
     }
     const isAdmin=String(currentUser.vaiTro||'').toLowerCase()==='admin';
@@ -743,7 +743,13 @@ function closePremiumModal(){document.getElementById('modal-premium')?.classList
 function premiumGoSignIn(){closePremiumModal();openAuthModal('login');}
 function premiumGoSignUp(){closePremiumModal();openAuthModal('register');}
 function updatePremiumButtons(){
-    const btn=document.querySelector('button[onclick="clickProgressOrExam(\'progress\')"]'); if(btn){const span=btn.querySelector('span');if(span)span.textContent=canAccessPremium()?'Bản đồ tuần':'Bản đồ tuần 🔒';}
+    const btn=document.querySelector('button[onclick="clickProgressOrExam(\'progress\')"]');
+    if(!btn)return;
+    const unlocked=canAccessPremium();
+    const mobile=btn.querySelector('#progress-label-mobile');
+    const desktop=btn.querySelector('#progress-label-desktop');
+    if(mobile)mobile.textContent=unlocked?'Tuần':'Tuần 🔒';
+    if(desktop)desktop.textContent=unlocked?'Bản đồ tuần':'Bản đồ tuần 🔒';
 }
 async function openAdminManager(){if(!isAdminUser())return;updateNavTabs('Quản lý tài khoản','👥',null);switchAppView('view-admin');await loadAdminAccounts();}
 async function loadAdminAccounts(){
