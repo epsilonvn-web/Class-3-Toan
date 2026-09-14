@@ -655,7 +655,7 @@ async function doLogin() {
     try {
         const result=await callAppsScript('login',{maHS,maPin});
         if(!result.ok){showAuthError(result.error||'ID hoặc PIN không đúng!');return;}
-        currentUser={...result.student,isGuest:false};
+        currentUser={...result.student,isGuest:false,token:result.token};
         if(result.token) localStorage.setItem(AUTH_TOKEN_KEY,result.token);
         closeAuthModal(); enterDashboard();
     } catch(err){showAuthError('Lỗi kết nối máy chủ: '+err.message);} finally {btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-right-to-bracket mr-1"></i> Đăng nhập';}
@@ -687,7 +687,7 @@ async function tryAutoLogin() {
     if(!token) return;
     try{
         const res=await callAppsScript('session',{token});
-        if(res.ok){currentUser={...res.student,isGuest:false};enterDashboard(true);} else {localStorage.removeItem(AUTH_TOKEN_KEY);}
+        if(res.ok){currentUser={...res.student,isGuest:false,token};enterDashboard(true);} else {localStorage.removeItem(AUTH_TOKEN_KEY);}
     }catch(e){}
 }
 
@@ -1667,6 +1667,7 @@ async function saveExamResultToSheet() {
 
     const payload = {
         maHS: currentUser.maHS,
+        token: currentUser.token, // bắt buộc để server xác nhận đúng chủ tài khoản mới cho ghi điểm
         hoTen: currentUser.hoTen,
         lop: currentUser.lop,
         examCategory: categoryKey,
@@ -1712,6 +1713,7 @@ async function saveWeeklyProgressToSheet(percent, starCount, scoreVal) {
     const payload = {
         student_id: currentUser.maHS,
         maHS: currentUser.maHS,
+        token: currentUser.token, // bắt buộc để server xác nhận đúng chủ tài khoản mới cho ghi điểm
         hoTen: currentUser.hoTen,
         lop: currentUser.lop,
         sheetName: 'LichSuTienTrinhTuan',
@@ -1768,8 +1770,15 @@ async function openHistoryModal(sheetName = 'LichSuTienTrinhTuan') {
 
     showLoadingOverlay('Đang trích xuất dữ liệu và vẽ biểu đồ năng lực...');
     try {
-        const res = await callAppsScript('getHistory', { maHS: currentUser.maHS, sheetName });
+        const res = await callAppsScript('getHistory', { maHS: currentUser.maHS, sheetName, token: currentUser.token });
         hideLoadingOverlay();
+        if (res && res.ok === false) {
+            // Token hết hạn/không hợp lệ hoặc không đúng chủ - đóng modal, báo rõ thay vì âm thầm
+            // hiện báo cáo trống (dễ gây hiểu lầm là bé chưa học gì).
+            closeHistoryModal();
+            alert(res.error || 'Không thể tải lịch sử - bé đăng nhập lại nhé!');
+            return;
+        }
         const rows = (res && res.history) ? res.history : [];
         renderHistoryReport(rows, sheetName);
     } catch (err) {
