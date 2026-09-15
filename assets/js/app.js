@@ -859,17 +859,17 @@ function updatePremiumButtons(){
     const unlocked=canAccessPremium();
     const btn=document.getElementById('btn-progress-week');
     if(btn){
-        const mobile=btn.querySelector('#progress-label-mobile');
-        const desktop=btn.querySelector('#progress-label-desktop');
-        if(mobile)mobile.textContent=unlocked?'Tuần':'Tuần 🔒';
-        if(desktop)desktop.textContent=unlocked?'Bản đồ tuần':'Bản đồ tuần 🔒';
+        const mobile=btn.querySelector('#progress-label-mobile'), desktop=btn.querySelector('#progress-label-desktop'), lock=btn.querySelector('#progress-lock-mobile');
+        if(mobile) mobile.textContent='Tuần';
+        if(desktop) desktop.textContent='Bản đồ tuần';
+        if(lock) lock.classList.toggle('hidden', unlocked);
     }
     const gameBtn=document.getElementById('btn-mini-game');
     if(gameBtn){
-        const mobile=gameBtn.querySelector('#minigame-label-mobile');
-        const desktop=gameBtn.querySelector('#minigame-label-desktop');
-        if(mobile)mobile.textContent=unlocked?'Game':'Game 🔒';
-        if(desktop)desktop.textContent=unlocked?'Mini Game':'Mini Game 🔒';
+        const mobile=gameBtn.querySelector('#minigame-label-mobile'), desktop=gameBtn.querySelector('#minigame-label-desktop'), lock=gameBtn.querySelector('#minigame-lock-mobile');
+        if(mobile) mobile.textContent='Game';
+        if(desktop) desktop.textContent='Mini Game';
+        if(lock) lock.classList.toggle('hidden', unlocked);
     }
 }
 async function openAdminManager(){if(!isAdminUser())return;updateNavTabs('Quản lý tài khoản','👥',null);switchAppView('view-admin');await loadAdminAccounts();}
