@@ -318,15 +318,15 @@
 
                     <div id="user-info-box" class="text-xs font-bold text-gray-600 text-right"></div>
 
-                    <button id="btn-progress-week" onclick="clickProgressOrExam('progress')" class="h-10 px-2.5 md:px-3 bg-gradient-to-r from-orange-500 to-orange-700 text-white font-extrabold rounded-xl text-xs md:text-sm shadow-md hover:from-orange-600 hover:to-orange-700 flex items-center space-x-1 md:space-x-1.5 shrink-0 transition-shadow duration-200 hover:shadow-[0_0_14px_rgba(249,115,22,0.65)]">
+                    <button id="btn-progress-week" onclick="clickProgressOrExam('progress')" class="relative h-10 px-2.5 md:px-3 bg-gradient-to-r from-orange-500 to-orange-700 text-white font-extrabold rounded-xl text-xs md:text-sm shadow-md hover:from-orange-600 hover:to-orange-700 flex items-center space-x-1 md:space-x-1.5 shrink-0 transition-shadow duration-200 hover:shadow-[0_0_14px_rgba(249,115,22,0.65)]">
                         <i class="fa-solid fa-map-location-dot"></i>
-                        <span id="progress-label-mobile" class="md:hidden">Tuần</span>
+                        <span id="progress-label-mobile" class="md:hidden">Tuần</span><span id="progress-lock-mobile" class="hidden absolute -top-2 md:-top-2.5 right-1 md:right-1.5 text-[12px] md:text-[13px] leading-none">🔒</span>
                         <span id="progress-label-desktop" class="hidden md:inline">Bản đồ tuần</span>
                     </button>
 
-                    <button id="btn-mini-game" onclick="openMiniGameHub()" class="h-10 px-2.5 md:px-3 bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-extrabold rounded-xl text-xs md:text-sm shadow-md hover:from-teal-600 hover:to-emerald-600 flex items-center space-x-1 md:space-x-1.5 shrink-0 transition-shadow duration-200 hover:shadow-[0_0_14px_rgba(20,184,166,0.65)]">
+                    <button id="btn-mini-game" onclick="openMiniGameHub()" class="relative h-10 px-2.5 md:px-3 bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-extrabold rounded-xl text-xs md:text-sm shadow-md hover:from-teal-600 hover:to-emerald-600 flex items-center space-x-1 md:space-x-1.5 shrink-0 transition-shadow duration-200 hover:shadow-[0_0_14px_rgba(20,184,166,0.65)]">
                         <i class="fa-solid fa-gamepad"></i>
-                        <span id="minigame-label-mobile" class="md:hidden">Game 🔒</span>
+                        <span id="minigame-label-mobile" class="md:hidden">Game</span><span id="minigame-lock-mobile" class="hidden absolute -top-2 md:-top-2.5 right-1 md:right-1.5 text-[12px] md:text-[13px] leading-none">🔒</span>
                         <span id="minigame-label-desktop" class="hidden md:inline">Mini Game 🔒</span>
                     </button>
                 </div>
