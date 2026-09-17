@@ -80,6 +80,14 @@
         ::-webkit-scrollbar-thumb:hover { background: #eab308; }
 
 
+        /* Login logo: only the original image, no border/frame */
+        #screen-login img[alt="Toán 3"] {
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            background: transparent !important;
+        }
+
         /* Mobile header: row 1 = learning navigation, row 2 = status/account */
         @media (max-width: 767px) {
             .app-main-header {
@@ -202,7 +210,7 @@
             <div class="w-full max-w-md pastel-card p-6 md:p-8 flex flex-col items-center text-center my-auto relative max-h-[95vh] overflow-y-auto">
                 <button onclick="closeAuthModal()" class="absolute right-4 top-4 w-9 h-9 rounded-full bg-yellow-50 border border-yellow-200 text-gray-500 hover:text-orange-600 flex items-center justify-center" title="Đóng"><i class="fa-solid fa-xmark"></i></button>
             <div class="mb-2 flex flex-col items-center">
-                <img src="icon-512.png" alt="Toán 3" class="w-[150px] h-[150px] md:w-[160px] md:h-[160px] object-contain shadow-md select-none">
+                <img src="icon-512.png" alt="Toán 3" class="w-[150px] h-[150px] md:w-[160px] md:h-[160px] object-contain select-none">
             </div>
 
             <p class="text-base md:text-lg font-extrabold text-orange-600 mb-5">Cô Ong Vàng</p>
