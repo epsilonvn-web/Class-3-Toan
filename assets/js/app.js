@@ -126,6 +126,8 @@ const GREETINGS_GUEST = [
 // ==========================================
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwb1dYNx6aIvfZ9wgOh3KDyLCwihHw3iVL6444yH2BV577cei6L1vV3-dXIw_6OKJM7-Q/exec";
 const AUTH_TOKEN_KEY = 'toan3_auth_token';
+let authRestoreInProgress = false;
+let authRestoreFailed = false;
 const PREMIUM_TOPIC_IDS = new Set([11]);
 let adminAccountsCache = [];
 let adminSortKey = 'maHS';
@@ -796,21 +798,84 @@ async function doRegister() {
 }
 
 async function tryAutoLogin() {
-    const token=localStorage.getItem(AUTH_TOKEN_KEY);
-    if(!token) return;
-    try{
-        const res=await callAppsScript('session',{token});
-        if(res.ok){currentUser={...res.student,isGuest:false,token};enterDashboard(true);} else {localStorage.removeItem(AUTH_TOKEN_KEY);}
-    }catch(e){}
+    const token = localStorage.getItem(AUTH_TOKEN_KEY);
+    if (!token) {
+        handleGuestMode();
+        return;
+    }
+
+    authRestoreInProgress = true;
+    authRestoreFailed = false;
+
+    // Có token thì KHÔNG hạ user xuống Khách trong lúc đang restore.
+    // localStorage chỉ chứa token, tuyệt đối không chứa PIN/mật khẩu.
+    const box = document.getElementById('user-info-box');
+    if (box && !currentUser) {
+        box.innerHTML = '<span class="text-gray-400 font-bold text-[10px] md:text-xs">Đang khôi phục phiên...</span>';
+    }
+
+    try {
+        const res = await callAppsScript('restoreSession', { token });
+
+        if (res && res.ok) {
+            currentUser = { ...res.student, isGuest: false, token };
+            authRestoreFailed = false;
+            enterDashboard(true);
+            return;
+        }
+
+        // Token bị backend từ chối: vẫn KHÔNG tự xoá token.
+        // Chỉ logout() mới được phép xoá token local.
+        authRestoreFailed = true;
+        currentUser = null;
+        if (box) {
+            box.innerHTML = '<span class="text-orange-500 font-bold text-[10px] md:text-xs">Phiên cần xác thực lại</span>';
+        }
+    } catch (e) {
+        // Lỗi mạng tạm thời: giữ nguyên token và trạng thái phiên cục bộ;
+        // không chuyển về Khách, không xoá token.
+        authRestoreFailed = true;
+        if (box && !currentUser) {
+            box.innerHTML = '<span class="text-gray-400 font-bold text-[10px] md:text-xs">Chưa kết nối được máy chủ</span>';
+        }
+    } finally {
+        authRestoreInProgress = false;
+    }
 }
 
 async function logout() {
-    const token=localStorage.getItem(AUTH_TOKEN_KEY);
+    const token = localStorage.getItem(AUTH_TOKEN_KEY);
+
+    // Đây là nơi DUY NHẤT chủ động xoá session token phía client.
+    // Người dùng đã bấm Đăng xuất nên UI có thể chuyển về Khách ngay.
     localStorage.removeItem(AUTH_TOKEN_KEY);
-    localStorage.removeItem('tv1_mahs'); localStorage.removeItem('tv1_mapin');
-    currentUser={name:'Khách (Guest)',isGuest:true,tuanHienTai:1,hoTen:'Bé Khách',lop:'',maHS:'KHACH',vaiTro:'guest',loaiTaiKhoan:'guest'};
-    updateUserInfoBox(); resetStars(); renderDashboardGrid(); goHome();
-    if(token){try{await callAppsScript('logout',{token});}catch(e){}}
+    localStorage.removeItem('tv1_mahs');
+    localStorage.removeItem('tv1_mapin');
+
+    currentUser = {
+        name: 'Khách (Guest)',
+        isGuest: true,
+        tuanHienTai: 1,
+        hoTen: 'Bé Khách',
+        lop: '',
+        maHS: 'KHACH',
+        vaiTro: 'guest',
+        loaiTaiKhoan: 'guest'
+    };
+
+    updateUserInfoBox();
+    resetStars();
+    renderDashboardGrid();
+    goHome();
+
+    if (token) {
+        try {
+            await callAppsScript('logout', { token });
+        } catch (e) {
+            // Token local đã xoá theo yêu cầu người dùng.
+            // Nếu mạng lỗi, token server cũ có thể còn tồn tại nhưng thiết bị này không giữ nó nữa.
+        }
+    }
 }
 
 function handleGuestMode() {
@@ -2533,6 +2598,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAutoSpeechButtonUI();
 });
 
-handleGuestMode();
+// Khởi động xác thực:
+// - Có token: restore từ backend, không nháy về Khách.
+// - Không có token: vào chế độ Khách.
+// - Lỗi mạng: giữ token, không tự logout.
 tryAutoLogin();
 if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {})); }
