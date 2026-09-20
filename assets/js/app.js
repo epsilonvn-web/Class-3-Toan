@@ -372,7 +372,8 @@ async function renderDashboardGrid() {
     let topicsData = [];
     try { topicsData = await fetchAllTopicsData(); } catch (e) {}
     let html = '';
-    TOPICS_CONFIG.forEach(t => {
+    // Khám phá chỉ giữ các chuyên đề học tự do. Ôn tập và Đề thi đã có tab chính riêng.
+    TOPICS_CONFIG.filter(t => ![11, 12].includes(Number(t.id))).forEach(t => {
         const topicObj = topicsData.find(item => Number(item.topic_id) === Number(t.id));
         const totalCount = topicObj?.questions?.length || 0;
         const countLabel = totalCount > 0 ? `${totalCount} câu` : 'Đang cập nhật';
@@ -385,20 +386,11 @@ async function renderDashboardGrid() {
                     <div class="w-8 h-8 bg-${t.color}-100 rounded-xl flex items-center justify-center text-sm font-extrabold text-${t.color}-600 shadow-inner group-hover:scale-110 transition-transform shrink-0">${t.icon}</div>
                     <h3 class="font-extrabold text-${t.color}-700 text-sm md:text-base leading-tight">${t.title}</h3>
                 </div>
-                <div class="flex justify-between items-center mt-1.5 pt-1 border-t border-yellow-100 text-[11px] font-bold text-gray-500">
+                <div class="flex justify-between items-center mt-1.5 pt-1 border-t border-pink-100 text-[11px] font-bold text-gray-500">
                     <span>${t.desc}</span><span class="bg-${t.color}-50 text-${t.color}-600 px-2 py-0.5 rounded-full">${countLabel}</span>
                 </div>
             </div>`;
     });
-    let totalExamsCount = 3;
-    try { const examData = await loadExamDataFile('de_thi_toan_3.json'); if (examData?.exams) totalExamsCount = examData.exams.length; } catch (e) {}
-    const examLocked = !canAccessPremium();
-    html += `
-        <div onclick="openExamHub()" class="relative pastel-card p-3 flex flex-col justify-between cursor-pointer hover:border-amber-400 transition-all group bg-gradient-to-br from-white to-amber-50/50 min-h-[92px]">
-            ${examLocked ? '<span class="absolute right-3 top-2 text-slate-400 text-sm">🔒</span>' : ''}
-            <div class="flex items-center space-x-2.5 pr-5"><div class="w-8 h-8 bg-amber-100 rounded-xl flex items-center justify-center text-sm font-extrabold text-amber-600 shadow-inner">🏆</div><h3 class="font-extrabold text-amber-700 text-sm md:text-base leading-tight">12. Đấu trường đề thi</h3></div>
-            <div class="flex justify-between items-center mt-1.5 pt-1 border-t border-amber-100 text-[11px] font-bold text-gray-500"><span>HK1, HK2, HSG</span><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">${totalExamsCount} đề thi</span></div>
-        </div>`;
     container.innerHTML = html;
 }
 
@@ -485,35 +477,35 @@ async function renderExamHubGrid() {
     const countHSG = getCountForCategory(examFileMap.hsg.examCategory);
 
     let html = `
-        <div class="bg-yellow-50/70 p-5 rounded-3xl border-2 border-yellow-200 flex flex-col justify-between items-center text-center group min-h-[250px] pastel-card">
+        <div class="bg-pink-50/70 p-5 rounded-3xl border-2 border-pink-200 flex flex-col justify-between items-center text-center group min-h-[250px] pastel-card">
             <div>
                 <div class="text-4xl mb-1.5 group-hover:scale-110 transition-transform">🔢</div>
-                <h3 class="font-extrabold text-yellow-600 text-lg mb-1">Học kỳ 1</h3>
+                <h3 class="font-extrabold text-pink-600 text-lg mb-1">Học kỳ 1</h3>
                 <p class="text-xs text-gray-500 font-bold mb-2">Kiểm tra kiến thức HK1</p>
-                <span class="inline-block bg-yellow-100 text-yellow-700 px-3 py-0.5 rounded-full text-xs font-black mb-3">${countHK1} đề thi chuẩn</span>
+                <span class="inline-block bg-pink-100 text-pink-700 px-3 py-0.5 rounded-full text-xs font-black mb-3">${countHK1} đề thi chuẩn</span>
             </div>
             <div class="w-full space-y-2">
-                <button onclick="startRandomExam('hocky1')" class="w-full py-2.5 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-extrabold rounded-xl text-xs pastel-btn shadow-sm">
+                <button onclick="startRandomExam('hocky1')" class="w-full py-2.5 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-extrabold rounded-xl text-xs pastel-btn shadow-sm">
                     🚀 Vào thi thử
                 </button>
-                <button onclick="openHistoryModal('LichSuBaiThiHK1')" class="w-full py-2 bg-white text-yellow-700 border border-yellow-300 font-extrabold rounded-xl text-xs pastel-btn hover:bg-yellow-50">
+                <button onclick="openHistoryModal('LichSuBaiThiHK1')" class="w-full py-2 bg-white text-pink-700 border border-pink-300 font-extrabold rounded-xl text-xs pastel-btn hover:bg-pink-50">
                     📊 Xem lịch sử thi
                 </button>
             </div>
         </div>
 
-        <div class="bg-orange-50/70 p-5 rounded-3xl border-2 border-orange-200 flex flex-col justify-between items-center text-center group min-h-[250px] pastel-card">
+        <div class="bg-purple-50/70 p-5 rounded-3xl border-2 border-purple-200 flex flex-col justify-between items-center text-center group min-h-[250px] pastel-card">
             <div>
                 <div class="text-4xl mb-1.5 group-hover:scale-110 transition-transform">⭐</div>
-                <h3 class="font-extrabold text-orange-600 text-lg mb-1">Học kỳ 2</h3>
+                <h3 class="font-extrabold text-purple-600 text-lg mb-1">Học kỳ 2</h3>
                 <p class="text-xs text-gray-500 font-bold mb-2">Kiểm tra kiến thức HK2</p>
-                <span class="inline-block bg-orange-100 text-orange-700 px-3 py-0.5 rounded-full text-xs font-black mb-3">${countHK2} đề thi chuẩn</span>
+                <span class="inline-block bg-purple-100 text-purple-700 px-3 py-0.5 rounded-full text-xs font-black mb-3">${countHK2} đề thi chuẩn</span>
             </div>
             <div class="w-full space-y-2">
-                <button onclick="startRandomExam('hocky2')" class="w-full py-2.5 bg-gradient-to-r from-orange-500 to-orange-700 text-white font-extrabold rounded-xl text-xs pastel-btn shadow-sm">
+                <button onclick="startRandomExam('hocky2')" class="w-full py-2.5 bg-gradient-to-r from-purple-500 to-purple-700 text-white font-extrabold rounded-xl text-xs pastel-btn shadow-sm">
                     🚀 Vào thi thử
                 </button>
-                <button onclick="openHistoryModal('LichSuBaiThiHK2')" class="w-full py-2 bg-white text-orange-700 border border-orange-300 font-extrabold rounded-xl text-xs pastel-btn hover:bg-orange-50">
+                <button onclick="openHistoryModal('LichSuBaiThiHK2')" class="w-full py-2 bg-white text-purple-700 border border-purple-300 font-extrabold rounded-xl text-xs pastel-btn hover:bg-purple-50">
                     📊 Xem lịch sử thi
                 </button>
             </div>
@@ -527,7 +519,7 @@ async function renderExamHubGrid() {
                 <span class="inline-block bg-amber-100 text-amber-700 px-3 py-0.5 rounded-full text-xs font-black mb-3">${countHSG} đề thi tuyển chọn</span>
             </div>
             <div class="w-full space-y-2">
-                <button onclick="startRandomExam('hsg')" class="w-full py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-extrabold rounded-xl text-xs pastel-btn shadow-sm">
+                <button onclick="startRandomExam('hsg')" class="w-full py-2.5 bg-gradient-to-r from-amber-500 to-purple-500 text-white font-extrabold rounded-xl text-xs pastel-btn shadow-sm">
                     🚀 Vào thi thử
                 </button>
                 <button onclick="openHistoryModal('LichSuBaiThiHSG')" class="w-full py-2 bg-white text-amber-700 border border-amber-300 font-extrabold rounded-xl text-xs pastel-btn hover:bg-amber-50">
@@ -565,7 +557,7 @@ const MINIGAME_PALETTES = [
     ['bg-indigo-50/80','border-indigo-300','text-indigo-600'],
     ['bg-emerald-50/80','border-emerald-300','text-emerald-600'],
     ['bg-fuchsia-50/80','border-fuchsia-300','text-fuchsia-600'],
-    ['bg-orange-50/80','border-orange-300','text-orange-600'],
+    ['bg-purple-50/80','border-purple-300','text-purple-600'],
     ['bg-cyan-50/80','border-cyan-300','text-cyan-600'],
     ['bg-lime-50/80','border-lime-300','text-lime-700'],
     ['bg-purple-50/80','border-purple-300','text-purple-600'],
@@ -641,7 +633,7 @@ async function openGamePlay(gameId) {
     try {
         await loadGameScript(GAME_SCRIPT_MAP[gameId]);
     } catch (e) {
-        if (container) container.innerHTML = '<p class="text-center text-orange-500 font-bold py-8">Không tải được game, bé thử lại nhé!</p>';
+        if (container) container.innerHTML = '<p class="text-center text-purple-500 font-bold py-8">Không tải được game, bé thử lại nhé!</p>';
         return;
     }
     if (gameId === 'balance-scale' && typeof startBalanceScaleGame === 'function') startBalanceScaleGame();
@@ -704,7 +696,7 @@ function returnToTopicLecture() {
 
 function switchAppView(viewId) {
     stopSpeaking();
-    ['view-dashboard-grid','view-lecture','view-quiz','view-roadmap','view-minigame-hub','view-game-play','view-exam-hub','view-result','view-admin'].forEach(id => {
+    ['view-dashboard-grid','view-lecture','view-quiz','view-bai-hoc-hub','view-roadmap','view-minigame-hub','view-game-play','view-exam-hub','view-result','view-admin'].forEach(id => {
         const el=document.getElementById(id); if (!el) return; el.classList.toggle('hidden', id !== viewId);
     });
 }
@@ -724,8 +716,8 @@ function switchAuthTab(tab) {
     const isLogin = tab === 'login';
     document.getElementById('form-login').classList.toggle('hidden', !isLogin);
     document.getElementById('form-register').classList.toggle('hidden', isLogin);
-    document.getElementById('tab-btn-login').className = `py-2.5 rounded-xl font-extrabold text-sm pastel-btn ${isLogin ? 'bg-white text-yellow-600 shadow-sm' : 'text-gray-400'}`;
-    document.getElementById('tab-btn-register').className = `py-2.5 rounded-xl font-extrabold text-sm pastel-btn ${!isLogin ? 'bg-white text-yellow-600 shadow-sm' : 'text-gray-400'}`;
+    document.getElementById('tab-btn-login').className = `py-2.5 rounded-xl font-extrabold text-sm pastel-btn ${isLogin ? 'bg-white text-pink-600 shadow-sm' : 'text-gray-400'}`;
+    document.getElementById('tab-btn-register').className = `py-2.5 rounded-xl font-extrabold text-sm pastel-btn ${!isLogin ? 'bg-white text-pink-600 shadow-sm' : 'text-gray-400'}`;
     hideAuthError();
 }
 
@@ -829,7 +821,7 @@ async function tryAutoLogin() {
         authRestoreFailed = true;
         currentUser = null;
         if (box) {
-            box.innerHTML = '<span class="text-orange-500 font-bold text-[10px] md:text-xs">Phiên cần xác thực lại</span>';
+            box.innerHTML = '<span class="text-purple-500 font-bold text-[10px] md:text-xs">Phiên cần xác thực lại</span>';
         }
     } catch (e) {
         // Lỗi mạng tạm thời: giữ nguyên token và trạng thái phiên cục bộ;
@@ -892,12 +884,12 @@ function enterDashboard(isSilent=false) {
 function updateUserInfoBox() {
     const box=document.getElementById('user-info-box'); if(!box)return;
     if(!currentUser || currentUser.isGuest){
-        box.innerHTML=`<div class="flex items-center gap-1.5"><span class="text-amber-600 font-extrabold text-xs mr-0.5 md:mr-1">Khách</span><div class="flex flex-col md:flex-row gap-1 md:gap-1.5"><button onclick="openAuthModal('login')" class="px-2.5 md:px-3 py-1.5 md:py-2 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-black text-[11px] md:text-xs leading-none">Sign in</button><button onclick="openAuthModal('register')" class="px-2.5 md:px-3 py-1.5 md:py-2 rounded-xl bg-white border border-orange-200 text-orange-600 font-black text-[11px] md:text-xs leading-none">Sign up</button></div></div>`;
+        box.innerHTML=`<div class="flex items-center gap-1.5"><span class="text-amber-600 font-extrabold text-xs mr-0.5 md:mr-1">Khách</span><div class="flex flex-col md:flex-row gap-1 md:gap-1.5"><button onclick="openAuthModal('login')" class="px-2.5 md:px-3 py-1.5 md:py-2 rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 text-white font-black text-[11px] md:text-xs leading-none">Sign in</button><button onclick="openAuthModal('register')" class="px-2.5 md:px-3 py-1.5 md:py-2 rounded-xl bg-white border border-purple-200 text-purple-600 font-black text-[11px] md:text-xs leading-none">Sign up</button></div></div>`;
         updatePremiumButtons(); return;
     }
     const isAdmin=String(currentUser.vaiTro||'').toLowerCase()==='admin';
     const tier=isAdmin?'Admin':String(currentUser.loaiTaiKhoan||'regular').toUpperCase();
-    box.innerHTML=`<div class="flex items-center gap-2"><div class="text-right"><div class="text-yellow-600 font-extrabold text-xs md:text-sm leading-tight">${escapeHtml(currentUser.hoTen||currentUser.maHS)}</div><div class="text-gray-500 font-semibold text-[10px]">${escapeHtml(tier)} · ID ${escapeHtml(currentUser.maHS)}</div></div>${isAdmin?'<button onclick="openAdminManager()" class="h-9 px-3 bg-yellow-100 hover:bg-yellow-200 text-orange-700 border border-yellow-300 rounded-xl font-black text-xs"><i class="fa-solid fa-users-gear mr-1"></i>Quản lý</button>':''}<button onclick="logout()" title="Đăng xuất" class="w-8 h-8 flex items-center justify-center bg-orange-100 hover:bg-orange-200 text-orange-500 rounded-xl border border-orange-200 text-xs"><i class="fa-solid fa-right-from-bracket"></i></button></div>`;
+    box.innerHTML=`<div class="flex items-center gap-2"><div class="text-right"><div class="text-pink-600 font-extrabold text-xs md:text-sm leading-tight">${escapeHtml(currentUser.hoTen||currentUser.maHS)}</div><div class="text-gray-500 font-semibold text-[10px]">${escapeHtml(tier)} · ID ${escapeHtml(currentUser.maHS)}</div></div>${isAdmin?'<button onclick="openAdminManager()" class="h-9 px-3 bg-pink-100 hover:bg-pink-200 text-purple-700 border border-pink-300 rounded-xl font-black text-xs"><i class="fa-solid fa-users-gear mr-1"></i>Quản lý</button>':''}<button onclick="logout()" title="Đăng xuất" class="w-8 h-8 flex items-center justify-center bg-purple-100 hover:bg-purple-200 text-purple-500 rounded-xl border border-purple-200 text-xs"><i class="fa-solid fa-right-from-bracket"></i></button></div>`;
     updatePremiumButtons();
 }
 
@@ -914,7 +906,7 @@ function requirePremium(featureName){if(canAccessPremium())return true;showPremi
 function showPremiumModal(featureName){
     const modal=document.getElementById('modal-premium'),msg=document.getElementById('premium-modal-message'),actions=document.getElementById('premium-guest-actions');if(!modal||!msg)return;
     if(!currentUser||currentUser.isGuest){msg.innerHTML=`Đây là <strong>${escapeHtml(featureName)}</strong> dành cho tài khoản <strong>Trial hoặc VIP</strong>.<br><br>Con có thể Sign in nếu đã có tài khoản hoặc Sign up để đăng ký nhé!<br><span class="text-gray-500">Các chuyên đề cơ bản vẫn học miễn phí bình thường.</span>`;actions?.classList.remove('hidden');}
-    else{msg.innerHTML=`Tài khoản hiện tại của con là <strong class="text-orange-600">Regular</strong>.<br><br><strong>${escapeHtml(featureName)}</strong> yêu cầu tài khoản <strong>Trial hoặc VIP</strong>. Con hãy liên hệ Admin để được nâng hạng nhé!`;actions?.classList.add('hidden');}
+    else{msg.innerHTML=`Tài khoản hiện tại của con là <strong class="text-purple-600">Regular</strong>.<br><br><strong>${escapeHtml(featureName)}</strong> yêu cầu tài khoản <strong>Trial hoặc VIP</strong>. Con hãy liên hệ Admin để được nâng hạng nhé!`;actions?.classList.add('hidden');}
     modal.classList.remove('hidden');
 }
 function closePremiumModal(){document.getElementById('modal-premium')?.classList.add('hidden');}
@@ -925,8 +917,15 @@ function updatePremiumButtons(){
     const btn=document.getElementById('btn-progress-week');
     if(btn){
         const mobile=btn.querySelector('#progress-label-mobile'), desktop=btn.querySelector('#progress-label-desktop'), lock=btn.querySelector('#progress-lock-mobile');
-        if(mobile) mobile.textContent='Tuần';
-        if(desktop) desktop.textContent='Bản đồ tuần';
+        if(mobile) mobile.textContent='Bài tập';
+        if(desktop) desktop.textContent='Bài tập';
+        if(lock) lock.classList.toggle('hidden', unlocked);
+    }
+    const lessonBtn=document.getElementById('btn-lessons');
+    if(lessonBtn){
+        const mobile=lessonBtn.querySelector('#lessons-label-mobile'), desktop=lessonBtn.querySelector('#lessons-label-desktop'), lock=lessonBtn.querySelector('#lessons-lock-mobile');
+        if(mobile) mobile.textContent='Bài học';
+        if(desktop) desktop.textContent='Bài học';
         if(lock) lock.classList.toggle('hidden', unlocked);
     }
     const gameBtn=document.getElementById('btn-mini-game');
@@ -982,7 +981,7 @@ function renderAdminAccounts(rows){
     if(count)count.textContent=`${students.length} tài khoản`;
     updateAdminSortIcons();
     if(!students.length){tbody.innerHTML='<tr><td colspan="6" class="px-3 py-6 text-center text-gray-400">Chưa có tài khoản học sinh</td></tr>';return;}
-    tbody.innerHTML=students.map(a=>`<tr class="hover:bg-yellow-50/50"><td class="px-3 py-3 font-black text-orange-700">${escapeHtml(a.maHS)}</td><td class="px-3 py-3">${escapeHtml(a.hoTen||'')}</td><td class="px-3 py-3">${escapeHtml(a.lop||'')}</td><td class="px-3 py-3"><select onchange="adminChangeTier('${String(a.maHS).replace(/'/g,"\\'")}',this.value)" class="px-2 py-1.5 rounded-lg border border-yellow-200 font-black bg-white ${a.loaiTaiKhoan==='vip'?'text-orange-600':a.loaiTaiKhoan==='trial'?'text-amber-600':'text-gray-600'}"><option value="regular" ${a.loaiTaiKhoan==='regular'?'selected':''}>Regular</option><option value="trial" ${a.loaiTaiKhoan==='trial'?'selected':''}>Trial</option><option value="vip" ${a.loaiTaiKhoan==='vip'?'selected':''}>VIP</option></select></td><td class="px-3 py-3">${escapeHtml(a.hanDungThu||'--')}</td><td class="px-3 py-3">${escapeHtml(a.hanVIP||'--')}</td></tr>`).join('');
+    tbody.innerHTML=students.map(a=>`<tr class="hover:bg-pink-50/50"><td class="px-3 py-3 font-black text-purple-700">${escapeHtml(a.maHS)}</td><td class="px-3 py-3">${escapeHtml(a.hoTen||'')}</td><td class="px-3 py-3">${escapeHtml(a.lop||'')}</td><td class="px-3 py-3"><select onchange="adminChangeTier('${String(a.maHS).replace(/'/g,"\\'")}',this.value)" class="px-2 py-1.5 rounded-lg border border-pink-200 font-black bg-white ${a.loaiTaiKhoan==='vip'?'text-purple-600':a.loaiTaiKhoan==='trial'?'text-amber-600':'text-gray-600'}"><option value="regular" ${a.loaiTaiKhoan==='regular'?'selected':''}>Regular</option><option value="trial" ${a.loaiTaiKhoan==='trial'?'selected':''}>Trial</option><option value="vip" ${a.loaiTaiKhoan==='vip'?'selected':''}>VIP</option></select></td><td class="px-3 py-3">${escapeHtml(a.hanDungThu||'--')}</td><td class="px-3 py-3">${escapeHtml(a.hanVIP||'--')}</td></tr>`).join('');
 }
 function filterAdminAccounts(){
     const q=(document.getElementById('admin-search-input')?.value||'').trim().toLowerCase();
@@ -999,8 +998,16 @@ function resetStars() {
     if (redEl) redEl.textContent = 0;
 }
 
+function clickLessonModule() {
+    if (!requirePremium('Bài học')) return;
+    inMiniGameFlow = false;
+    stopSpeaking();
+    updateNavTabs('Bài học', '📖', null);
+    switchAppView('view-bai-hoc-hub');
+}
+
 function clickProgressOrExam(type) {
-    if(type==='progress'){if(!requirePremium('Bản đồ tuần'))return;openRoadmap();}
+    if(type==='progress'){if(!requirePremium('Bài tập'))return;openRoadmap();}
     else if(type==='exam'){if(!requirePremium('Đấu trường đề thi'))return;openExamHub();}
 }
 
@@ -1100,7 +1107,7 @@ function handleNextExamFromReport() {
 function openRoadmap() {
     inMiniGameFlow = false;
     stopSpeaking();
-    updateNavTabs("Bản đồ tiến trình tuần", "🗺️", null);
+    updateNavTabs("Bài tập", "✏️", null);
     renderRoadmapSVG();
     switchAppView('view-roadmap');
 }
@@ -1308,15 +1315,15 @@ function loadQuestion() {
     const isPoemLike = passageLines.length >= 4 && avgLineLen > 0 && avgLineLen < 35;
     const useTwoColumns = isPoemLike;
     const passageHtml = pText ? `
-        <div class="w-full max-w-3xl bg-yellow-50/70 border-2 border-yellow-200 rounded-2xl p-3 mb-1.5 text-left shadow-xs">
-            ${pTitle ? `<p class="font-black text-yellow-700 text-sm md:text-base mb-1">${escapeHtml(pTitle)}</p>` : ''}
+        <div class="w-full max-w-3xl bg-pink-50/70 border-2 border-pink-200 rounded-2xl p-3 mb-1.5 text-left shadow-xs">
+            ${pTitle ? `<p class="font-black text-pink-700 text-sm md:text-base mb-1">${escapeHtml(pTitle)}</p>` : ''}
             <p class="text-gray-800 text-sm md:text-base font-bold whitespace-pre-line leading-relaxed ${useTwoColumns ? 'md:columns-2 md:gap-6' : ''}">${escapeHtml(pText)}</p>
         </div>` : '';
 
     const practiceSpeakerBtnHtml = !isEvaluationMode ? `
         <div class="flex items-center justify-center mt-1 mb-1">
-            <button onclick="speakCurrentQuestion()" class="px-4 py-1.5 bg-yellow-50 hover:bg-yellow-100 text-yellow-700 border border-yellow-200 rounded-2xl text-xs md:text-sm font-extrabold flex items-center space-x-1.5 pastel-btn shadow-xs">
-                <i class="fa-solid fa-volume-high text-yellow-600"></i>
+            <button onclick="speakCurrentQuestion()" class="px-4 py-1.5 bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200 rounded-2xl text-xs md:text-sm font-extrabold flex items-center space-x-1.5 pastel-btn shadow-xs">
+                <i class="fa-solid fa-volume-high text-pink-600"></i>
                 <span>Nghe câu hỏi</span>
             </button>
         </div>
@@ -1328,11 +1335,11 @@ function loadQuestion() {
     if (isLetterListen) {
         html = `
             ${mediaHtml}
-            <div class="w-full max-w-3xl border-2 border-dashed border-yellow-200 bg-yellow-50/40 rounded-3xl px-4 py-4 md:py-5 flex flex-col items-center text-center mb-3">
+            <div class="w-full max-w-3xl border-2 border-dashed border-pink-200 bg-pink-50/40 rounded-3xl px-4 py-4 md:py-5 flex flex-col items-center text-center mb-3">
                 <div class="text-3xl md:text-4xl mb-1.5 space-x-2">
                     <span>🎧</span><span>👂</span><span>🔢</span>
                 </div>
-                <p class="text-sm md:text-base lg:text-lg font-black text-orange-600 leading-snug">${escapeHtml(q.question_text)}</p>
+                <p class="text-sm md:text-base lg:text-lg font-black text-purple-600 leading-snug">${escapeHtml(q.question_text)}</p>
                 ${practiceSpeakerBtnHtml}
             </div>
 
@@ -1347,9 +1354,9 @@ function loadQuestion() {
         html += `</div>`;
         if (q.mascot_text) {
             html += `
-                <div class="mt-4 inline-flex items-center space-x-1.5 bg-yellow-50 border border-yellow-200 rounded-full px-3.5 py-1.5">
+                <div class="mt-4 inline-flex items-center space-x-1.5 bg-pink-50 border border-pink-200 rounded-full px-3.5 py-1.5">
                     <span>🐝</span>
-                    <span class="text-xs md:text-sm font-extrabold text-orange-600">${escapeHtml(q.mascot_text)}</span>
+                    <span class="text-xs md:text-sm font-extrabold text-purple-600">${escapeHtml(q.mascot_text)}</span>
                 </div>`;
         }
     } else {
@@ -1372,18 +1379,18 @@ function loadQuestion() {
 
         if (activeExamContext) {
             html += `
-                <button data-opt="${escapeHtml(opt)}" onclick="checkAnswer('${opt.replace(/'/g, "\\'")}')" class="option-btn w-full p-2.5 md:p-3 bg-white hover:bg-yellow-50/50 border border-yellow-200 rounded-2xl font-extrabold text-gray-800 text-left transition-all flex items-center justify-between text-sm md:text-base shadow-xs">
+                <button data-opt="${escapeHtml(opt)}" onclick="checkAnswer('${opt.replace(/'/g, "\\'")}')" class="option-btn w-full p-2.5 md:p-3 bg-white hover:bg-pink-50/50 border border-pink-200 rounded-2xl font-extrabold text-gray-800 text-left transition-all flex items-center justify-between text-sm md:text-base shadow-xs">
                     <div class="flex items-center space-x-2.5">
-                        <span class="opt-badge w-7 h-7 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center font-black text-sm shrink-0">${letter}</span>
+                        <span class="opt-badge w-7 h-7 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center font-black text-sm shrink-0">${letter}</span>
                         <span class="opt-text">${escapeHtml(formattedOpt)}</span>
                     </div>
-                    <span class="option-icon text-yellow-500 text-base md:text-lg"></span>
+                    <span class="option-icon text-pink-500 text-base md:text-lg"></span>
                 </button>`;
         } else {
             html += `
-                <button data-opt="${escapeHtml(opt)}" onclick="checkAnswer('${opt.replace(/'/g, "\\'")}')" class="option-btn w-full p-3 md:p-3.5 bg-yellow-50/40 hover:bg-yellow-100/70 border-2 border-yellow-200 rounded-2xl font-extrabold text-gray-800 text-left transition-all flex items-center justify-between text-sm md:text-base shadow-xs pastel-btn">
-                    <span><strong class="text-yellow-600 mr-2 text-base md:text-lg">${letter}.</strong> ${escapeHtml(formattedOpt)}</span>
-                    <span class="option-icon text-yellow-500 text-base md:text-lg"></span>
+                <button data-opt="${escapeHtml(opt)}" onclick="checkAnswer('${opt.replace(/'/g, "\\'")}')" class="option-btn w-full p-3 md:p-3.5 bg-pink-50/40 hover:bg-pink-100/70 border-2 border-pink-200 rounded-2xl font-extrabold text-gray-800 text-left transition-all flex items-center justify-between text-sm md:text-base shadow-xs pastel-btn">
+                    <span><strong class="text-pink-600 mr-2 text-base md:text-lg">${letter}.</strong> ${escapeHtml(formattedOpt)}</span>
+                    <span class="option-icon text-pink-500 text-base md:text-lg"></span>
                 </button>`;
         }
     });
@@ -1411,12 +1418,12 @@ function restoreQuestionState(q) {
             const iconSpan = b.querySelector('.option-icon');
 
             if (completedAnswer !== undefined && bOpt === completedAnswer) {
-                b.className = "option-btn w-full p-2.5 md:p-3 bg-yellow-50/30 border-2 border-yellow-500 rounded-2xl font-extrabold text-gray-900 text-left transition-all flex items-center justify-between text-sm md:text-base shadow-xs";
-                if (badge) badge.className = "opt-badge w-7 h-7 rounded-xl bg-yellow-500 text-white flex items-center justify-center font-black text-sm shrink-0 shadow-xs";
-                if (iconSpan) iconSpan.innerHTML = '<i class="fa-regular fa-circle-check text-yellow-600 text-lg"></i>';
+                b.className = "option-btn w-full p-2.5 md:p-3 bg-pink-50/30 border-2 border-pink-500 rounded-2xl font-extrabold text-gray-900 text-left transition-all flex items-center justify-between text-sm md:text-base shadow-xs";
+                if (badge) badge.className = "opt-badge w-7 h-7 rounded-xl bg-pink-500 text-white flex items-center justify-center font-black text-sm shrink-0 shadow-xs";
+                if (iconSpan) iconSpan.innerHTML = '<i class="fa-regular fa-circle-check text-pink-600 text-lg"></i>';
             } else {
-                b.className = "option-btn w-full p-2.5 md:p-3 bg-white hover:bg-yellow-50/50 border border-yellow-200 rounded-2xl font-extrabold text-gray-800 text-left transition-all flex items-center justify-between text-sm md:text-base shadow-xs";
-                if (badge) badge.className = "opt-badge w-7 h-7 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center font-black text-sm shrink-0";
+                b.className = "option-btn w-full p-2.5 md:p-3 bg-white hover:bg-pink-50/50 border border-pink-200 rounded-2xl font-extrabold text-gray-800 text-left transition-all flex items-center justify-between text-sm md:text-base shadow-xs";
+                if (badge) badge.className = "opt-badge w-7 h-7 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center font-black text-sm shrink-0";
                 if (iconSpan) iconSpan.innerHTML = '';
             }
         });
@@ -1430,10 +1437,10 @@ function restoreQuestionState(q) {
             b.disabled = true;
             const bOpt = b.getAttribute('data-opt');
             if (bOpt === q.answer) {
-                b.classList.remove('bg-yellow-50/40', 'border-yellow-200');
+                b.classList.remove('bg-pink-50/40', 'border-pink-200');
                 b.classList.add('bg-green-100', 'border-green-400', 'text-green-800');
             } else if (!isCorrect && bOpt === completedAnswer) {
-                b.classList.remove('bg-yellow-50/40', 'border-yellow-200');
+                b.classList.remove('bg-pink-50/40', 'border-pink-200');
                 b.classList.add('bg-red-200', 'border-red-500', 'text-red-900');
             }
         });
@@ -1444,7 +1451,7 @@ function restoreQuestionState(q) {
         document.querySelectorAll('.option-btn').forEach(b => {
             const bOpt = b.getAttribute('data-opt');
             if (wrongAttempts.includes(bOpt)) {
-                b.classList.remove('bg-yellow-50/40', 'border-yellow-200');
+                b.classList.remove('bg-pink-50/40', 'border-pink-200');
                 b.classList.add('bg-red-200', 'border-red-500', 'text-red-900');
                 b.disabled = true;
             }
@@ -1455,7 +1462,7 @@ function restoreQuestionState(q) {
         document.querySelectorAll('.option-btn').forEach(b => {
             const bOpt = b.getAttribute('data-opt');
             if (bOpt === completedAnswer) {
-                b.classList.remove('bg-yellow-50/40', 'border-yellow-200');
+                b.classList.remove('bg-pink-50/40', 'border-pink-200');
                 b.classList.add('bg-green-100', 'border-green-400', 'text-green-800');
                 b.disabled = true;
             }
@@ -1508,12 +1515,12 @@ function checkAnswer(selectedOpt) {
             const iconSpan = b.querySelector('.option-icon');
 
             if (bOpt === selectedOpt) {
-                b.className = "option-btn w-full p-2.5 md:p-3 bg-yellow-50/30 border-2 border-yellow-500 rounded-2xl font-extrabold text-gray-900 text-left transition-all flex items-center justify-between text-sm md:text-base shadow-xs";
-                if (badge) badge.className = "opt-badge w-7 h-7 rounded-xl bg-yellow-500 text-white flex items-center justify-center font-black text-sm shrink-0 shadow-xs";
-                if (iconSpan) iconSpan.innerHTML = '<i class="fa-regular fa-circle-check text-yellow-600 text-lg"></i>';
+                b.className = "option-btn w-full p-2.5 md:p-3 bg-pink-50/30 border-2 border-pink-500 rounded-2xl font-extrabold text-gray-900 text-left transition-all flex items-center justify-between text-sm md:text-base shadow-xs";
+                if (badge) badge.className = "opt-badge w-7 h-7 rounded-xl bg-pink-500 text-white flex items-center justify-center font-black text-sm shrink-0 shadow-xs";
+                if (iconSpan) iconSpan.innerHTML = '<i class="fa-regular fa-circle-check text-pink-600 text-lg"></i>';
             } else {
-                b.className = "option-btn w-full p-2.5 md:p-3 bg-white hover:bg-yellow-50/50 border border-yellow-200 rounded-2xl font-extrabold text-gray-800 text-left transition-all flex items-center justify-between text-sm md:text-base shadow-xs";
-                if (badge) badge.className = "opt-badge w-7 h-7 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center font-black text-sm shrink-0";
+                b.className = "option-btn w-full p-2.5 md:p-3 bg-white hover:bg-pink-50/50 border border-pink-200 rounded-2xl font-extrabold text-gray-800 text-left transition-all flex items-center justify-between text-sm md:text-base shadow-xs";
+                if (badge) badge.className = "opt-badge w-7 h-7 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center font-black text-sm shrink-0";
                 if (iconSpan) iconSpan.innerHTML = '';
             }
         });
@@ -1542,10 +1549,10 @@ function checkAnswer(selectedOpt) {
             b.disabled = true;
             const bOpt = b.getAttribute('data-opt');
             if (bOpt === q.answer) {
-                b.classList.remove('bg-yellow-50/40', 'border-yellow-200');
+                b.classList.remove('bg-pink-50/40', 'border-pink-200');
                 b.classList.add('bg-green-100', 'border-green-400', 'text-green-800');
             } else if (bOpt === selectedOpt) {
-                b.classList.remove('bg-yellow-50/40', 'border-yellow-200');
+                b.classList.remove('bg-pink-50/40', 'border-pink-200');
                 b.classList.add('bg-red-200', 'border-red-500', 'text-red-900');
             }
         });
@@ -1575,7 +1582,7 @@ function checkAnswer(selectedOpt) {
         document.querySelectorAll('.option-btn').forEach(b => {
             b.disabled = true;
             if (b.getAttribute('data-opt') === q.answer) {
-                b.classList.remove('bg-yellow-50/40', 'border-yellow-200');
+                b.classList.remove('bg-pink-50/40', 'border-pink-200');
                 b.classList.add('bg-green-100', 'border-green-400', 'text-green-800');
             }
         });
@@ -1593,7 +1600,7 @@ function checkAnswer(selectedOpt) {
 
         document.querySelectorAll('.option-btn').forEach(b => {
             if (b.getAttribute('data-opt') === selectedOpt) {
-                b.classList.remove('bg-yellow-50/40', 'border-yellow-200');
+                b.classList.remove('bg-pink-50/40', 'border-pink-200');
                 b.classList.add('bg-red-200', 'border-red-500', 'text-red-900');
                 b.disabled = true;
             }
@@ -1711,7 +1718,7 @@ function showResultScreen() {
 
     const nextActionLabel = document.getElementById('report-next-action-label');
     if (nextActionLabel) {
-        nextActionLabel.textContent = activeRoadmapContext ? '🔙 Quay lại tiến trình tuần' : '🚀 Làm đề thi tiếp theo';
+        nextActionLabel.textContent = activeRoadmapContext ? '🔙 Quay lại Bài tập' : '🚀 Làm đề thi tiếp theo';
     }
 
     const historyBtn = document.getElementById('report-history-btn');
@@ -1772,15 +1779,15 @@ function renderReportTopicsBreakdown() {
             ? (data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0)
             : (data.maxScore > 0 ? Math.round((data.earnedScore / data.maxScore) * 100) : 0);
         const isPassed = pct >= 50;
-        const badgeClass = isPassed ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-orange-50 text-orange-700 border border-orange-200';
+        const badgeClass = isPassed ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-purple-50 text-purple-700 border border-purple-200';
         const badgeText = isPassed ? 'Đạt yêu cầu' : 'Cần luyện tập thêm';
-        const barColor = isPassed ? 'bg-gradient-to-r from-amber-400 to-orange-400' : 'bg-gradient-to-r from-yellow-400 to-orange-400';
+        const barColor = isPassed ? 'bg-gradient-to-r from-amber-400 to-purple-400' : 'bg-gradient-to-r from-pink-400 to-purple-400';
         const scoreLine = isRoadmap
-            ? `<span>Số câu đúng: <strong class="text-yellow-600">${data.correct}/${data.total} câu</strong></span>`
-            : `<span>Điểm đạt: <strong class="text-yellow-600">${data.earnedScore.toFixed(1)} / ${data.maxScore.toFixed(1)}đ</strong></span>`;
+            ? `<span>Số câu đúng: <strong class="text-pink-600">${data.correct}/${data.total} câu</strong></span>`
+            : `<span>Điểm đạt: <strong class="text-pink-600">${data.earnedScore.toFixed(1)} / ${data.maxScore.toFixed(1)}đ</strong></span>`;
 
         html += `
-            <div class="bg-yellow-50/40 border border-yellow-100 rounded-2xl p-3 flex flex-col justify-between space-y-2">
+            <div class="bg-pink-50/40 border border-pink-100 rounded-2xl p-3 flex flex-col justify-between space-y-2">
                 <div class="flex items-center justify-between">
                     <span class="font-black text-slate-800 text-xs sm:text-sm">${SKILL_TAXONOMY[k].name}</span>
                     <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${badgeClass}">${badgeText}</span>
@@ -1789,7 +1796,7 @@ function renderReportTopicsBreakdown() {
                     ${scoreLine}
                     <span class="font-math font-black">${pct}%</span>
                 </div>
-                <div class="w-full bg-yellow-100 rounded-full h-2 overflow-hidden">
+                <div class="w-full bg-pink-100 rounded-full h-2 overflow-hidden">
                     <div class="${barColor} h-full rounded-full transition-all duration-500" style="width: ${pct}%"></div>
                 </div>
             </div>
@@ -1809,14 +1816,14 @@ function openReviewWrongModal() {
         let html = '';
         quizWrongAnswers.forEach((item, idx) => {
             html += `
-                <div class="bg-orange-50/40 border border-orange-200 rounded-2xl p-3.5 space-y-2">
+                <div class="bg-purple-50/40 border border-purple-200 rounded-2xl p-3.5 space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="px-2.5 py-0.5 bg-orange-100 text-orange-800 font-black text-xs rounded-lg">CÂU ${item.question_number || (idx + 1)}</span>
+                        <span class="px-2.5 py-0.5 bg-purple-100 text-purple-800 font-black text-xs rounded-lg">CÂU ${item.question_number || (idx + 1)}</span>
                         <span class="text-xs font-bold text-slate-500">${escapeHtml(beautifySubtopicName(item.sub_topic_label) || 'Chủ đề tổng hợp')}</span>
                     </div>
                     <p class="font-extrabold text-slate-800 text-sm">${escapeHtml(item.question_text)}</p>
                     <div class="text-xs space-y-1 font-semibold">
-                        <p class="text-orange-600"><i class="fa-solid fa-xmark mr-1"></i> Đáp án con chọn: <strong>${escapeHtml(item.dap_an_chon)}</strong></p>
+                        <p class="text-purple-600"><i class="fa-solid fa-xmark mr-1"></i> Đáp án con chọn: <strong>${escapeHtml(item.dap_an_chon)}</strong></p>
                         <p class="text-emerald-700"><i class="fa-solid fa-check mr-1"></i> Đáp án đúng chuẩn: <strong>${escapeHtml(item.dap_an_dung)}</strong></p>
                     </div>
                     <div class="p-2.5 bg-amber-50/80 border border-amber-200 rounded-xl text-xs text-amber-900 font-semibold flex items-start gap-2">
@@ -2200,7 +2207,7 @@ function renderPedagogicalEvaluation(rows, skillAverages, touchedSkills) {
     box.innerHTML = `
         <div class="bg-white/80 p-3 rounded-xl border border-amber-200">
             <span class="text-amber-700 font-extrabold block mb-0.5">🌟 1. Đánh giá tổng quan năng lực & xu hướng tiến bộ:</span>
-            <p class="text-gray-700">Học sinh <strong>${escapeHtml(currentUser.hoTen)}</strong> đã hoàn thành <strong>${count} bài kiểm tra</strong> với điểm số trung bình tích lũy đạt <strong class="text-yellow-600">${avgScoreStr}/10 điểm</strong>. ${overviewText}</p>
+            <p class="text-gray-700">Học sinh <strong>${escapeHtml(currentUser.hoTen)}</strong> đã hoàn thành <strong>${count} bài kiểm tra</strong> với điểm số trung bình tích lũy đạt <strong class="text-pink-600">${avgScoreStr}/10 điểm</strong>. ${overviewText}</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -2209,14 +2216,14 @@ function renderPedagogicalEvaluation(rows, skillAverages, touchedSkills) {
                 <p class="text-gray-700">${strengthHtml}</p>
             </div>
 
-            <div class="bg-orange-50/70 p-3 rounded-xl border border-orange-200">
-                <span class="text-orange-700 font-extrabold block mb-0.5">⚠️ 3. Điểm cần lưu ý & khắc phục:</span>
+            <div class="bg-purple-50/70 p-3 rounded-xl border border-purple-200">
+                <span class="text-purple-700 font-extrabold block mb-0.5">⚠️ 3. Điểm cần lưu ý & khắc phục:</span>
                 <p class="text-gray-700">${weaknessHtml}</p>
             </div>
         </div>
 
-        <div class="bg-white/80 p-3 rounded-xl border border-orange-200">
-            <span class="text-orange-700 font-extrabold block mb-0.5">💡 4. Kế hoạch bồi dưỡng & hướng dẫn phụ huynh:</span>
+        <div class="bg-white/80 p-3 rounded-xl border border-purple-200">
+            <span class="text-purple-700 font-extrabold block mb-0.5">💡 4. Kế hoạch bồi dưỡng & hướng dẫn phụ huynh:</span>
             <p class="text-gray-700">Ba mẹ nên dành 15 phút mỗi tối cùng con ôn lại các phép tính, đặt câu hỏi gợi mở và khen ngợi kịp thời để giúp ${studentName} giữ vững niềm yêu thích môn Toán nhé!</p>
         </div>
     `;
@@ -2278,10 +2285,10 @@ function renderHistoryTable(rows, sheetName) {
             });
 
             bodyRows += `
-                <tr class="hover:bg-yellow-50/30 transition-colors">
+                <tr class="hover:bg-pink-50/30 transition-colors">
                     <td class="py-2.5 px-2">${idx + 1}</td>
                     <td class="py-2.5 px-2 font-black">Tuần ${r.tuan || (idx + 1)}</td>
-                    <td class="py-2.5 px-2 font-black text-orange-600">${itemDiem}</td>
+                    <td class="py-2.5 px-2 font-black text-purple-600">${itemDiem}</td>
                     ${skillCells}
                     <td class="py-2.5 px-2 text-gray-500">${dateStr}</td>
                     <td class="py-2.5 px-2 text-gray-500">${durationStr}</td>
@@ -2305,10 +2312,10 @@ function renderHistoryTable(rows, sheetName) {
             });
 
             bodyRows += `
-                <tr class="hover:bg-yellow-50/30 transition-colors">
+                <tr class="hover:bg-pink-50/30 transition-colors">
                     <td class="py-2.5 px-2">${idx + 1}</td>
                     <td class="py-2.5 px-2 font-black">${r.deSo ? `Đề ${r.deSo}` : `Tuần ${r.tuan || (idx + 1)}`}</td>
-                    <td class="py-2.5 px-2 font-black text-orange-600">${itemDiem}</td>
+                    <td class="py-2.5 px-2 font-black text-purple-600">${itemDiem}</td>
                     ${examSkillCells}
                     <td class="py-2.5 px-2 text-gray-500">${dateStr}</td>
                     <td class="py-2.5 px-2 text-gray-500">${durationStr}</td>
@@ -2320,7 +2327,7 @@ function renderHistoryTable(rows, sheetName) {
     const html = `
         <tr class="bg-amber-100/90 text-amber-950 font-black border-b-2 border-amber-200">
             <td class="py-2.5 px-2" colspan="2">Điểm trung bình</td>
-            <td class="py-2.5 px-2 text-orange-600">${avgTong}</td>
+            <td class="py-2.5 px-2 text-purple-600">${avgTong}</td>
             ${summaryCells}
             <td class="py-2.5 px-2" colspan="2">--</td>
         </tr>
@@ -2507,7 +2514,7 @@ function updateQuizPalletUI() {
         const answer = userAnswers[idx];
         const isAnswered = answer !== undefined;
         const isCurrent = idx === currentQIndex;
-        let cls = 'bg-white text-yellow-400 border-yellow-200 hover:bg-yellow-50';
+        let cls = 'bg-white text-pink-400 border-pink-200 hover:bg-pink-50';
 
         if (isAnswered) {
             if (isRoadmap) {
@@ -2521,7 +2528,7 @@ function updateQuizPalletUI() {
                 cls = 'bg-emerald-500 text-white border-emerald-600 hover:bg-emerald-600';
             }
         }
-        if (isCurrent) cls = 'bg-gradient-to-br from-yellow-500 to-orange-500 text-white border-yellow-500 shadow-md';
+        if (isCurrent) cls = 'bg-gradient-to-br from-pink-500 to-purple-500 text-white border-pink-500 shadow-md';
         html += `<button onclick="jumpToQuestion(${idx})" class="${btnSize} shrink-0 rounded-xl border-2 font-black flex items-center justify-center transition-colors duration-150 ${cls}">${idx + 1}</button>`;
     });
     container.innerHTML = html;
@@ -2549,7 +2556,7 @@ function showLoadingOverlay(msg) {
         el = document.createElement('div');
         el.id = 'loading-overlay';
         el.className = 'fixed inset-0 bg-black/30 flex items-center justify-center z-50';
-        el.innerHTML = `<div class="bg-white px-6 py-4 rounded-2xl shadow-xl font-extrabold text-yellow-600 flex items-center space-x-3"><i class="fa-solid fa-spinner fa-spin"></i><span id="loading-overlay-text"></span></div>`;
+        el.innerHTML = `<div class="bg-white px-6 py-4 rounded-2xl shadow-xl font-extrabold text-pink-600 flex items-center space-x-3"><i class="fa-solid fa-spinner fa-spin"></i><span id="loading-overlay-text"></span></div>`;
         document.body.appendChild(el);
     }
     document.getElementById('loading-overlay-text').textContent = msg;
@@ -2572,11 +2579,11 @@ function updateAutoSpeechButtonUI() {
         icon.className = 'fa-solid fa-volume-high';
         btn.title = 'Đang BẬT tự động đọc câu hỏi — bấm để tắt';
         btn.classList.remove('bg-gray-100', 'text-gray-400', 'border-gray-200');
-        btn.classList.add('bg-yellow-50', 'text-yellow-600', 'border-yellow-200');
+        btn.classList.add('bg-pink-50', 'text-pink-600', 'border-pink-200');
     } else {
         icon.className = 'fa-solid fa-volume-xmark';
         btn.title = 'Đang TẮT tự động đọc câu hỏi — bấm để bật';
-        btn.classList.remove('bg-yellow-50', 'text-yellow-600', 'border-yellow-200');
+        btn.classList.remove('bg-pink-50', 'text-pink-600', 'border-pink-200');
         btn.classList.add('bg-gray-100', 'text-gray-400', 'border-gray-200');
     }
 }
@@ -2604,3 +2611,357 @@ document.addEventListener('DOMContentLoaded', () => {
 // - Lỗi mạng: giữ token, không tự logout.
 tryAutoLogin();
 if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {})); }
+// ============================================================
+// TOÁN 3 V2 - BÀI HỌC <-> BÀI TẬP THEO SGK/SBT
+// 58 bài học chính; loại Luyện tập chung và các bài Ôn tập cuối kỳ/cuối năm.
+// Bài học mở toàn bộ. Bài tập mở tuần tự theo ngưỡng >=80%.
+// TOAN3_C1-C6 tiếp tục là trục đánh giá xuyên suốt.
+// ============================================================
+const TOAN3_BAI_HOC_DATA_FILE = 'assets/data/bai_hoc_toan_3.json';
+let toan3BaiHocDataCache_ = null;
+let activeBaiHocToan3_ = { data: null, lesson: null, pageIndex: 0 };
+
+async function loadBaiHocToan3Data_() {
+    if (toan3BaiHocDataCache_) return toan3BaiHocDataCache_;
+    const res = await fetch(`${TOAN3_BAI_HOC_DATA_FILE}?v=20260920-sgk-sbt-v1`, { cache: 'no-store' });
+    if (!res.ok) throw new Error('Không thể tải dữ liệu Bài học/Bài tập Toán 3');
+    toan3BaiHocDataCache_ = await res.json();
+    return toan3BaiHocDataCache_;
+}
+
+function switchAppView(viewId) {
+    stopSpeaking();
+    ['view-dashboard-grid','view-lecture','view-quiz','view-bai-hoc-hub','view-bai-hoc-detail','view-roadmap','view-minigame-hub','view-game-play','view-exam-hub','view-result','view-admin'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.toggle('hidden', id !== viewId);
+    });
+}
+
+function getBaiTapUnlockKeyToan3_() {
+    const id = currentUser?.maHS || 'KHACH';
+    return `toan3_bai_tap_unlocked_v1_${String(id).toUpperCase()}`;
+}
+function getUnlockedBaiTapToan3_() {
+    try { return Math.max(1, Number(localStorage.getItem(getBaiTapUnlockKeyToan3_()) || 1)); }
+    catch (e) { return 1; }
+}
+function saveUnlockedBaiTapToan3_(n) {
+    try { localStorage.setItem(getBaiTapUnlockKeyToan3_(), String(Math.max(1, Number(n) || 1))); }
+    catch (e) {}
+}
+function getNextBaiTapToan3_(data, bai) {
+    return (data?.bai_tap || []).map(x => Number(x.bai)).sort((a,b)=>a-b).find(x => x > Number(bai)) || null;
+}
+function isBaiTapUnlockedToan3_(data, bai) {
+    return Number(bai) <= getUnlockedBaiTapToan3_();
+}
+
+function semesterSwitchButtonsToan3_(hostId, activeSem, fnName) {
+    const host = document.getElementById(hostId);
+    if (!host) return;
+    host.innerHTML = [1,2].map(s => `<button onclick="${fnName}(${s})" class="px-4 py-2 rounded-xl border-2 font-black text-xs md:text-sm transition-all ${Number(s)===Number(activeSem)?'bg-gradient-to-r from-pink-500 to-purple-500 text-white border-purple-400 shadow-sm':'bg-white text-purple-700 border-pink-200 hover:bg-pink-50'}">Học kỳ ${s}</button>`).join('');
+}
+
+async function clickLessonModule(semesterNumber = 1) {
+    if (!requirePremium('Bài học')) return;
+    inMiniGameFlow = false;
+    stopSpeaking();
+    activeExamContext = null; activeRoadmapContext = null; activeTopicId = null; pendingTopicQuiz = null;
+    updateNavTabs('Bài học', '📖', null);
+    switchAppView('view-bai-hoc-hub');
+    showLoadingOverlay('Đang mở Bài học...');
+    try {
+        const data = await loadBaiHocToan3Data_();
+        renderBaiHocGridToan3_(data, semesterNumber);
+    } catch (err) {
+        typeof showAppNotice==='function' ? showAppNotice(`Không thể mở Bài học: ${err.message}`) : alert(err.message);
+    } finally { hideLoadingOverlay(); }
+}
+
+function renderBaiHocGridToan3_(data, semesterNumber) {
+    semesterSwitchButtonsToan3_('lesson-semester-tabs', semesterNumber, 'clickLessonModule');
+    const container = document.getElementById('bai-hoc-grid-container');
+    if (!container) return;
+    const arr = (data?.bai_hoc || []).filter(x => Number(x.semester) === Number(semesterNumber));
+    const palette = [
+        ['#fff7ed','#fdba74','#c2410c'],['#fefce8','#fde047','#a16207'],['#f0fdf4','#86efac','#15803d'],
+        ['#eff6ff','#93c5fd','#1d4ed8'],['#faf5ff','#d8b4fe','#7e22ce'],['#fff1f2','#fda4af','#be123c']
+    ];
+    container.innerHTML = `<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 md:gap-3">${arr.map((bh,idx)=>{
+        const c=palette[idx%palette.length];
+        return `<button onclick="selectBaiHocToan3_(${bh.bai})" class="text-left min-h-[106px] rounded-2xl border-2 p-3 transition-all hover:-translate-y-0.5 hover:shadow-lg flex flex-col" style="background:${c[0]};border-color:${c[1]}"><div class="font-black text-base md:text-lg" style="color:${c[2]}">Bài ${bh.bai}</div><div class="text-[11px] font-black text-slate-400 mt-0.5">SGK bài ${bh.source_lesson_no}</div><div class="text-[13px] md:text-sm font-extrabold text-slate-700 mt-1.5 leading-snug">${escapeHtml(bh.source_title||'')}</div></button>`;
+    }).join('')}</div>`;
+}
+
+async function selectBaiHocToan3_(bai) {
+    if (!requirePremium('Bài học')) return;
+    try {
+        const data = await loadBaiHocToan3Data_();
+        const lesson = (data?.bai_hoc || []).find(x => Number(x.bai) === Number(bai));
+        if (!lesson) throw new Error(`Không tìm thấy dữ liệu Bài ${bai}`);
+        activeBaiHocToan3_ = { data, lesson, pageIndex: 0 };
+        renderBaiHocDetailToan3_();
+    } catch (err) {
+        typeof showAppNotice==='function' ? showAppNotice(`Không thể mở Bài học: ${err.message}`) : alert(err.message);
+    }
+}
+
+function renderBaiHocDetailToan3_() {
+    const ctx = activeBaiHocToan3_;
+    const lesson = ctx.lesson;
+    if (!lesson) return;
+    switchAppView('view-bai-hoc-detail');
+    updateNavTabs('Bài học', '📖', `Bài ${lesson.bai}`);
+    const meta = document.getElementById('bai-hoc-detail-meta');
+    const title = document.getElementById('bai-hoc-detail-title');
+    const tabs = document.getElementById('bai-hoc-detail-tabs');
+    const body = document.getElementById('bai-hoc-detail-body');
+    if (meta) meta.textContent = `Bài ${lesson.bai} · SGK bài ${lesson.source_lesson_no} · ${lesson.theme || 'Toán 3'}`;
+    if (title) title.textContent = lesson.source_title || `Bài ${lesson.bai}`;
+    const pages = Array.isArray(lesson.pages) ? lesson.pages : [];
+    if (tabs) tabs.innerHTML = pages.map((pg,idx)=>`<button onclick="openBaiHocPageToan3_(${idx})" class="px-3 py-2 rounded-xl border-2 font-black text-xs md:text-sm ${idx===ctx.pageIndex?'bg-gradient-to-r from-pink-500 to-purple-500 text-white border-purple-400 shadow-sm':'bg-white text-purple-700 border-pink-200 hover:bg-pink-50'}">${escapeHtml(pg.title||`Trang ${idx+1}`)}</button>`).join('');
+    if (body) body.innerHTML = renderBaiHocPageBodyToan3_(pages[ctx.pageIndex]||{}) + renderBaiHocBottomNavToan3_(ctx.pageIndex,pages.length);
+}
+
+function renderBaiHocPageBodyToan3_(page) {
+    const safe = escapeHtml;
+    if (page.page_type === 'explore') {
+        const cards=(page.knowledge_cards||[]).map(c=>`<div class="rounded-2xl border border-pink-200 bg-white p-3"><div class="font-black text-purple-700 mb-1">${safe(c.title)}</div><div class="text-sm font-bold text-slate-700 leading-relaxed">${safe(c.text)}</div></div>`).join('');
+        const examples=(page.worked_examples||[]).map(x=>`<li>${safe(x)}</li>`).join('');
+        const steps=(page.micro_steps||[]).map((x,i)=>`<div class="flex gap-2 items-start"><span class="w-7 h-7 rounded-full bg-purple-500 text-white flex items-center justify-center font-black shrink-0">${i+1}</span><span class="font-bold text-slate-700">${safe(x)}</span></div>`).join('');
+        return `<div class="space-y-3"><div class="rounded-3xl border-2 border-pink-200 bg-gradient-to-br from-pink-50 via-white to-purple-50 p-4 md:p-5"><div class="text-sm md:text-base font-extrabold text-slate-700 leading-relaxed">${safe(page.intro||'')}</div><div class="mt-3 text-base md:text-lg font-black text-slate-800 leading-relaxed">${safe(page.story||'')}</div></div><div class="grid grid-cols-1 md:grid-cols-3 gap-2.5">${cards}</div><div class="grid grid-cols-1 lg:grid-cols-2 gap-3"><div class="rounded-3xl border-2 border-sky-100 bg-sky-50/50 p-4"><div class="font-black text-sky-700 mb-2">👀 Hình dung trực quan</div><div class="whitespace-pre-line text-center text-lg font-black text-slate-700 leading-relaxed">${safe(page.visual_scene||'')}</div></div><div class="rounded-3xl border-2 border-purple-100 bg-white p-4"><div class="font-black text-purple-700 mb-2">🧩 Làm từng bước</div><div class="space-y-2">${steps}</div></div></div><div class="rounded-2xl bg-emerald-50 border border-emerald-200 p-4"><div class="font-black text-emerald-700 mb-1">Ví dụ</div><ul class="list-disc pl-5 space-y-1 text-sm font-bold text-slate-700">${examples}</ul></div><div class="grid grid-cols-1 md:grid-cols-2 gap-2"><div class="rounded-2xl bg-rose-50 border border-rose-200 p-3 text-sm font-bold text-rose-700">⚠️ ${safe(page.common_mistake||'')}</div><div class="rounded-2xl bg-violet-50 border border-violet-200 p-3 text-sm font-bold text-violet-700">✅ ${safe(page.self_check||'')}</div></div><button onclick="speakLessonTeacherToan3_()" class="w-full md:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 text-white font-black text-sm shadow-sm">🔊 Nghe Cô Ong Vàng giảng</button></div>`;
+    }
+    if (page.page_type === 'practice') {
+        const items=(page.items||[]).map((it,i)=>`<div class="rounded-2xl border-2 border-pink-100 bg-white p-4"><div class="text-xs font-black text-purple-500 mb-1">Câu ${i+1}</div><div class="font-extrabold text-slate-800 mb-2">${safe(it.prompt||'')}</div><div class="flex flex-wrap gap-2">${(it.options||[]).map(o=>`<button onclick="lessonPracticeAnswerToan3_(this,'${String(o).replace(/'/g,"\\'")}','${String(it.answer).replace(/'/g,"\\'")}')" class="px-3 py-2 rounded-xl border border-pink-200 bg-pink-50 text-slate-700 font-black text-sm hover:bg-pink-100">${safe(o)}</button>`).join('')}</div><div class="lesson-practice-feedback mt-2 text-sm font-bold"></div></div>`).join('');
+        const strategy=(page.practice_strategy||[]).map((x,i)=>`<li><b>${i+1}.</b> ${safe(x)}</li>`).join('');
+        return `<div class="space-y-3"><div class="grid grid-cols-1 md:grid-cols-3 gap-3">${items}</div><div class="rounded-2xl bg-purple-50 border border-purple-200 p-4"><div class="font-black text-purple-700 mb-2">Cách làm chắc chắn</div><ul class="space-y-1 text-sm font-bold text-slate-700">${strategy}</ul></div><div class="grid grid-cols-1 md:grid-cols-2 gap-2">${(page.extra_examples||[]).map(x=>`<div class="rounded-2xl bg-white border border-pink-100 p-3 text-sm font-bold text-slate-700">${safe(x)}</div>`).join('')}</div></div>`;
+    }
+    const pts=(page.key_points||[]).map((x,i)=>`<div class="flex gap-3 items-start rounded-2xl border border-pink-100 bg-white p-3"><span class="w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white flex items-center justify-center font-black shrink-0">${i+1}</span><div class="font-extrabold text-slate-700 leading-relaxed">${safe(x)}</div></div>`).join('');
+    const checks=(page.quick_check||[]).map(x=>`<li>${safe(x)}</li>`).join('');
+    return `<div class="space-y-3"><div class="rounded-3xl border-2 border-pink-200 bg-gradient-to-br from-pink-50 via-white to-purple-50 p-4 md:p-5"><div class="text-lg font-black text-purple-700 mb-3">🌟 Điều con cần ghi nhớ</div><div class="grid grid-cols-1 gap-2">${pts}</div></div><div class="rounded-2xl bg-violet-50 border border-violet-200 p-4"><div class="font-black text-violet-700 mb-2">Tự kiểm cuối bài</div><ul class="list-disc pl-5 text-sm font-bold text-slate-700 space-y-1">${checks}</ul></div><div class="rounded-2xl bg-emerald-50 border border-emerald-200 p-4 font-extrabold text-emerald-700">${safe(page.finish_prompt||'')}</div></div>`;
+}
+
+function lessonPracticeAnswerToan3_(btn, value, answer) {
+    const wrap = btn.closest('.rounded-2xl');
+    const fb = wrap?.querySelector('.lesson-practice-feedback');
+    wrap?.querySelectorAll('button').forEach(b=>b.disabled=true);
+    if (String(value)===String(answer)) {
+        btn.classList.add('bg-emerald-100','border-emerald-300','text-emerald-700');
+        if (fb) { fb.textContent='✅ Chính xác!'; fb.className='lesson-practice-feedback mt-2 text-sm font-black text-emerald-600'; }
+    } else {
+        btn.classList.add('bg-rose-100','border-rose-300','text-rose-700');
+        if (fb) { fb.textContent=`Chưa đúng. Đáp án đúng: ${answer}`; fb.className='lesson-practice-feedback mt-2 text-sm font-black text-rose-600'; }
+    }
+}
+function openBaiHocPageToan3_(idx) { activeBaiHocToan3_.pageIndex=Math.max(0,Number(idx)||0); renderBaiHocDetailToan3_(); }
+function renderBaiHocBottomNavToan3_(idx,count) {
+    const prev=idx>0?`<button onclick="openBaiHocPageToan3_(${idx-1})" class="px-4 py-2.5 rounded-xl bg-white border border-pink-200 text-purple-700 font-black text-sm">← Trang trước</button>`:'<span></span>';
+    const next=idx<count-1?`<button onclick="openBaiHocPageToan3_(${idx+1})" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 text-white font-black text-sm shadow-sm">Trang tiếp →</button>`:`<button onclick="openRoadmap(${activeBaiHocToan3_.lesson?.semester||1})" class="px-5 py-2.5 rounded-xl bg-emerald-500 text-white font-black text-sm shadow-sm">Làm Bài tập →</button>`;
+    return `<div class="flex items-center justify-between gap-3 pt-4 mt-4 border-t border-pink-100">${prev}<div class="text-sm font-black text-slate-400">${idx+1}/${count}</div>${next}</div>`;
+}
+function speakLessonTeacherToan3_() {
+    const lesson=activeBaiHocToan3_?.lesson; const page=lesson?.pages?.[activeBaiHocToan3_.pageIndex||0];
+    const text=String(page?.teacher_script||page?.intro||'').trim(); if(text) speakVietnamese(text,0.92);
+}
+function backToBaiHocHubToan3_() { clickLessonModule(Number(activeBaiHocToan3_.lesson?.semester||1)); }
+
+function clickProgressOrExam(type) {
+    if (type==='progress') { if(!requirePremium('Bài tập')) return; openRoadmap(1); }
+    else if (type==='exam') { if(!requirePremium('Đấu trường đề thi')) return; openExamHub(); }
+}
+
+async function openRoadmap(semesterNumber = 1) {
+    inMiniGameFlow = false;
+    stopSpeaking();
+    if (!requirePremium('Bài tập')) return;
+    activeExamContext=null; activeTopicId=null; pendingTopicQuiz=null;
+    updateNavTabs('Bài tập','✏️',null);
+    switchAppView('view-roadmap');
+    showLoadingOverlay('Đang mở Bài tập...');
+    try {
+        const data=await loadBaiHocToan3Data_();
+        renderBaiTapGridToan3_(data,semesterNumber);
+    } catch(err) { typeof showAppNotice==='function' ? showAppNotice(`Không thể mở Bài tập: ${err.message}`) : alert(err.message); }
+    finally { hideLoadingOverlay(); }
+}
+
+function renderBaiTapGridToan3_(data, semesterNumber) {
+    semesterSwitchButtonsToan3_('roadmap-semester-tabs',semesterNumber,'openRoadmap');
+    const container=document.getElementById('roadmap-svg-container'); if(!container)return;
+    const unlocked=getUnlockedBaiTapToan3_();
+    const arr=(data?.bai_tap||[]).filter(x=>Number(x.semester)===Number(semesterNumber));
+    container.className='w-full bg-gradient-to-b from-pink-50/30 to-purple-50/30 rounded-2xl border-2 border-pink-100 p-3 md:p-4';
+    const palette=[['#fff7ed','#fdba74','#c2410c'],['#fefce8','#fde047','#a16207'],['#f0fdf4','#86efac','#15803d'],['#eff6ff','#93c5fd','#1d4ed8'],['#faf5ff','#d8b4fe','#7e22ce'],['#fff1f2','#fda4af','#be123c']];
+    container.innerHTML=`<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 md:gap-3">${arr.map((bt,idx)=>{
+        const open=Number(bt.bai)<=unlocked; const c=palette[idx%palette.length];
+        return `<button onclick="${open?`selectBaiTapToan3_(${bt.bai})`:`showLockedBaiTapToan3_(${bt.bai})`}" class="relative text-left min-h-[116px] rounded-2xl border-2 p-3 transition-all ${open?'hover:-translate-y-0.5 hover:shadow-lg':'opacity-55'} flex flex-col" style="background:${open?c[0]:'#f8fafc'};border-color:${open?c[1]:'#cbd5e1'}"><span class="absolute top-2 right-2">${open?'':'🔒'}</span><div class="font-black text-base md:text-lg pr-5" style="color:${open?c[2]:'#94a3b8'}">Bài ${bt.bai}</div><div class="text-[10px] font-black text-slate-400">SGK bài ${bt.source_lesson_no}</div><div class="text-[13px] font-extrabold ${open?'text-slate-700':'text-slate-400'} mt-1 leading-snug">${escapeHtml(bt.title||'')}</div><div class="text-[11px] mt-auto pt-2 ${open?'text-emerald-600':'text-slate-400'} font-black">${open?'20 câu / lượt':'Cần ≥80% bài trước'}</div></button>`;
+    }).join('')}</div>`;
+}
+function showLockedBaiTapToan3_(bai) { typeof showAppNotice==='function' ? showAppNotice(`🔒 Bài tập ${bai} chưa mở. Bé cần đạt từ 80% ở Bài tập trước để mở khóa nhé!`) : alert('Bài tập chưa mở'); }
+
+function normalizeEmbeddedQuestionToan3_(q) {
+    const raw={...q,sub_code:q.sub_id||q.sub_code,tag:q.skill_tag||q.competency||q.tag};
+    const n=normalizeQuestion(raw);
+    n.sub_id=String(q.sub_id||n.sub_topic||'');
+    n.lesson_refs=Array.isArray(q.lesson_refs)?q.lesson_refs.map(String):[];
+    n.skill_tag=q.skill_tag||q.competency||n.skill_tag||'TOAN3_C1';
+    return n;
+}
+function getQuestionsForBaiTapToan3_(bt) {
+    if(!bt)return[];
+    const embedded=Array.isArray(bt.embedded_questions)?bt.embedded_questions.map(normalizeEmbeddedQuestionToan3_).filter(Boolean):[];
+    let candidate=shuffleArray(embedded).slice(0,Math.min(Number(bt.candidate_pool_target||30),embedded.length));
+    if(candidate.length<20 && allQuestionsFlatCache){
+        const subIds=(bt.sub_ids||[]).map(String);
+        const fallback=allQuestionsFlatCache.filter(q=>subIds.includes(String(q.sub_topic||q.sub_id||'')) && !candidate.some(x=>String(x.question_id)===String(q.question_id)));
+        candidate=candidate.concat(shuffleArray(fallback).slice(0,30-candidate.length));
+    }
+    const by={}; candidate.forEach(q=>{const m=String(q.skill_tag||'TOAN3_C1').match(/C([1-6])/i);const k=m?`C${m[1]}`:'C1';(by[k]||=[]).push(q);});
+    const out=[],used=new Set(); let progress=true;
+    while(out.length<20&&progress){progress=false;for(const k of ['C1','C2','C3','C4','C5','C6']){const a=by[k]||[];while(a.length&&used.has(a[0].question_id))a.shift();if(a.length&&out.length<20){const q=a.shift();used.add(q.question_id);out.push(q);progress=true;}}}
+    for(const q of candidate){if(out.length>=20)break;if(!used.has(q.question_id)){used.add(q.question_id);out.push(q);}}
+    return shuffleArray(out.slice(0,20));
+}
+async function selectBaiTapToan3_(bai) {
+    stopSpeaking(); showLoadingOverlay(`Đang chuẩn bị Bài tập ${bai}...`);
+    try {
+        const data=await loadBaiHocToan3Data_(); const bt=(data?.bai_tap||[]).find(x=>Number(x.bai)===Number(bai));
+        if(!bt)throw new Error('Không tìm thấy Bài tập'); if(!isBaiTapUnlockedToan3_(data,bai)){showLockedBaiTapToan3_(bai);return;}
+        try{await fetchAllTopicsData();}catch(e){}
+        const qs=getQuestionsForBaiTapToan3_(bt); if(qs.length<20)throw new Error(`Kho câu hỏi phù hợp hiện chỉ có ${qs.length} câu; cần tối thiểu 20 câu.`);
+        activeRoadmapContext={week:Number(bai),bai:Number(bai),semester:Number(bt.semester||1),topicId:`BT${bai}`,chuDe:`Bài tập ${bai} · ${bt.title||''}`};
+        pendingTopicQuiz=null; activeExamContext=null; updateNavTabs('Bài tập','✏️',`Bài ${bai}`);
+        startTopicQuiz(bai,activeRoadmapContext.chuDe,qs,null);
+    } catch(err){typeof showAppNotice==='function'?showAppNotice(`Không thể mở Bài tập: ${err.message}`):alert(err.message);} finally{hideLoadingOverlay();}
+}
+
+// Giữ API/sheet backend hiện tại để không đổi Apps Script ở bước này.
+// Trường Tuan/week được dùng như số Bài tập trong kiến trúc mới.
+async function saveWeeklyProgressToSheet(percent, starCount, scoreVal) {
+    if(!activeRoadmapContext||!currentUser||currentUser.isGuest)return;
+    const {week,bai,topicId,chuDe}=activeRoadmapContext; const baiSo=Number(bai||week);
+    const thoiGianLamBai=quizStartTime?formatDuration(Date.now()-quizStartTime):''; const scoreThang10=Number(scoreVal??0).toFixed(1);
+    const skillCorrect={C1:0,C2:0,C3:0,C4:0,C5:0,C6:0},skillTotal={C1:0,C2:0,C3:0,C4:0,C5:0,C6:0};
+    quizAnsweredLog.forEach(item=>{const m=String(item.skill_tag||'TOAN3_C1').toUpperCase().match(/C([1-6])/);const tag=m?`C${m[1]}`:'C1';skillTotal[tag]++;if(item.isCorrect)skillCorrect[tag]++;});
+    const payload={student_id:currentUser.maHS,maHS:currentUser.maHS,token:currentUser.token,hoTen:currentUser.hoTen,lop:currentUser.lop,sheetName:'LichSuTienTrinhTuan',week_completed:baiSo,tuan:baiSo,chuDe,topicId,score:scoreThang10,stars_earned:starCount,tongCauHoi:activeQuestionsList.length,soCauDung:quizAnsweredLog.filter(x=>x.isCorrect).length,percent,thoiGianLamBai,wrongQuestions:quizWrongAnswers};
+    Object.keys(SKILL_TAXONOMY).forEach(k=>{payload[SKILL_TAXONOMY[k].sheetCol]=skillCorrect[k];payload[SKILL_TAXONOMY[k].totalCol]=skillTotal[k];});
+    try{
+        await callAppsScript('saveWeeklyProgress',payload);
+        if(percent>=80){const data=await loadBaiHocToan3Data_();const nextBai=getNextBaiTapToan3_(data,baiSo);if(nextBai&&nextBai>getUnlockedBaiTapToan3_()){saveUnlockedBaiTapToan3_(nextBai);setTimeout(()=>{if(typeof showAppNotice==='function')showAppNotice(`🎉 Chúc mừng bé đạt ${percent}%! Bài tập ${nextBai} đã được mở khóa.`);},500);}}
+    }catch(e){}
+}
+
+// Điều hướng trở lại đúng học kỳ sau khi làm Bài tập.
+function returnToTopicLecture() {
+    stopSpeaking();
+    clearInterval(quizTimerInterval);
+    if (activeExamContext) {
+        openExamHub();
+    } else if (activeRoadmapContext) {
+        openRoadmap(Number(activeRoadmapContext.semester || 1));
+    } else if (pendingTopicQuiz) {
+        updateNavTabs(pendingTopicQuiz.topicName, TOPICS_CONFIG.find(t => t.id === pendingTopicQuiz.topicNum)?.icon, null);
+        switchAppView('view-lecture');
+    } else if (inMiniGameFlow) {
+        openMiniGameHub();
+    } else if (activeBaiHocToan3_?.lesson) {
+        renderBaiHocDetailToan3_();
+    }
+}
+function handleNextExamFromReport() {
+    stopSpeaking();
+    if (activeRoadmapContext) {
+        const sem = Number(activeRoadmapContext.semester || 1);
+        activeRoadmapContext = null;
+        openRoadmap(sem);
+    } else if (activeExamContext) {
+        activeExamContext = null;
+        openExamHub();
+    } else {
+        goHome();
+    }
+}
+
+
+// ============================================================
+// UI 6 TAB + PINK/PURPLE THEME - TOAN 3
+// Bám giao diện Toán 2; giữ nguyên mascot Cô Ong Vàng và logic Toán 3.
+// ============================================================
+function setMainTabActive_(tabName) {
+    document.querySelectorAll('.main-module-tab').forEach(btn => btn.classList.toggle('is-active', btn.dataset.tab === tabName));
+}
+function getActiveMainModuleMeta_() {
+    const active=document.querySelector('.main-module-tab.is-active')?.dataset?.tab||'discover';
+    const map={discover:{label:'Khám phá',icon:'🧭',target:'discover'},lessons:{label:'Bài học',icon:'📖',target:'lessons'},exercises:{label:'Bài tập',icon:'✏️',target:'exercises'},review:{label:'Ôn tập',icon:'🧠',target:'review'},exams:{label:'Đề thi',icon:'🏆',target:'exams'},games:{label:'Mini games',icon:'🎮',target:'games'}};
+    return map[active]||map.discover;
+}
+function refreshMainTabLocksToan3_(){
+    const unlocked=canAccessPremium();
+    ['bai-hoc-lock-icon','roadmap-lock-icon','review-lock-icon','exam-lock-icon','minigame-lock-icon'].forEach(id=>document.getElementById(id)?.classList.toggle('hidden',unlocked));
+}
+function openMainTab(tabName){
+    stopSpeaking(); clearInterval(quizTimerInterval);
+    if(tabName==='discover'){goHome();return;}
+    if(tabName==='lessons'){if(!requirePremium('Bài học'))return;setMainTabActive_('lessons');clickLessonModule(1);return;}
+    if(tabName==='exercises'){if(!requirePremium('Bài tập'))return;setMainTabActive_('exercises');openRoadmap(1);return;}
+    if(tabName==='review'){
+        if(!requirePremium('Ôn tập'))return; setMainTabActive_('review');
+        // Toán 3 hiện vẫn dùng chuyên mục ôn tập trong kho học liệu.
+        const reviewTopic=TOPICS_CONFIG.find(t=>/ôn tập/i.test(String(t.title||'')));
+        if(reviewTopic){openTopic(reviewTopic.id,reviewTopic.title,reviewTopic.icon);setMainTabActive_('review');}
+        else showAppNotice('Phần Ôn tập đang được cập nhật.');
+        return;
+    }
+    if(tabName==='exams'){if(!requirePremium('Đấu trường đề thi'))return;setMainTabActive_('exams');openExamHub();return;}
+    if(tabName==='games'){if(!requirePremium('Mini Game'))return;setMainTabActive_('games');openMiniGameHub();return;}
+    goHome();
+}
+function updateNavTabs(level2Title, level2Icon, level3Title, level4Title){
+    const rootTab=document.getElementById('header-discover-tab'),tab2=document.getElementById('header-level2-tab'),tab3=document.getElementById('header-level3-tab'),tab4=document.getElementById('header-level4-tab');
+    const meta=getActiveMainModuleMeta_();
+    if(rootTab){const btn=rootTab.querySelector('button');if(btn){btn.setAttribute('onclick',`openMainTab('${meta.target}')`);btn.innerHTML=`<span>${meta.label}</span>`;}rootTab.classList.remove('hidden');rootTab.classList.add('flex');}
+    if(!level2Title){
+        [tab2,tab3,tab4].forEach(el=>{if(el){el.classList.add('hidden');el.classList.remove('flex');}});return;
+    }
+    if(tab2){const t2=document.getElementById('header-level2-title');if(t2)t2.textContent=level2Title;const i2=document.getElementById('header-level2-icon');if(i2)i2.textContent=level2Icon||meta.icon;const b=tab2.querySelector('button');if(b)b.setAttribute('onclick','returnToTopicLecture()');tab2.classList.remove('hidden');tab2.classList.add('flex');}
+    if(tab3){const t3=document.getElementById('header-level3-title');if(level3Title){if(t3)t3.textContent=level3Title;tab3.classList.remove('hidden');tab3.classList.add('flex');}else{tab3.classList.add('hidden');tab3.classList.remove('flex');}}
+    if(tab4){const t4=document.getElementById('header-level4-title');if(level4Title){if(t4)t4.textContent=level4Title;tab4.classList.remove('hidden');tab4.classList.add('flex');}else{tab4.classList.add('hidden');tab4.classList.remove('flex');}}
+}
+function goHome(){
+    stopSpeaking();clearInterval(quizTimerInterval);inMiniGameFlow=false;activeTopicId=null;activeExamContext=null;activeRoadmapContext=null;pendingTopicQuiz=null;
+    setMainTabActive_('discover');updateNavTabs(null,null,null);renderDashboardGrid();switchAppView('view-dashboard-grid');refreshMainTabLocksToan3_();
+}
+function clickLessonModule(semesterNumber=1){
+    if(!requirePremium('Bài học'))return;inMiniGameFlow=false;stopSpeaking();setMainTabActive_('lessons');activeExamContext=null;activeRoadmapContext=null;activeTopicId=null;pendingTopicQuiz=null;updateNavTabs(null,null,null);switchAppView('view-bai-hoc-hub');showLoadingOverlay('Đang mở Bài học...');loadBaiHocToan3Data_().then(data=>renderBaiHocGridToan3_(data,semesterNumber)).catch(err=>showAppNotice(`Không thể mở Bài học: ${err.message}`)).finally(()=>hideLoadingOverlay());
+}
+function semesterSwitchButtonsToan3_(hostId,activeSem,fnName){const host=document.getElementById(hostId);if(!host)return;host.innerHTML=[1,2].map(s=>`<button onclick="${fnName}(${s})" class="semester-switch-btn ${Number(s)===Number(activeSem)?'is-active':'is-inactive'}">Học kỳ ${s}</button>`).join('');}
+function renderBaiHocGridToan3_(data,semesterNumber){
+    semesterSwitchButtonsToan3_('lesson-semester-tabs',semesterNumber,'clickLessonModule');
+    const container=document.getElementById('bai-hoc-grid-container');if(!container)return;
+    const arr=(data?.bai_hoc||[]).filter(x=>Number(x.semester)===Number(semesterNumber));
+    const palette=[
+      {bg:'linear-gradient(145deg,#fff1f7 0%,#fdf4ff 100%)',border:'#f9a8d4',title:'#be185d'},
+      {bg:'linear-gradient(145deg,#faf5ff 0%,#f5f3ff 100%)',border:'#d8b4fe',title:'#7e22ce'},
+      {bg:'linear-gradient(145deg,#fdf2f8 0%,#fff7ed 100%)',border:'#fbcfe8',title:'#db2777'},
+      {bg:'linear-gradient(145deg,#f5f3ff 0%,#fdf2f8 100%)',border:'#c4b5fd',title:'#6d28d9'},
+      {bg:'linear-gradient(145deg,#fff7fb 0%,#fce7f3 100%)',border:'#f9a8d4',title:'#c026d3'},
+      {bg:'linear-gradient(145deg,#faf5ff 0%,#fff1f7 100%)',border:'#e9d5ff',title:'#9333ea'}];
+    container.style.background='linear-gradient(135deg,#fff7fb 0%,#faf5ff 50%,#fdf2f8 100%)';container.style.borderColor='#f0abfc';
+    container.innerHTML=`<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 md:gap-3">${arr.map((bh,idx)=>{const c=palette[idx%palette.length];return `<button onclick="selectBaiHocToan3_(${bh.bai})" class="text-left min-h-[96px] md:min-h-[104px] rounded-2xl border-2 p-3 md:p-3.5 transition-all hover:-translate-y-0.5 hover:shadow-lg flex flex-col items-start justify-start" style="background:${c.bg};border-color:${c.border};box-shadow:0 4px 12px rgba(168,85,247,.08)"><div class="font-black text-base md:text-[17px] leading-tight" style="color:${c.title}">Bài ${bh.bai}</div><div class="text-[13px] md:text-[14px] font-extrabold text-slate-700 mt-2 leading-snug text-left w-full">${escapeHtml(bh.source_title||bh.title||'')}</div></button>`}).join('')}</div>`;
+}
+function renderBaiTapGridToan3_(data,semesterNumber){
+    semesterSwitchButtonsToan3_('roadmap-semester-tabs',semesterNumber,'openRoadmap');const container=document.getElementById('roadmap-svg-container');if(!container)return;const unlocked=getUnlockedBaiTapToan3_();const arr=(data?.bai_tap||[]).filter(x=>Number(x.semester)===Number(semesterNumber));
+    container.className='w-full rounded-3xl border-2 p-3 md:p-4 shadow-sm';container.style.background='linear-gradient(135deg,#fff7fb 0%,#faf5ff 50%,#fdf2f8 100%)';container.style.borderColor='#f0abfc';
+    const palette=[['#fff1f7','#f9a8d4','#be185d'],['#faf5ff','#d8b4fe','#7e22ce'],['#fdf2f8','#fbcfe8','#db2777'],['#f5f3ff','#c4b5fd','#6d28d9']];
+    container.innerHTML=`<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 md:gap-3">${arr.map((bt,idx)=>{const open=Number(bt.bai)<=unlocked,c=palette[idx%palette.length];return `<button onclick="${open?`selectBaiTapToan3_(${bt.bai})`:`showLockedBaiTapToan3_(${bt.bai})`}" class="relative text-left min-h-[106px] rounded-2xl border-2 p-3 transition-all ${open?'hover:-translate-y-0.5 hover:shadow-lg':'opacity-55'} flex flex-col" style="background:${open?c[0]:'#f8fafc'};border-color:${open?c[1]:'#cbd5e1'}"><span class="absolute top-2 right-2">${open?'':'🔒'}</span><div class="font-black text-base md:text-[17px] pr-5" style="color:${open?c[2]:'#94a3b8'}">Bài ${bt.bai}</div><div class="text-[13px] md:text-[14px] font-extrabold ${open?'text-slate-700':'text-slate-400'} mt-2 leading-snug">${escapeHtml(bt.title||'')}</div><div class="text-[11px] mt-auto pt-2 ${open?'text-pink-600':'text-slate-400'} font-black">${open?'20 câu':'Cần ≥80% bài trước'}</div></button>`}).join('')}</div>`;
+}
+function renderBaiHocDetailToan3_(){
+    const ctx=activeBaiHocToan3_,lesson=ctx.lesson;if(!lesson)return;switchAppView('view-bai-hoc-detail');setMainTabActive_('lessons');updateNavTabs(`Bài ${lesson.bai}`,'📖',null);
+    const meta=document.getElementById('bai-hoc-detail-meta'),title=document.getElementById('bai-hoc-detail-title'),tabs=document.getElementById('bai-hoc-detail-tabs'),body=document.getElementById('bai-hoc-detail-body');
+    if(meta)meta.textContent=`Bài ${lesson.bai} · ${lesson.theme||'Toán 3'}`;if(title)title.textContent=lesson.source_title||`Bài ${lesson.bai}`;const pages=Array.isArray(lesson.pages)?lesson.pages:[];
+    const labels=['Bài đọc','Câu hỏi','Tổng kết'];
+    if(tabs)tabs.innerHTML=pages.map((pg,idx)=>`<button onclick="openBaiHocPageToan3_(${idx})" class="px-3 py-2 rounded-xl border font-black text-sm md:text-base ${idx===ctx.pageIndex?'bg-gradient-to-r from-pink-500 to-purple-500 text-white border-purple-400 shadow-sm':'bg-white text-purple-700 border-purple-200 hover:bg-purple-50'}">${labels[idx]||escapeHtml(pg.title||`Trang ${idx+1}`)}</button>`).join('');
+    if(body)body.innerHTML=renderBaiHocPageBodyToan3_(pages[ctx.pageIndex]||{})+renderBaiHocBottomNavToan3_(ctx.pageIndex,pages.length);
+}
+function enterDashboard(isSilent=false){document.getElementById('screen-dashboard')?.classList.remove('hidden');updateUserInfoBox();resetStars();renderDashboardGrid();renderExamHubGrid();refreshMainTabLocksToan3_();goHome();if(!isSilent&&currentUser&&!currentUser.isGuest){setTimeout(()=>{const template=GREETINGS_STUDENT[Math.floor(Math.random()*GREETINGS_STUDENT.length)];speakVietnamese(template.replace('{name}',currentUser.hoTen),0.96);},350);}}
