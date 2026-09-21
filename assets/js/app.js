@@ -395,6 +395,7 @@ async function renderDashboardGrid() {
 }
 
 async function startRandomExam(categoryKey) {
+    setAppShellRootMode_(false);
     stopSpeaking();
     // File đề thi Toán 3 có sẵn field "exam_category" sạch ("Học kỳ 1"/"Học kỳ 2"/"Học sinh giỏi")
     // nên lọc thẳng theo đúng field này, không cần suy luận qua tiền tố exam_id như bản lớp 2 cũ.
@@ -453,6 +454,8 @@ function updateExamTimerDisplay() {
 }
 
 function openExamHub() {
+    setAppShellRootMode_(true);
+    setMainTabActive_('exams');
     inMiniGameFlow = false;
     if (!requirePremium('Đấu trường đề thi')) return;
     stopSpeaking(); activeExamContext = null; activeRoadmapContext = null; activeTopicId = null; pendingTopicQuiz = null;
@@ -582,6 +585,8 @@ const loadedGameScripts = {};
 
 function openMiniGameHub() {
     if (!requirePremium('Mini Game')) return;
+    setAppShellRootMode_(true);
+    setMainTabActive_('games');
     stopSpeaking();
     inMiniGameFlow = true;
     activeExamContext = null; activeRoadmapContext = null; activeTopicId = null; pendingTopicQuiz = null;
@@ -616,6 +621,7 @@ function loadGameScript(src) {
 
 async function openGamePlay(gameId) {
     if (!requirePremium('Mini Game')) return;
+    setAppShellRootMode_(false);
     stopSpeaking();
     inMiniGameFlow = true;
     const game = MINIGAME_LIST.find(g => g.id === gameId);
@@ -889,7 +895,8 @@ function updateUserInfoBox() {
     }
     const isAdmin=String(currentUser.vaiTro||'').toLowerCase()==='admin';
     const tier=isAdmin?'Admin':String(currentUser.loaiTaiKhoan||'regular').toUpperCase();
-    box.innerHTML=`<div class="flex items-center gap-2"><div class="text-right"><div class="text-pink-600 font-extrabold text-xs md:text-sm leading-tight">${escapeHtml(currentUser.hoTen||currentUser.maHS)}</div><div class="text-gray-500 font-semibold text-[10px]">${escapeHtml(tier)} · ID ${escapeHtml(currentUser.maHS)}</div></div>${isAdmin?'<button onclick="openAdminManager()" class="h-9 px-3 bg-pink-100 hover:bg-pink-200 text-purple-700 border border-pink-300 rounded-xl font-black text-xs"><i class="fa-solid fa-users-gear mr-1"></i>Quản lý</button>':''}<button onclick="logout()" title="Đăng xuất" class="w-8 h-8 flex items-center justify-center bg-purple-100 hover:bg-purple-200 text-purple-500 rounded-xl border border-purple-200 text-xs"><i class="fa-solid fa-right-from-bracket"></i></button></div>`;
+    const accountMeta = isAdmin ? '' : `<div class="text-gray-500 font-semibold text-[10px]">${escapeHtml(tier)} · ID ${escapeHtml(currentUser.maHS)}</div>`;
+    box.innerHTML=`<div class="flex items-center gap-2"><div class="text-right"><div class="text-pink-600 font-extrabold text-xs md:text-sm leading-tight">${escapeHtml(currentUser.hoTen||currentUser.maHS)}</div>${accountMeta}</div>${isAdmin?'<button onclick="openAdminManager()" title="Quản lý tài khoản" class="h-9 px-3 bg-pink-100 hover:bg-pink-200 text-purple-700 border border-pink-300 rounded-xl font-black text-xs flex items-center justify-center"><i class="fa-solid fa-users-gear md:mr-1"></i><span class="admin-manage-label hidden md:inline">Quản lý</span></button>':''}<button onclick="logout()" title="Đăng xuất" class="w-8 h-8 flex items-center justify-center bg-purple-100 hover:bg-purple-200 text-purple-500 rounded-xl border border-purple-200 text-xs"><i class="fa-solid fa-right-from-bracket"></i></button></div>`;
     updatePremiumButtons();
 }
 
@@ -936,7 +943,7 @@ function updatePremiumButtons(){
         if(lock) lock.classList.toggle('hidden', unlocked);
     }
 }
-async function openAdminManager(){if(!isAdminUser())return;updateNavTabs('Quản lý tài khoản','👥',null);switchAppView('view-admin');await loadAdminAccounts();}
+async function openAdminManager(){if(!isAdminUser())return;setAppShellRootMode_(false);updateNavTabs('Quản lý tài khoản','👥',null);switchAppView('view-admin');await loadAdminAccounts();}
 async function loadAdminAccounts(){
     if(!isAdminUser())return;const token=localStorage.getItem(AUTH_TOKEN_KEY);showLoadingOverlay('Đang tải danh sách tài khoản...');
     try{const res=await callAppsScript('adminListAccounts',{token});if(!res.ok)throw new Error(res.error||'Không thể tải dữ liệu');adminAccountsCache=res.accounts||[];renderAdminAccounts(adminAccountsCache);}catch(e){alert(e.message);}finally{hideLoadingOverlay();}
@@ -1015,6 +1022,7 @@ function clickProgressOrExam(type) {
 // CHỦ ĐỀ 1: BẢNG CHỮ CÁI TƯƠNG TÁC (1.1 ĐẾN 1.4)
 // ==========================================
 function openTopic(topicNum, topicName, icon) {
+    setAppShellRootMode_(false);
     inMiniGameFlow = false;
     if(PREMIUM_TOPIC_IDS.has(Number(topicNum)) && !requirePremium(topicName)) return;
     stopSpeaking(); activeTopicId=topicNum; activeExamContext=null; activeRoadmapContext=null; updateNavTabs(topicName,icon||'🐝',null);
@@ -1073,6 +1081,7 @@ function speakLecture() {
 }
 
 function selectSubtopic(idx) {
+    setAppShellRootMode_(false);
     stopSpeaking();
     if (!pendingTopicQuiz) return;
     const { topicNum, topicName, questions, groups, groupMap, groupLabels } = pendingTopicQuiz;
@@ -2772,6 +2781,8 @@ function clickProgressOrExam(type) {
 }
 
 async function openRoadmap(semesterNumber = 1) {
+    setAppShellRootMode_(true);
+    setMainTabActive_('exercises');
     inMiniGameFlow = false;
     stopSpeaking();
     if (!requirePremium('Bài tập')) return;
@@ -2824,6 +2835,7 @@ function getQuestionsForBaiTapToan3_(bt) {
     return shuffleArray(out.slice(0,20));
 }
 async function selectBaiTapToan3_(bai) {
+    setAppShellRootMode_(false);
     stopSpeaking(); showLoadingOverlay(`Đang chuẩn bị Bài tập ${bai}...`);
     try {
         const data=await loadBaiHocToan3Data_(); const bt=(data?.bai_tap||[]).find(x=>Number(x.bai)===Number(bai));
@@ -2885,6 +2897,19 @@ function handleNextExamFromReport() {
 
 
 // ============================================================
+// TOAN 3 APP SHELL 2026: banner chinh o root tab, banner phu + breadcrumb khi vao noi dung.
+// Presentation only; khong doi nghiep vu/du lieu.
+// ============================================================
+let appShellRootMode_ = true;
+function setAppShellRootMode_(isRoot) {
+    appShellRootMode_ = !!isRoot;
+    const mainBanner = document.getElementById('app-main-banner');
+    const contextBanner = document.getElementById('app-context-banner');
+    if (mainBanner) mainBanner.classList.toggle('hidden', !appShellRootMode_);
+    if (contextBanner) contextBanner.classList.toggle('hidden', appShellRootMode_);
+}
+
+// ============================================================
 // UI 6 TAB + PINK/PURPLE THEME - TOAN 3
 // Bám giao diện Toán 2; giữ nguyên mascot Cô Ong Vàng và logic Toán 3.
 // ============================================================
@@ -2909,7 +2934,7 @@ function openMainTab(tabName){
         if(!requirePremium('Ôn tập'))return; setMainTabActive_('review');
         // Toán 3 hiện vẫn dùng chuyên mục ôn tập trong kho học liệu.
         const reviewTopic=TOPICS_CONFIG.find(t=>/ôn tập/i.test(String(t.title||'')));
-        if(reviewTopic){openTopic(reviewTopic.id,reviewTopic.title,reviewTopic.icon);setMainTabActive_('review');}
+        if(reviewTopic){openTopic(reviewTopic.id,reviewTopic.title,reviewTopic.icon);setMainTabActive_('review');setAppShellRootMode_(true);}
         else showAppNotice('Phần Ôn tập đang được cập nhật.');
         return;
     }
@@ -2918,21 +2943,23 @@ function openMainTab(tabName){
     goHome();
 }
 function updateNavTabs(level2Title, level2Icon, level3Title, level4Title){
-    const rootTab=document.getElementById('header-discover-tab'),tab2=document.getElementById('header-level2-tab'),tab3=document.getElementById('header-level3-tab'),tab4=document.getElementById('header-level4-tab');
+    const tab2=document.getElementById('header-level2-tab'),tab3=document.getElementById('header-level3-tab'),tab4=document.getElementById('header-level4-tab');
     const meta=getActiveMainModuleMeta_();
-    if(rootTab){const btn=rootTab.querySelector('button');if(btn){btn.setAttribute('onclick',`openMainTab('${meta.target}')`);btn.innerHTML=`<span>${meta.label}</span>`;}rootTab.classList.remove('hidden');rootTab.classList.add('flex');}
     if(!level2Title){
-        [tab2,tab3,tab4].forEach(el=>{if(el){el.classList.add('hidden');el.classList.remove('flex');}});return;
+        [tab2,tab3,tab4].forEach(el=>{if(el){el.classList.add('hidden');el.classList.remove('flex');}});
+        return;
     }
     if(tab2){const t2=document.getElementById('header-level2-title');if(t2)t2.textContent=level2Title;const i2=document.getElementById('header-level2-icon');if(i2)i2.textContent=level2Icon||meta.icon;const b=tab2.querySelector('button');if(b)b.setAttribute('onclick','returnToTopicLecture()');tab2.classList.remove('hidden');tab2.classList.add('flex');}
     if(tab3){const t3=document.getElementById('header-level3-title');if(level3Title){if(t3)t3.textContent=level3Title;tab3.classList.remove('hidden');tab3.classList.add('flex');}else{tab3.classList.add('hidden');tab3.classList.remove('flex');}}
     if(tab4){const t4=document.getElementById('header-level4-title');if(level4Title){if(t4)t4.textContent=level4Title;tab4.classList.remove('hidden');tab4.classList.add('flex');}else{tab4.classList.add('hidden');tab4.classList.remove('flex');}}
 }
 function goHome(){
+    setAppShellRootMode_(true);
     stopSpeaking();clearInterval(quizTimerInterval);inMiniGameFlow=false;activeTopicId=null;activeExamContext=null;activeRoadmapContext=null;pendingTopicQuiz=null;
     setMainTabActive_('discover');updateNavTabs(null,null,null);renderDashboardGrid();switchAppView('view-dashboard-grid');refreshMainTabLocksToan3_();
 }
 function clickLessonModule(semesterNumber=1){
+    setAppShellRootMode_(true);
     if(!requirePremium('Bài học'))return;inMiniGameFlow=false;stopSpeaking();setMainTabActive_('lessons');activeExamContext=null;activeRoadmapContext=null;activeTopicId=null;pendingTopicQuiz=null;updateNavTabs(null,null,null);switchAppView('view-bai-hoc-hub');showLoadingOverlay('Đang mở Bài học...');loadBaiHocToan3Data_().then(data=>renderBaiHocGridToan3_(data,semesterNumber)).catch(err=>showAppNotice(`Không thể mở Bài học: ${err.message}`)).finally(()=>hideLoadingOverlay());
 }
 function semesterSwitchButtonsToan3_(hostId,activeSem,fnName){const host=document.getElementById(hostId);if(!host)return;host.innerHTML=[1,2].map(s=>`<button onclick="${fnName}(${s})" class="semester-switch-btn ${Number(s)===Number(activeSem)?'is-active':'is-inactive'}">Học kỳ ${s}</button>`).join('');}
@@ -2957,6 +2984,7 @@ function renderBaiTapGridToan3_(data,semesterNumber){
     container.innerHTML=`<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 md:gap-3">${arr.map((bt,idx)=>{const open=Number(bt.bai)<=unlocked,c=palette[idx%palette.length];return `<button onclick="${open?`selectBaiTapToan3_(${bt.bai})`:`showLockedBaiTapToan3_(${bt.bai})`}" class="relative text-left min-h-[106px] rounded-2xl border-2 p-3 transition-all ${open?'hover:-translate-y-0.5 hover:shadow-lg':'opacity-55'} flex flex-col" style="background:${open?c[0]:'#f8fafc'};border-color:${open?c[1]:'#cbd5e1'}"><span class="absolute top-2 right-2">${open?'':'🔒'}</span><div class="font-black text-base md:text-[17px] pr-5" style="color:${open?c[2]:'#94a3b8'}">Bài ${bt.bai}</div><div class="text-[13px] md:text-[14px] font-extrabold ${open?'text-slate-700':'text-slate-400'} mt-2 leading-snug">${escapeHtml(bt.title||'')}</div><div class="text-[11px] mt-auto pt-2 ${open?'text-pink-600':'text-slate-400'} font-black">${open?'20 câu':'Cần ≥80% bài trước'}</div></button>`}).join('')}</div>`;
 }
 function renderBaiHocDetailToan3_(){
+    setAppShellRootMode_(false);
     const ctx=activeBaiHocToan3_,lesson=ctx.lesson;if(!lesson)return;switchAppView('view-bai-hoc-detail');setMainTabActive_('lessons');updateNavTabs(`Bài ${lesson.bai}`,'📖',null);
     const meta=document.getElementById('bai-hoc-detail-meta'),title=document.getElementById('bai-hoc-detail-title'),tabs=document.getElementById('bai-hoc-detail-tabs'),body=document.getElementById('bai-hoc-detail-body');
     if(meta)meta.textContent=`Bài ${lesson.bai} · ${lesson.theme||'Toán 3'}`;if(title)title.textContent=lesson.source_title||`Bài ${lesson.bai}`;const pages=Array.isArray(lesson.pages)?lesson.pages:[];
