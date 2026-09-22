@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <meta name="theme-color" content="#f472b6">
+    <meta name="theme-color" content="#ffffff">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -25,6 +25,7 @@
     <!-- html2pdf.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
+        html { background: #ffffff; }
         body {
             font-family: 'Quicksand', 'Nunito', sans-serif;
             background: linear-gradient(135deg, #fdf2f8 0%, #fae8ff 50%, #f3e8ff 100%);
@@ -40,7 +41,7 @@
             background: #ffffff;
             border-radius: 28px;
             box-shadow: 0 12px 30px rgba(236,72,153,0.12);
-            border: 3px solid #fbcfe8;
+            border: 1px solid #fbcfe8;
         }
         .pastel-btn {
             transition: all 0.2s ease;
@@ -276,26 +277,27 @@
 
         #app-banner-slot{width:100%;position:relative;}
         #app-main-banner{position:relative;width:100%;aspect-ratio:6/1;min-height:0;overflow:hidden;border-radius:0;border:0;box-shadow:none;background:#fff;}
+        #app-main-banner picture{display:block;width:100%;height:100%;}
         #app-main-banner img{width:100%;height:100%;object-fit:cover;display:block;}
         .app-main-banner-copy{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:36%;text-align:center;pointer-events:none;text-shadow:0 2px 0 rgba(255,255,255,.9),0 3px 12px rgba(126,34,206,.12);}
         .app-main-banner-title{font-size:clamp(21px,2.35vw,34px);line-height:1;font-weight:900;color:#ec4899;letter-spacing:-.02em;}
         .app-main-banner-teacher{margin-top:5px;font-size:clamp(12px,1.15vw,17px);font-weight:900;color:#7e22ce;}
         #app-context-banner.hidden,#app-main-banner.hidden{display:none !important;}
         #app-context-banner{position:relative;min-height:58px;overflow:hidden;border-radius:0;border:0 !important;background:none !important;box-shadow:none !important;display:flex;align-items:center;padding:7px 10px;}
-        #app-context-banner::before{content:'';position:absolute;inset:0;background-image:url('footer-bg.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;transform:rotate(180deg);transform-origin:center;opacity:1;filter:none;pointer-events:none;z-index:0;}
+        #app-context-banner::before{content:'';position:absolute;inset:0;background-image:url('banner-sub.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;transform:none;opacity:1;filter:none;pointer-events:none;z-index:0;}
         #header-learning-tabs{width:100% !important;max-width:none !important;flex:1 1 auto !important;min-width:0 !important;overflow-x:auto !important;overflow-y:hidden !important;scrollbar-width:none;gap:5px;position:relative;z-index:2;white-space:nowrap;}
         #header-learning-tabs::-webkit-scrollbar{display:none;}
         #header-level2-tab,#header-level3-tab,#header-level4-tab{width:auto !important;min-width:0 !important;max-width:none !important;flex:0 0 auto !important;overflow:visible !important;}
-        #header-level2-tab > button,#header-level3-tab > div,#header-level4-tab > div{height:38px !important;max-width:none !important;min-width:0 !important;padding:0 12px !important;border-radius:13px !important;background:rgba(255,255,255,.86) !important;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);box-shadow:0 2px 7px rgba(76,29,149,.08) !important;white-space:nowrap !important;}
+        #header-level2-tab > button,#header-level3-tab > div,#header-level4-tab > div{height:38px !important;max-width:none !important;min-width:0 !important;padding:0 12px !important;border-radius:13px !important;background:rgba(255,255,255,.50) !important;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);box-shadow:0 2px 7px rgba(76,29,149,.08) !important;white-space:nowrap !important;}
         #header-level2-tab > button{color:#be185d !important;border:1.5px solid #f9a8d4 !important;}
         #header-level3-tab > div{color:#7e22ce !important;border:1.5px solid #d8b4fe !important;}
         #header-level4-tab > div{color:#b45309 !important;border:1.5px solid #fde68a !important;}
         #header-level2-title,#header-level3-title,#header-level4-title{font-size:12px !important;font-weight:900 !important;}
         #header-level3-tab > span,#header-level4-tab > span{color:#c084fc !important;font-size:13px !important;}
 
-        #app-footer{width:100%;max-width:72rem;min-height:76px;margin:10px auto 0;padding:0 14px;border-radius:0;background-image:url('footer-bg.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;color:#9d174d;border:0;box-shadow:none;}
-        #app-footer .footer-title{font-size:14px;font-weight:900;line-height:1.35;text-shadow:0 1px 0 #fff;}
-        #app-footer .footer-sub{font-size:11px;font-weight:800;line-height:1.35;color:#7e22ce;text-shadow:0 1px 0 #fff;}
+        #app-footer{width:100%;max-width:72rem;min-height:76px;margin:10px auto 0;padding:0 14px;border-radius:0;background-image:url('footer-bg.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;color:#1827f2;border:0;box-shadow:none;}
+        #app-footer .footer-title{font-size:17px;font-weight:900;line-height:1.35;text-shadow:0 1px 0 #fff;}
+        #app-footer .footer-sub{font-size:13px;font-weight:800;line-height:1.35;color:#1827f2;text-shadow:0 1px 0 #fff;}
 
         #view-bai-hoc-hub,#view-roadmap,#view-minigame-hub,#view-exam-hub{background:transparent !important;border:0 !important;box-shadow:none !important;border-radius:0 !important;padding-left:0 !important;padding-right:0 !important;min-height:0 !important;}
         #bai-hoc-grid-container,#roadmap-svg-container{background:transparent !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;padding-left:0 !important;padding-right:0 !important;}
@@ -322,7 +324,7 @@
             #user-info-box{margin-left:0 !important;min-width:0;text-align:right;}
             #user-info-box .admin-manage-label{display:none !important;}
             #user-info-box button[title="Quản lý tài khoản"]{width:34px !important;padding-left:0 !important;padding-right:0 !important;justify-content:center !important;}
-            #app-main-banner{aspect-ratio:6/1;}
+            #app-main-banner{aspect-ratio:4/1;border-radius:0;}
             .app-main-banner-copy{width:39%;left:51%;top:49%;}
             .app-main-banner-title{font-size:clamp(13px,4.2vw,20px);}
             .app-main-banner-teacher{font-size:clamp(9px,2.8vw,13px);margin-top:2px;}
@@ -332,14 +334,125 @@
             #header-level2-title,#header-level3-title,#header-level4-title{font-size:11px !important;}
             #header-level2-icon{display:none !important;}
             #app-footer{min-height:64px;margin-top:8px;}
-            #app-footer .footer-title{font-size:12px;}
-            #app-footer .footer-sub{font-size:10px;}
+            #app-footer .footer-title{font-size:14px;}
+            #app-footer .footer-sub{font-size:12px;}
             #view-lecture,#view-bai-hoc-detail,#view-game-play,#view-quiz > .pastel-card{padding-top:6px !important;padding-bottom:6px !important;}
             #view-dashboard-grid .pastel-card h3{font-size:1.05rem !important;}
             #view-dashboard-grid .pastel-card > div:last-child{font-size:13.2px !important;}
         }
 
-    </style>
+
+
+        /* =========================================================
+           TOAN 3 - DONG BO BANNER / FOOTER / NEN THEO CHUAN TV1
+           Presentation only - khong doi engine/data/business logic.
+           ========================================================= */
+        html,
+        body,
+        #screen-dashboard,
+        #app-viewport,
+        #view-dashboard-grid {
+            background:#ffffff !important;
+        }
+
+        /* Card nội dung không dùng bóng; giữ nền pastel nhẹ để phân nhóm. */
+        #view-dashboard-grid .pastel-card,
+        #view-dashboard-grid .pastel-card:hover {
+            box-shadow:none !important;
+        }
+        #view-dashboard-grid .pastel-card:has(h3.text-pink-700)    { background:rgba(253,242,248,.82) !important; }
+        #view-dashboard-grid .pastel-card:has(h3.text-purple-700)  { background:rgba(250,245,255,.84) !important; }
+        #view-dashboard-grid .pastel-card:has(h3.text-indigo-700)  { background:rgba(238,242,255,.86) !important; }
+        #view-dashboard-grid .pastel-card:has(h3.text-amber-700)   { background:rgba(255,251,235,.88) !important; }
+        #view-dashboard-grid .pastel-card:has(h3.text-emerald-700) { background:rgba(236,253,245,.86) !important; }
+        #view-dashboard-grid .pastel-card:has(h3.text-cyan-700)    { background:rgba(236,254,255,.86) !important; }
+        #view-dashboard-grid .pastel-card:has(h3.text-violet-700)  { background:rgba(245,243,255,.86) !important; }
+        #view-dashboard-grid .pastel-card:has(h3.text-rose-700)    { background:rgba(255,241,242,.86) !important; }
+        #view-dashboard-grid .pastel-card:has(h3.text-blue-700)    { background:rgba(239,246,255,.86) !important; }
+        #view-dashboard-grid .pastel-card:has(h3.text-yellow-700)  { background:rgba(254,252,232,.90) !important; }
+
+        /* Banner phụ: desktop ưu tiên hiện đầy đủ nội dung, chỉ cuộn khi tổng breadcrumb quá dài. */
+        @media (min-width:768px) {
+            .main-module-tab { font-size:16px !important; }
+            #header-level2-tab > button,
+            #header-level3-tab > div,
+            #header-level4-tab > div {
+                width:auto !important;
+                min-width:0 !important;
+                max-width:440px !important;
+                padding-left:18px !important;
+                padding-right:18px !important;
+            }
+            #header-level2-title,
+            #header-level3-title,
+            #header-level4-title {
+                font-size:14px !important;
+                max-width:400px !important;
+                overflow:hidden !important;
+                text-overflow:ellipsis !important;
+                white-space:nowrap !important;
+            }
+        }
+        @media (max-width:767px) {
+            .main-module-tab { font-size:14px !important; }
+        }
+    
+
+        /* Toan 3 - cum sao dung/sai lon hon, can xung voi nut Home */
+        #header-star-box{
+            min-width:92px !important;
+            padding:7px 9px !important;
+            row-gap:4px !important;
+            border-radius:14px !important;
+        }
+        #header-star-box > div{
+            min-height:21px;
+            gap:8px !important;
+        }
+        #header-star-box > div > span:first-child{
+            min-width:48px;
+            padding:3px 6px !important;
+            font-size:12px !important;
+            line-height:1.15 !important;
+            border-radius:7px !important;
+        }
+        #header-star-box > div > span:first-child i{
+            font-size:12px !important;
+        }
+        #star-green-count,
+        #star-red-count{
+            min-width:16px;
+            text-align:center;
+            font-size:15px !important;
+            line-height:1 !important;
+        }
+
+        @media (max-width:767px){
+            #header-star-box{
+                min-width:72px !important;
+                padding:5px 6px !important;
+                row-gap:3px !important;
+                border-radius:12px !important;
+            }
+            #header-star-box > div{
+                min-height:18px;
+                gap:5px !important;
+            }
+            #header-star-box > div > span:first-child{
+                min-width:30px;
+                padding:3px 5px !important;
+                font-size:11px !important;
+            }
+            #header-star-box > div > span:first-child i{
+                font-size:11px !important;
+            }
+            #star-green-count,
+            #star-red-count{
+                font-size:13px !important;
+            }
+        }
+
+</style>
 </head>
 <body class="p-1 md:p-2 w-full" style="padding-top:0;padding-bottom:max(0.25rem,env(safe-area-inset-bottom));padding-left:max(0.25rem,env(safe-area-inset-left));padding-right:max(0.25rem,env(safe-area-inset-right));">
 
@@ -436,7 +549,7 @@
                 <div id="header-info-zone" class="flex items-center">
                     <div id="header-star-box" class="flex flex-col space-y-0.5 bg-pink-50/90 px-1.5 md:px-2.5 py-1 rounded-xl border border-pink-200 shadow-inner">
                         <div class="flex items-center justify-between space-x-2 font-extrabold"><span class="px-1.5 py-0.5 bg-emerald-500 text-white rounded text-[10px] shadow-sm flex items-center justify-center"><i class="fa-solid fa-star md:mr-0.5"></i><span class="hidden md:inline"> Đúng</span></span><span class="text-emerald-600 font-extrabold text-xs" id="star-green-count">0</span></div>
-                        <div class="flex items-center justify-between space-x-2 font-extrabold"><span class="px-1.5 py-0.5 bg-purple-500 text-white rounded text-[10px] shadow-sm flex items-center justify-center"><i class="fa-solid fa-star md:mr-0.5"></i><span class="hidden md:inline"> Sai</span></span><span class="text-purple-600 font-extrabold text-xs" id="star-red-count">0</span></div>
+                        <div class="flex items-center justify-between space-x-2 font-extrabold"><span class="px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] shadow-sm flex items-center justify-center"><i class="fa-solid fa-star md:mr-0.5"></i><span class="hidden md:inline"> Sai</span></span><span class="text-red-600 font-extrabold text-xs" id="star-red-count">0</span></div>
                     </div>
                     <div id="user-info-box" class="text-xs font-bold text-gray-600 text-right"></div>
                 </div>
@@ -444,11 +557,10 @@
 
             <section id="app-banner-slot" aria-label="Không gian nhận diện và điều hướng">
                 <div id="app-main-banner">
-                    <img src="banner-main.jpg" alt="Không gian học tập Toán 3">
-                    <div class="app-main-banner-copy">
-                        <div class="app-main-banner-title">Toán 3</div>
-                        <div class="app-main-banner-teacher">Cô Ong Vàng</div>
-                    </div>
+                    <picture>
+                        <source media="(max-width: 767px)" srcset="banner-main-mobile.jpg">
+                        <img src="banner-main.jpg" alt="Không gian học tập Toán 3 cùng Cô Ong Vàng">
+                    </picture>
                 </div>
                 <div id="app-context-banner" class="hidden">
                     <div id="header-learning-tabs" class="flex items-center min-w-0">
@@ -934,8 +1046,8 @@
     <!-- CHÂN TRANG DUNG CHUNG - artwork + chu HTML -->
     <footer id="app-footer" class="select-text cursor-text" style="user-select:text;-webkit-user-select:text;">
         <div>
-            <div class="footer-title">Toán 3 · Cô Ong Vàng</div>
-            <div class="footer-sub">Zalo 0865.749.402</div>
+            <div class="footer-title">Epsilon Edu - Tiến bộ từng ngày</div>
+            <div class="footer-sub"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> 0865.749.402</div>
         </div>
     </footer>
 
