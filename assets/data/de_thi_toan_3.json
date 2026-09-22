@@ -118,7 +118,7 @@
             "Thứ hai"
           ],
           "answer": "Thứ hai",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy đếm lần lượt từng ngày và nhớ tháng 4 có 30 ngày. Mỗi ngày tiếp theo thì thứ trong tuần cũng tiến thêm một bậc nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -339,7 +339,7 @@
         },
         {
           "question_id": 50020,
-          "question_text": "Tháng nào dưới đây luôn có ít nhất là 28 ngày hoặc 29 ngày? (Mã 739)",
+          "question_text": "Tháng nào có 28 ngày trong năm thường và 29 ngày trong năm nhuận? (Mã 739)",
           "options": [
             "Tháng 12",
             "Tháng 1",
@@ -347,7 +347,7 @@
             "Tháng 3"
           ],
           "answer": "Tháng 2",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Tháng 2 có 28 ngày trong năm thường và 29 ngày trong năm nhuận. Con hãy dựa vào đặc điểm này để chọn đáp án nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -576,7 +576,7 @@
             "Chủ nhật"
           ],
           "answer": "Thứ hai",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy đếm lần lượt từng ngày và nhớ tháng 4 có 30 ngày. Mỗi ngày tiếp theo thì thứ trong tuần cũng tiến thêm một bậc nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -1255,7 +1255,7 @@
         },
         {
           "question_id": 50072,
-          "question_text": "Tháng nào dưới đây luôn có ít nhất là 28 ngày hoặc 29 ngày? (Mã 659)",
+          "question_text": "Tháng nào có 28 ngày trong năm thường và 29 ngày trong năm nhuận? (Mã 659)",
           "options": [
             "Tháng 1",
             "Tháng 2",
@@ -1263,7 +1263,7 @@
             "Tháng 12"
           ],
           "answer": "Tháng 2",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Tháng 2 có 28 ngày trong năm thường và 29 ngày trong năm nhuận. Con hãy dựa vào đặc điểm này để chọn đáp án nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -1484,7 +1484,7 @@
         },
         {
           "question_id": 50085,
-          "question_text": "Tháng nào dưới đây luôn có ít nhất là 28 ngày hoặc 29 ngày? (Mã 932)",
+          "question_text": "Tháng nào có 28 ngày trong năm thường và 29 ngày trong năm nhuận? (Mã 932)",
           "options": [
             "Tháng 2",
             "Tháng 3",
@@ -1492,7 +1492,7 @@
             "Tháng 12"
           ],
           "answer": "Tháng 2",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Tháng 2 có 28 ngày trong năm thường và 29 ngày trong năm nhuận. Con hãy dựa vào đặc điểm này để chọn đáp án nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -1721,7 +1721,7 @@
             "Thứ ba"
           ],
           "answer": "Thứ hai",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy đếm lần lượt từng ngày và nhớ tháng 4 có 30 ngày. Mỗi ngày tiếp theo thì thứ trong tuần cũng tiến thêm một bậc nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -2179,7 +2179,7 @@
             "Thứ ba"
           ],
           "answer": "Thứ hai",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy đếm lần lượt từng ngày và nhớ tháng 4 có 30 ngày. Mỗi ngày tiếp theo thì thứ trong tuần cũng tiến thêm một bậc nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -6980,7 +6980,7 @@
         },
         {
           "question_id": 50137,
-          "question_text": "Tháng nào dưới đây luôn có ít nhất là 28 ngày hoặc 29 ngày? (Mã 597)",
+          "question_text": "Tháng nào có 28 ngày trong năm thường và 29 ngày trong năm nhuận? (Mã 597)",
           "options": [
             "Tháng 3",
             "Tháng 12",
@@ -6988,7 +6988,7 @@
             "Tháng 1"
           ],
           "answer": "Tháng 2",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Tháng 2 có 28 ngày trong năm thường và 29 ngày trong năm nhuận. Con hãy dựa vào đặc điểm này để chọn đáp án nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -7438,7 +7438,7 @@
         },
         {
           "question_id": 50163,
-          "question_text": "Tháng nào dưới đây luôn có ít nhất là 28 ngày hoặc 29 ngày? (Mã 498)",
+          "question_text": "Tháng nào có 28 ngày trong năm thường và 29 ngày trong năm nhuận? (Mã 498)",
           "options": [
             "Tháng 3",
             "Tháng 1",
@@ -7446,7 +7446,7 @@
             "Tháng 12"
           ],
           "answer": "Tháng 2",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Tháng 2 có 28 ngày trong năm thường và 29 ngày trong năm nhuận. Con hãy dựa vào đặc điểm này để chọn đáp án nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -7904,7 +7904,7 @@
             "Thứ tư"
           ],
           "answer": "Thứ hai",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy đếm lần lượt từng ngày và nhớ tháng 4 có 30 ngày. Mỗi ngày tiếp theo thì thứ trong tuần cũng tiến thêm một bậc nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -8125,7 +8125,7 @@
         },
         {
           "question_id": 50202,
-          "question_text": "Tháng nào dưới đây luôn có ít nhất là 28 ngày hoặc 29 ngày? (Mã 323)",
+          "question_text": "Tháng nào có 28 ngày trong năm thường và 29 ngày trong năm nhuận? (Mã 323)",
           "options": [
             "Tháng 2",
             "Tháng 1",
@@ -8133,7 +8133,7 @@
             "Tháng 3"
           ],
           "answer": "Tháng 2",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Tháng 2 có 28 ngày trong năm thường và 29 ngày trong năm nhuận. Con hãy dựa vào đặc điểm này để chọn đáp án nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -8354,7 +8354,7 @@
         },
         {
           "question_id": 50215,
-          "question_text": "Tháng nào dưới đây luôn có ít nhất là 28 ngày hoặc 29 ngày? (Mã 985)",
+          "question_text": "Tháng nào có 28 ngày trong năm thường và 29 ngày trong năm nhuận? (Mã 985)",
           "options": [
             "Tháng 1",
             "Tháng 12",
@@ -8362,7 +8362,7 @@
             "Tháng 2"
           ],
           "answer": "Tháng 2",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Tháng 2 có 28 ngày trong năm thường và 29 ngày trong năm nhuận. Con hãy dựa vào đặc điểm này để chọn đáp án nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -8583,7 +8583,7 @@
         },
         {
           "question_id": 50228,
-          "question_text": "Tháng nào dưới đây luôn có ít nhất là 28 ngày hoặc 29 ngày? (Mã 517)",
+          "question_text": "Tháng nào có 28 ngày trong năm thường và 29 ngày trong năm nhuận? (Mã 517)",
           "options": [
             "Tháng 3",
             "Tháng 12",
@@ -8591,7 +8591,7 @@
             "Tháng 1"
           ],
           "answer": "Tháng 2",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Tháng 2 có 28 ngày trong năm thường và 29 ngày trong năm nhuận. Con hãy dựa vào đặc điểm này để chọn đáp án nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -9049,7 +9049,7 @@
             "Chủ nhật"
           ],
           "answer": "Thứ hai",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy đếm lần lượt từng ngày và nhớ tháng 4 có 30 ngày. Mỗi ngày tiếp theo thì thứ trong tuần cũng tiến thêm một bậc nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -14316,7 +14316,7 @@
             "Chủ nhật"
           ],
           "answer": "Thứ hai",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy đếm lần lượt từng ngày và nhớ tháng 4 có 30 ngày. Mỗi ngày tiếp theo thì thứ trong tuần cũng tiến thêm một bậc nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -14545,7 +14545,7 @@
             "Chủ nhật"
           ],
           "answer": "Thứ hai",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy đếm lần lượt từng ngày và nhớ tháng 4 có 30 ngày. Mỗi ngày tiếp theo thì thứ trong tuần cũng tiến thêm một bậc nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -14766,7 +14766,7 @@
         },
         {
           "question_id": 50319,
-          "question_text": "Tháng nào dưới đây luôn có ít nhất là 28 ngày hoặc 29 ngày? (Mã 405)",
+          "question_text": "Tháng nào có 28 ngày trong năm thường và 29 ngày trong năm nhuận? (Mã 405)",
           "options": [
             "Tháng 2",
             "Tháng 1",
@@ -14774,7 +14774,7 @@
             "Tháng 12"
           ],
           "answer": "Tháng 2",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Tháng 2 có 28 ngày trong năm thường và 29 ngày trong năm nhuận. Con hãy dựa vào đặc điểm này để chọn đáp án nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -14995,7 +14995,7 @@
         },
         {
           "question_id": 50332,
-          "question_text": "Tháng nào dưới đây luôn có ít nhất là 28 ngày hoặc 29 ngày? (Mã 820)",
+          "question_text": "Tháng nào có 28 ngày trong năm thường và 29 ngày trong năm nhuận? (Mã 820)",
           "options": [
             "Tháng 1",
             "Tháng 3",
@@ -15003,7 +15003,7 @@
             "Tháng 12"
           ],
           "answer": "Tháng 2",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Tháng 2 có 28 ngày trong năm thường và 29 ngày trong năm nhuận. Con hãy dựa vào đặc điểm này để chọn đáp án nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -15224,7 +15224,7 @@
         },
         {
           "question_id": 50345,
-          "question_text": "Tháng nào dưới đây luôn có ít nhất là 28 ngày hoặc 29 ngày? (Mã 710)",
+          "question_text": "Tháng nào có 28 ngày trong năm thường và 29 ngày trong năm nhuận? (Mã 710)",
           "options": [
             "Tháng 2",
             "Tháng 1",
@@ -15232,7 +15232,7 @@
             "Tháng 12"
           ],
           "answer": "Tháng 2",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Một giờ có 60 phút. Khi kim dài chỉ vào một số trên mặt đồng hồ, con hãy lấy số đó nhân với 5 để tính ra số phút tương ứng nhé!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Tháng 2 có 28 ngày trong năm thường và 29 ngày trong năm nhuận. Con hãy dựa vào đặc điểm này để chọn đáp án nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C3",
           "diem": 1.0,
@@ -17041,10 +17041,10 @@
           "question_id": 60318,
           "question_text": "Bạn Tuấn nhìn đồng hồ thấy kim ngắn chỉ lệch qua số 2, kim dài chỉ đúng số 10. Hỏi lúc này là mấy giờ mấy phút?",
           "options": [
-            "249 giờphút",
-            "253 giờphút",
-            "250 giờphút",
-            "260 giờphút"
+            "2 giờ 49 phút",
+            "2 giờ 53 phút",
+            "2 giờ 50 phút",
+            "2 giờ 60 phút"
           ],
           "answer": "2 giờ 50 phút",
           "hint": "Chào em! Cô giáo Ong Vàng 🐝 gợi ý: Xem giờ thật thú vị, kim ngắn chỉ giờ và kim dài chỉ phút nhé!",
@@ -18186,10 +18186,10 @@
           "question_id": 60383,
           "question_text": "Bạn Kiên nhìn đồng hồ thấy kim ngắn chỉ lệch qua số 3, kim dài chỉ đúng số 10. Hỏi lúc này là mấy giờ mấy phút?",
           "options": [
-            "350 giờphút",
-            "348 giờphút",
-            "335 giờphút",
-            "370 giờphút"
+            "3 giờ 50 phút",
+            "3 giờ 48 phút",
+            "3 giờ 35 phút",
+            "3 giờ 70 phút"
           ],
           "answer": "3 giờ 50 phút",
           "hint": "Chào em! Cô giáo Ong Vàng 🐝 gợi ý: Xem giờ thật thú vị, kim ngắn chỉ giờ và kim dài chỉ phút nhé!",
