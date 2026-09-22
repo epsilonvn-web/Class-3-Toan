@@ -185,8 +185,8 @@
             "61",
             "81"
           ],
-          "answer": "71",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "81",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Khi con 10 tuổi thì mẹ 24 + 10 = 34 tuổi, bố 27 + 10 = 37 tuổi. Tổng số tuổi là 34 + 37 + 10 = 81 tuổi.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -1330,8 +1330,8 @@
             "61",
             "81"
           ],
-          "answer": "71",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "81",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Khi con 10 tuổi thì mẹ 24 + 10 = 34 tuổi, bố 27 + 10 = 37 tuổi. Tổng số tuổi là 34 + 37 + 10 = 81 tuổi.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -2651,10 +2651,10 @@
             "180",
             "174",
             "277",
-            "177"
+            "187"
           ],
-          "answer": "177",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "187",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -2926,15 +2926,15 @@
         },
         {
           "question_id": 60037,
-          "question_text": "Tính nhanh giá trị biểu thức: 164 x 9 - 64 x 5 - 64 x 3 = (Mã 872)",
+          "question_text": "Tính nhanh giá trị biểu thức: 64 x 9 - 64 x 5 - 64 x 3 = (Mã 872)",
           "options": [
-            "1576",
-            "1476",
-            "1485",
-            "1467"
+            "64",
+            "128",
+            "0",
+            "576"
           ],
-          "answer": "1476",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "64",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 64: 64 x (9 - 5 - 3) = 64 x 1 = 64.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -3335,13 +3335,13 @@
           "question_id": 60060,
           "question_text": "Tính giá trị của biểu thức số: 40 + 5 x 3 =",
           "options": [
-            "15",
+            "55",
             "18",
             "115",
             "12"
           ],
-          "answer": "15",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "55",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -3384,15 +3384,15 @@
         },
         {
           "question_id": 60063,
-          "question_text": "Tính nhanh giá trị biểu thức: 35 x 9 - 45 x 5 - 45 x 3 = (Mã 845)",
+          "question_text": "Tính nhanh giá trị biểu thức: 45 x 9 - 45 x 5 - 45 x 3 = (Mã 845)",
           "options": [
-            "415",
-            "315",
-            "324",
-            "306"
+            "45",
+            "90",
+            "0",
+            "405"
           ],
-          "answer": "315",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "45",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 45: 45 x (9 - 5 - 3) = 45 x 1 = 45.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -3842,15 +3842,15 @@
         },
         {
           "question_id": 60089,
-          "question_text": "Tính nhanh giá trị biểu thức: 130 x 9 - 80 x 5 - 80 x 3 = (Mã 292)",
+          "question_text": "Tính nhanh giá trị biểu thức: 80 x 9 - 80 x 5 - 80 x 3 = (Mã 292)",
           "options": [
-            "1161",
-            "1270",
-            "1179",
-            "1170"
+            "80",
+            "160",
+            "0",
+            "720"
           ],
-          "answer": "1170",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "80",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 80: 80 x (9 - 5 - 3) = 80 x 1 = 80.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -4025,10 +4025,10 @@
             "216",
             "314",
             "212",
-            "214"
+            "245"
           ],
-          "answer": "214",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "245",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -4071,15 +4071,15 @@
         },
         {
           "question_id": 60102,
-          "question_text": "Tính nhanh giá trị biểu thức: 164 x 9 - 64 x 5 - 64 x 3 = (Mã 952)",
+          "question_text": "Tính nhanh giá trị biểu thức: 64 x 9 - 64 x 5 - 64 x 3 = (Mã 952)",
           "options": [
-            "1467",
-            "1476",
-            "1485",
-            "1576"
+            "64",
+            "128",
+            "0",
+            "576"
           ],
-          "answer": "1476",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "64",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 64: 64 x (9 - 5 - 3) = 64 x 1 = 64.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -4529,15 +4529,15 @@
         },
         {
           "question_id": 60128,
-          "question_text": "Tính nhanh giá trị biểu thức: 5 x 9 - 25 x 5 - 25 x 3 = (Mã 876)",
+          "question_text": "Tính nhanh giá trị biểu thức: 25 x 9 - 25 x 5 - 25 x 3 = (Mã 876)",
           "options": [
-            "45",
-            "145",
-            "54",
-            "36"
+            "25",
+            "50",
+            "0",
+            "225"
           ],
-          "answer": "45",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "25",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 25: 25 x (9 - 5 - 3) = 25 x 1 = 25.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -5216,15 +5216,15 @@
         },
         {
           "question_id": 70037,
-          "question_text": "Tính nhanh giá trị biểu thức: 114 x 9 - 64 x 5 - 64 x 3 = (Mã 872)",
+          "question_text": "Tính nhanh giá trị biểu thức: 64 x 9 - 64 x 5 - 64 x 3 = (Mã 872)",
           "options": [
-            "1126",
-            "1017",
-            "1026",
-            "1035"
+            "64",
+            "128",
+            "0",
+            "576"
           ],
-          "answer": "1026",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "64",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 64: 64 x (9 - 5 - 3) = 64 x 1 = 64.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -5674,15 +5674,15 @@
         },
         {
           "question_id": 70063,
-          "question_text": "Tính nhanh giá trị biểu thức: 5 x 9 - 45 x 5 - 45 x 3 = (Mã 845)",
+          "question_text": "Tính nhanh giá trị biểu thức: 45 x 9 - 45 x 5 - 45 x 3 = (Mã 845)",
           "options": [
-            "145",
             "45",
-            "36",
-            "54"
+            "90",
+            "0",
+            "405"
           ],
           "answer": "45",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 45: 45 x (9 - 5 - 3) = 45 x 1 = 45.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -6312,13 +6312,13 @@
           "question_id": 70099,
           "question_text": "Tính giá trị của biểu thức số: 31 + 5 x 2 =",
           "options": [
-            "10",
+            "41",
             "110",
             "12",
             "8"
           ],
-          "answer": "10",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "41",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -6361,15 +6361,15 @@
         },
         {
           "question_id": 70102,
-          "question_text": "Tính nhanh giá trị biểu thức: 14 x 9 - 64 x 5 - 64 x 3 = (Mã 952)",
+          "question_text": "Tính nhanh giá trị biểu thức: 64 x 9 - 64 x 5 - 64 x 3 = (Mã 952)",
           "options": [
-            "135",
-            "226",
-            "126",
-            "117"
+            "64",
+            "128",
+            "0",
+            "576"
           ],
-          "answer": "126",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "64",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 64: 64 x (9 - 5 - 3) = 64 x 1 = 64.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -6770,13 +6770,13 @@
           "question_id": 70125,
           "question_text": "Tính giá trị của biểu thức số: 26 + 105 x 3 =",
           "options": [
-            "315",
+            "341",
             "415",
             "318",
             "312"
           ],
-          "answer": "315",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "341",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -6819,15 +6819,15 @@
         },
         {
           "question_id": 70128,
-          "question_text": "Tính nhanh giá trị biểu thức: 125 x 9 - 25 x 5 - 25 x 3 = (Mã 876)",
+          "question_text": "Tính nhanh giá trị biểu thức: 25 x 9 - 25 x 5 - 25 x 3 = (Mã 876)",
           "options": [
-            "1116",
-            "1225",
-            "1134",
-            "1125"
+            "25",
+            "50",
+            "0",
+            "225"
           ],
-          "answer": "1125",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "25",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 25: 25 x (9 - 5 - 3) = 25 x 1 = 25.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -7055,8 +7055,8 @@
             "61",
             "51"
           ],
-          "answer": "71",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "81",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Khi con 10 tuổi thì mẹ 24 + 10 = 34 tuổi, bố 27 + 10 = 37 tuổi. Tổng số tuổi là 34 + 37 + 10 = 81 tuổi.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -9116,8 +9116,8 @@
             "71",
             "61"
           ],
-          "answer": "71",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "81",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Khi con 10 tuổi thì mẹ 24 + 10 = 34 tuổi, bố 27 + 10 = 37 tuổi. Tổng số tuổi là 34 + 37 + 10 = 81 tuổi.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -9289,13 +9289,13 @@
           "question_id": 60138,
           "question_text": "Tính giá trị của biểu thức số: 37 + 108 x 2 =",
           "options": [
-            "216",
+            "253",
             "218",
             "214",
             "316"
           ],
-          "answer": "216",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "253",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -9518,13 +9518,13 @@
           "question_id": 60151,
           "question_text": "Tính giá trị của biểu thức số: 26 + 57 x 4 =",
           "options": [
-            "228",
+            "254",
             "224",
             "328",
             "232"
           ],
-          "answer": "228",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "254",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -9748,12 +9748,12 @@
           "question_text": "Tính giá trị của biểu thức số: 43 + 107 x 4 =",
           "options": [
             "528",
-            "428",
+            "471",
             "424",
             "432"
           ],
-          "answer": "428",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "471",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -9796,15 +9796,15 @@
         },
         {
           "question_id": 60167,
-          "question_text": "Tính nhanh giá trị biểu thức: 125 x 9 - 25 x 5 - 25 x 3 = (Mã 206)",
+          "question_text": "Tính nhanh giá trị biểu thức: 25 x 9 - 25 x 5 - 25 x 3 = (Mã 206)",
           "options": [
-            "1225",
-            "1116",
-            "1134",
-            "1125"
+            "25",
+            "50",
+            "0",
+            "225"
           ],
-          "answer": "1125",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "25",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 25: 25 x (9 - 5 - 3) = 25 x 1 = 25.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -10025,15 +10025,15 @@
         },
         {
           "question_id": 60180,
-          "question_text": "Tính nhanh giá trị biểu thức: 14 x 9 - 64 x 5 - 64 x 3 = (Mã 361)",
+          "question_text": "Tính nhanh giá trị biểu thức: 64 x 9 - 64 x 5 - 64 x 3 = (Mã 361)",
           "options": [
-            "126",
-            "226",
-            "117",
-            "135"
+            "64",
+            "128",
+            "0",
+            "576"
           ],
-          "answer": "126",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "64",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 64: 64 x (9 - 5 - 3) = 64 x 1 = 64.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -10207,11 +10207,11 @@
           "options": [
             "8",
             "12",
-            "10",
+            "36",
             "110"
           ],
-          "answer": "10",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "36",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -10254,15 +10254,15 @@
         },
         {
           "question_id": 60193,
-          "question_text": "Tính nhanh giá trị biểu thức: 70 x 9 - 80 x 5 - 80 x 3 = (Mã 370)",
+          "question_text": "Tính nhanh giá trị biểu thức: 80 x 9 - 80 x 5 - 80 x 3 = (Mã 370)",
           "options": [
-            "630",
-            "730",
-            "621",
-            "639"
+            "80",
+            "160",
+            "0",
+            "720"
           ],
-          "answer": "630",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "80",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 80: 80 x (9 - 5 - 3) = 80 x 1 = 80.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -10436,11 +10436,11 @@
           "options": [
             "115",
             "12",
-            "15",
+            "62",
             "18"
           ],
-          "answer": "15",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "62",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -10712,15 +10712,15 @@
         },
         {
           "question_id": 60219,
-          "question_text": "Tính nhanh giá trị biểu thức: 130 x 9 - 80 x 5 - 80 x 3 = (Mã 965)",
+          "question_text": "Tính nhanh giá trị biểu thức: 80 x 9 - 80 x 5 - 80 x 3 = (Mã 965)",
           "options": [
-            "1161",
-            "1270",
-            "1179",
-            "1170"
+            "80",
+            "160",
+            "0",
+            "720"
           ],
-          "answer": "1170",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "80",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 80: 80 x (9 - 5 - 3) = 80 x 1 = 80.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -10894,11 +10894,11 @@
           "options": [
             "212",
             "310",
-            "210",
+            "250",
             "208"
           ],
-          "answer": "210",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "250",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -10941,15 +10941,15 @@
         },
         {
           "question_id": 60232,
-          "question_text": "Tính nhanh giá trị biểu thức: 125 x 9 - 25 x 5 - 25 x 3 = (Mã 140)",
+          "question_text": "Tính nhanh giá trị biểu thức: 25 x 9 - 25 x 5 - 25 x 3 = (Mã 140)",
           "options": [
-            "1125",
-            "1116",
-            "1134",
-            "1225"
+            "25",
+            "50",
+            "0",
+            "225"
           ],
-          "answer": "1125",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "25",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 25: 25 x (9 - 5 - 3) = 25 x 1 = 25.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -11579,13 +11579,13 @@
           "question_id": 70138,
           "question_text": "Tính giá trị của biểu thức số: 37 + 18 x 2 =",
           "options": [
-            "36",
+            "73",
             "38",
             "136",
             "34"
           ],
-          "answer": "36",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "73",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -12037,13 +12037,13 @@
           "question_id": 70164,
           "question_text": "Tính giá trị của biểu thức số: 43 + 57 x 4 =",
           "options": [
-            "228",
+            "271",
             "328",
             "224",
             "232"
           ],
-          "answer": "228",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "271",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -12086,15 +12086,15 @@
         },
         {
           "question_id": 70167,
-          "question_text": "Tính nhanh giá trị biểu thức: 75 x 9 - 25 x 5 - 25 x 3 = (Mã 206)",
+          "question_text": "Tính nhanh giá trị biểu thức: 25 x 9 - 25 x 5 - 25 x 3 = (Mã 206)",
           "options": [
-            "775",
-            "675",
-            "684",
-            "666"
+            "25",
+            "50",
+            "0",
+            "225"
           ],
-          "answer": "675",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "25",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 25: 25 x (9 - 5 - 3) = 25 x 1 = 25.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -12315,15 +12315,15 @@
         },
         {
           "question_id": 70180,
-          "question_text": "Tính nhanh giá trị biểu thức: 54 x 9 - 64 x 5 - 64 x 3 = (Mã 361)",
+          "question_text": "Tính nhanh giá trị biểu thức: 64 x 9 - 64 x 5 - 64 x 3 = (Mã 361)",
           "options": [
-            "486",
-            "495",
-            "586",
-            "477"
+            "64",
+            "128",
+            "0",
+            "576"
           ],
-          "answer": "486",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "64",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 64: 64 x (9 - 5 - 3) = 64 x 1 = 64.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -12544,15 +12544,15 @@
         },
         {
           "question_id": 70193,
-          "question_text": "Tính nhanh giá trị biểu thức: 30 x 9 - 80 x 5 - 80 x 3 = (Mã 370)",
+          "question_text": "Tính nhanh giá trị biểu thức: 80 x 9 - 80 x 5 - 80 x 3 = (Mã 370)",
           "options": [
-            "261",
-            "279",
-            "270",
-            "370"
+            "80",
+            "160",
+            "0",
+            "720"
           ],
-          "answer": "270",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "80",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 80: 80 x (9 - 5 - 3) = 80 x 1 = 80.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -13231,15 +13231,15 @@
         },
         {
           "question_id": 70232,
-          "question_text": "Tính nhanh giá trị biểu thức: 5 x 9 - 25 x 5 - 25 x 3 = (Mã 140)",
+          "question_text": "Tính nhanh giá trị biểu thức: 25 x 9 - 25 x 5 - 25 x 3 = (Mã 140)",
           "options": [
-            "54",
-            "36",
-            "45",
-            "145"
+            "25",
+            "50",
+            "0",
+            "225"
           ],
-          "answer": "45",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "25",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 25: 25 x (9 - 5 - 3) = 25 x 1 = 25.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -13413,11 +13413,11 @@
           "options": [
             "108",
             "210",
-            "110",
+            "120",
             "112"
           ],
-          "answer": "110",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "120",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -13925,8 +13925,8 @@
             "81",
             "71"
           ],
-          "answer": "71",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "81",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Khi con 10 tuổi thì mẹ 24 + 10 = 34 tuổi, bố 27 + 10 = 37 tuổi. Tổng số tuổi là 34 + 37 + 10 = 81 tuổi.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -14383,8 +14383,8 @@
             "51",
             "61"
           ],
-          "answer": "71",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "81",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Khi con 10 tuổi thì mẹ 24 + 10 = 34 tuổi, bố 27 + 10 = 37 tuổi. Tổng số tuổi là 34 + 37 + 10 = 81 tuổi.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -14841,8 +14841,8 @@
             "81",
             "61"
           ],
-          "answer": "71",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "81",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Khi con 10 tuổi thì mẹ 24 + 10 = 34 tuổi, bố 27 + 10 = 37 tuổi. Tổng số tuổi là 34 + 37 + 10 = 81 tuổi.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -15070,8 +15070,8 @@
             "61",
             "51"
           ],
-          "answer": "71",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "81",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Khi con 10 tuổi thì mẹ 24 + 10 = 34 tuổi, bố 27 + 10 = 37 tuổi. Tổng số tuổi là 34 + 37 + 10 = 81 tuổi.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -15528,8 +15528,8 @@
             "61",
             "81"
           ],
-          "answer": "71",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "81",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Khi con 10 tuổi thì mẹ 24 + 10 = 34 tuổi, bố 27 + 10 = 37 tuổi. Tổng số tuổi là 34 + 37 + 10 = 81 tuổi.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -15757,8 +15757,8 @@
             "51",
             "71"
           ],
-          "answer": "71",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "81",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Khi con 10 tuổi thì mẹ 24 + 10 = 34 tuổi, bố 27 + 10 = 37 tuổi. Tổng số tuổi là 34 + 37 + 10 = 81 tuổi.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -16162,10 +16162,10 @@
             "424",
             "321",
             "327",
-            "324"
+            "369"
           ],
-          "answer": "324",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "369",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -16618,12 +16618,12 @@
           "question_text": "Tính giá trị của biểu thức số: 13 + 105 x 3 =",
           "options": [
             "415",
-            "315",
+            "328",
             "318",
             "312"
           ],
-          "answer": "315",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "328",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -16895,15 +16895,15 @@
         },
         {
           "question_id": 60310,
-          "question_text": "Tính nhanh giá trị biểu thức: 5 x 9 - 45 x 5 - 45 x 3 = (Mã 152)",
+          "question_text": "Tính nhanh giá trị biểu thức: 45 x 9 - 45 x 5 - 45 x 3 = (Mã 152)",
           "options": [
             "45",
-            "145",
-            "36",
-            "54"
+            "90",
+            "0",
+            "405"
           ],
           "answer": "45",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 45: 45 x (9 - 5 - 3) = 45 x 1 = 45.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -17536,10 +17536,10 @@
             "171",
             "274",
             "177",
-            "174"
+            "214"
           ],
-          "answer": "174",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "214",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -17582,15 +17582,15 @@
         },
         {
           "question_id": 60349,
-          "question_text": "Tính nhanh giá trị biểu thức: 95 x 9 - 45 x 5 - 45 x 3 = (Mã 960)",
+          "question_text": "Tính nhanh giá trị biểu thức: 45 x 9 - 45 x 5 - 45 x 3 = (Mã 960)",
           "options": [
-            "846",
-            "855",
-            "864",
-            "955"
+            "45",
+            "90",
+            "0",
+            "405"
           ],
-          "answer": "855",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "45",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 45: 45 x (9 - 5 - 3) = 45 x 1 = 45.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -17763,12 +17763,12 @@
           "question_text": "Tính giá trị của biểu thức số: 40 + 105 x 3 =",
           "options": [
             "312",
-            "315",
+            "355",
             "318",
             "415"
           ],
-          "answer": "315",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "355",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -18220,13 +18220,13 @@
           "question_id": 60385,
           "question_text": "Tính giá trị của biểu thức số: 39 + 5 x 3 =",
           "options": [
-            "15",
+            "54",
             "115",
             "12",
             "18"
           ],
-          "answer": "15",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "54",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -18449,13 +18449,13 @@
           "question_id": 70268,
           "question_text": "Tính giá trị của biểu thức số: 45 + 18 x 3 =",
           "options": [
-            "54",
+            "99",
             "154",
             "57",
             "51"
           ],
-          "answer": "54",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "99",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -18910,10 +18910,10 @@
             "162",
             "265",
             "168",
-            "165"
+            "178"
           ],
-          "answer": "165",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "178",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -19185,15 +19185,15 @@
         },
         {
           "question_id": 70310,
-          "question_text": "Tính nhanh giá trị biểu thức: 35 x 9 - 45 x 5 - 45 x 3 = (Mã 152)",
+          "question_text": "Tính nhanh giá trị biểu thức: 45 x 9 - 45 x 5 - 45 x 3 = (Mã 152)",
           "options": [
-            "306",
-            "315",
-            "324",
-            "415"
+            "45",
+            "90",
+            "0",
+            "405"
           ],
-          "answer": "315",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Đối với các câu hỏi tư duy nâng cao, con hãy áp dụng phương pháp phân tích thông minh (ví dụ rút thừa số chung hoặc chia đôi phần hiệu số) để giải bài cực kỳ nhanh!",
+          "answer": "45",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con hãy rút thừa số chung 45: 45 x (9 - 5 - 3) = 45 x 1 = 45.",
           "image_url": "",
           "skill_tag": "TOAN3_C6",
           "diem": 1.0,
@@ -20282,12 +20282,12 @@
           "question_text": "Tính giá trị của biểu thức số: 40 + 57 x 2 =",
           "options": [
             "214",
-            "114",
+            "154",
             "116",
             "112"
           ],
-          "answer": "114",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "154",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,
@@ -20510,13 +20510,13 @@
           "question_id": 70385,
           "question_text": "Tính giá trị của biểu thức số: 39 + 109 x 3 =",
           "options": [
-            "327",
+            "366",
             "427",
             "330",
             "324"
           ],
-          "answer": "327",
-          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Trong một biểu thức không có dấu ngoặc đơn, chúng ta bắt buộc phải tuân theo quy tắc: thực hiện phép tính nhân, chia trước rồi mới cộng, trừ sau nhé!",
+          "answer": "366",
+          "hint": "Cô giáo Ong Vàng 🐝 gợi ý: Con thực hiện phép nhân, chia trước; sau đó mới thực hiện phép cộng, trừ nhé!",
           "image_url": "",
           "skill_tag": "TOAN3_C4",
           "diem": 1.0,

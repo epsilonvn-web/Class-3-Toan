@@ -13909,13 +13909,13 @@
     "sub": "Ôn tập tổng hợp Học kỳ I",
     "q": "[Ôn tập HK1] Phép chia 3808 : 7 có số dư là bao nhiêu?",
     "o": [
-      "543",
-      "545",
-      "554",
-      "544"
+      "0",
+      "1",
+      "2",
+      "3"
     ],
-    "a": "544",
-    "h": "Chào em! Cô giáo Ong Vàng 🐝 gợi ý: Ta nhẩm 7 x 6 = 42, vậy 45 chia 7 bằng 6 và dư 45 - 42 = 3 nhé!",
+    "a": "0",
+    "h": "Cô giáo Ong Vàng 🐝 gợi ý: 7 x 544 = 3808, nên 3808 : 7 là phép chia hết và có số dư bằng 0.",
     "tag": "TOAN3_C2",
     "w": 11
   },
@@ -13984,13 +13984,13 @@
     "sub": "Ôn tập tổng hợp Học kỳ I",
     "q": "[Ôn tập HK1] Tính giá trị biểu thức: 120 - 10 x 4 = ?",
     "o": [
-      "40",
+      "80",
       "140",
-      "44",
+      "40",
       "36"
     ],
-    "a": "40",
-    "h": "Chào em! Cô giáo Ong Vàng 🐝 gợi ý: Quy tắc tính giá trị biểu thức là thực hiện phép nhân chia trước, cộng trừ sau nha em!",
+    "a": "80",
+    "h": "Cô giáo Ong Vàng 🐝 gợi ý: Thực hiện phép nhân trước: 10 x 4 = 40, sau đó 120 - 40 = 80.",
     "tag": "TOAN3_C4",
     "w": 11
   },
@@ -14209,13 +14209,13 @@
     "sub": "Ôn tập tổng hợp Học kỳ I",
     "q": "[Ôn tập HK1] Phép chia 4718 : 7 có số dư là bao nhiêu?",
     "o": [
-      "684",
-      "673",
-      "674",
-      "675"
+      "0",
+      "1",
+      "2",
+      "3"
     ],
-    "a": "674",
-    "h": "Chào em! Cô giáo Ong Vàng 🐝 gợi ý: Ta nhẩm 7 x 6 = 42, vậy 45 chia 7 bằng 6 và dư 45 - 42 = 3 nhé!",
+    "a": "0",
+    "h": "Cô giáo Ong Vàng 🐝 gợi ý: 7 x 674 = 4718, nên 4718 : 7 là phép chia hết và có số dư bằng 0.",
     "tag": "TOAN3_C2",
     "w": null
   },
@@ -14762,15 +14762,15 @@
   {
     "id": "Q_11_2_35",
     "sub": "Ôn tập tổng hợp Học kỳ II",
-    "q": "[Ôn tập HK2] Tính nhanh giá trị biểu thức sau bằng cách thuận tiện: 114 x 9 - 64 x 3 - 64 x 5 = ?",
+    "q": "[Ôn tập HK2] Tính nhanh giá trị biểu thức sau bằng cách thuận tiện: 64 x 9 - 64 x 3 - 64 x 5 = ?",
     "o": [
-      "1035",
-      "1017",
-      "1126",
-      "1026"
+      "64",
+      "128",
+      "0",
+      "576"
     ],
-    "a": "1026",
-    "h": "Chào em! Cô giáo Ong Vàng 🐝 gợi ý: Áp dụng tính chất phân phối rút thừa số chung: 64 x (9 - 3 - 5) = 64 x 1 = 64 cực nhanh nhé!",
+    "a": "64",
+    "h": "Cô giáo Ong Vàng 🐝 gợi ý: Rút thừa số chung 64: 64 x (9 - 3 - 5) = 64 x 1 = 64.",
     "tag": "TOAN3_C6",
     "w": 23
   },
