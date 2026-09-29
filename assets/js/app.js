@@ -96,12 +96,12 @@ const examFileMap = {
 // 6 nhóm năng lực Toán lớp 3 (TOAN_C1 - TOAN_C6) — khoá nội bộ vẫn dùng C1..C6,
 // việc trích tag từ chuỗi "TOAN_C1" sang "C1" được xử lý bằng regex ở nơi dùng.
 const SKILL_TAXONOMY = {
-    C1: { code: 'C1', sheetCol: 'C1_NhanBiet', totalCol: 'C1_NhanBiet_Tong', name: 'Nhận biết Số và Hình học trực quan', advice: 'Cần ôn lại cách đọc viết, so sánh, làm tròn số phạm vi 100.000, số La Mã, và nhận diện điểm giữa/trung điểm, hình tròn, góc vuông, khối lập phương/khối hộp.' },
-    C2: { code: 'C2', sheetCol: 'C2_PhepTinh', totalCol: 'C2_PhepTinh_Tong', name: 'Phép tính và Tính nhẩm thuần túy', advice: 'Rèn luyện thêm kỹ năng đặt tính rồi tính cộng/trừ/nhân/chia và tính nhẩm nhanh với số tròn chục, tròn trăm, tròn nghìn.' },
-    C3: { code: 'C3', sheetCol: 'C3_DoLuong', totalCol: 'C3_DoLuong_Tong', name: 'Đo lường, Thời gian & Thống kê Xác suất', advice: 'Luyện tập thêm về quy đổi mm/g/ml, xem đồng hồ chính xác từng phút, đọc nhiệt kế, đọc bảng thống kê và nhận định khả năng xảy ra của sự kiện.' },
-    C4: { code: 'C4', sheetCol: 'C4_BieuThuc', totalCol: 'C4_BieuThuc_Tong', name: 'Quy luật, Biểu thức & Ẩn số', advice: 'Cần luyện thêm về tính giá trị biểu thức có/không dấu ngoặc, các dạng bài tìm x và phát hiện quy luật dãy số.' },
-    C5: { code: 'C5', sheetCol: 'C5_GiaiToan', totalCol: 'C5_GiaiToan_Tong', name: 'Giải Toán có lời văn - Đọc hiểu ngữ cảnh', advice: 'Tăng cường đọc hiểu ngữ cảnh bài toán đố, luyện gấp/giảm số lần và giải toán 2 bước tính dạng "Rút về đơn vị".' },
-    C6: { code: 'C6', sheetCol: 'C6_TuDuy', totalCol: 'C6_TuDuy_Tong', name: 'Tư duy Toán nâng cao & IQ Hình học', advice: 'Rèn kỹ năng tính chu vi, diện tích hình phẳng và giải các bài toán tư duy logic (toán trồng cây, tuổi tác, đếm hình phức tạp).' }
+    C1: { code: 'C1', sheetCol: 'C1_NhanBiet', totalCol: 'C1_NhanBiet_Tong', name: 'Nhận biết Số và Hình học trực quan', advice: 'Ôn lại cách đọc, viết, phân tích và so sánh số; đồng thời củng cố nhận biết hình học trực quan đúng trong phạm vi kiến thức con đã học.' },
+    C2: { code: 'C2', sheetCol: 'C2_PhepTinh', totalCol: 'C2_PhepTinh_Tong', name: 'Phép tính và Tính nhẩm thuần túy', advice: 'Rèn thêm kỹ năng cộng, trừ, nhân, chia và tính nhẩm đúng trong phạm vi kiến thức con đã học.' },
+    C3: { code: 'C3', sheetCol: 'C3_DoLuong', totalCol: 'C3_DoLuong_Tong', name: 'Đo lường, Thời gian & Thống kê Xác suất', advice: 'Luyện thêm các nội dung đo lường, thời gian, đọc dữ liệu và xác suất đúng với phần kiến thức con đã học.' },
+    C4: { code: 'C4', sheetCol: 'C4_BieuThuc', totalCol: 'C4_BieuThuc_Tong', name: 'Quy luật, Biểu thức & Ẩn số', advice: 'Cần luyện thêm biểu thức, tìm thành phần chưa biết và nhận ra quy luật ở mức phù hợp với phần kiến thức con đã học.' },
+    C5: { code: 'C5', sheetCol: 'C5_GiaiToan', totalCol: 'C5_GiaiToan_Tong', name: 'Giải Toán có lời văn - Đọc hiểu ngữ cảnh', advice: 'Tăng cường đọc hiểu đề, xác định dữ kiện - câu hỏi và lựa chọn phép tính phù hợp cho các bài toán có lời văn đã học.' },
+    C6: { code: 'C6', sheetCol: 'C6_TuDuy', totalCol: 'C6_TuDuy_Tong', name: 'Tư duy Toán nâng cao & IQ Hình học', advice: 'Rèn tư duy suy luận và hình học ở đúng phạm vi đã học; ưu tiên hiểu cách làm thay vì ghi nhớ mẹo.' }
 };
 
 const GREETINGS_STUDENT = [
@@ -192,22 +192,36 @@ function deriveSubCode(q) {
 function normalizeQuestion(q) {
     if (!q) return null;
     const subCode = deriveSubCode(q);
+    const lessonTitles = Array.isArray(q.lesson_titles) ? q.lesson_titles.filter(Boolean) : [];
+    const competency = q.competency ?? q.skill_tag ?? q.tag ?? 'TOAN_C1';
     return {
         question_id: q.id ?? q.question_id ?? q.question_no ?? 0,
+        exam_id: q.exam_id ?? null,
         sub_topic: subCode,
-        sub_topic_label: String(q.sub ?? q.sub_code ?? subCode).trim(),
+        sub_code: subCode,
+        sub_topic_label: String(lessonTitles[0] ?? q.sub ?? q.sub_code ?? subCode).trim(),
+        lesson_refs: Array.isArray(q.lesson_refs) ? q.lesson_refs : [],
+        lesson_titles: lessonTitles,
         week: q.week ?? q.w ?? null,
         question_text: q.q ?? q.question_text ?? '',
         options: Array.isArray(q.o) ? q.o : (Array.isArray(q.options) ? q.options : []),
         answer: q.a ?? q.answer ?? '',
         hint: q.h ?? q.hint ?? '',
+        hint_policy: q.hint_policy ?? 'post_submit_only',
         image_url: q.img ?? q.image_url ?? '',
         audio_text: q.aud ?? q.audio_text ?? '',
         reading_title: q.r_title ?? q.reading_title ?? '',
         reading_passage: q.r_passage ?? q.reading_passage ?? q.passage_text ?? '',
-        skill_tag: q.skill_tag ?? q.tag ?? 'TOAN_C1',
+        competency,
+        skill_tag: competency,
+        difficulty: q.difficulty ?? null,
+        semester: q.semester ?? null,
+        scope: q.scope ?? null,
+        assessment_track: q.assessment_track ?? 'standard',
+        include_in_standard_competency: q.include_in_standard_competency !== false,
         diem: Number(q.diem ?? q.score ?? 0.5),
-        explanation: q.explanation ?? q.h ?? 'Không có giải thích chi tiết.'
+        score: Number(q.score ?? q.diem ?? 0.5),
+        explanation: q.explanation ?? q.h ?? q.hint ?? 'Không có giải thích chi tiết.'
     };
 }
 
@@ -415,7 +429,20 @@ async function startRandomExam(categoryKey) {
         const examLabel = examFileMap[categoryKey]?.label || 'Đề thi';
         const examTitle = exam.exam_name || exam.exam_title || exam.name || exam.title || `${examLabel} - Đề số ${candidates.indexOf(exam) + 1}`;
 
-        activeExamContext = { categoryKey, examIndex, examTitle };
+        activeExamContext = {
+            categoryKey,
+            examIndex,
+            examId: exam.exam_id ?? null,
+            examTitle,
+            timeLimitMinutes: Number(exam.time_limit_minutes || 40),
+            semester: exam.semester ?? null,
+            scope: exam.scope ?? null,
+            assessmentTrack: exam.assessment_track || 'standard',
+            includeInStandardCompetency: exam.include_in_standard_competency !== false,
+            hintPolicy: exam.hint_policy || examData?.assessment_policy?.hint_policy || 'post_submit_only',
+            assessmentPolicy: examData?.assessment_policy || {},
+            assessmentBlueprint: exam.assessment_blueprint || null
+        };
         activeRoadmapContext = null;
         pendingTopicQuiz = null;
 
@@ -431,7 +458,8 @@ async function startRandomExam(categoryKey) {
 }
 
 function startExamCountdown() {
-    quizRemainingSeconds = 40 * 60;
+    const minutes = Number(activeExamContext?.timeLimitMinutes || 40);
+    quizRemainingSeconds = Math.max(1, minutes) * 60;
     updateExamTimerDisplay();
     clearInterval(quizTimerInterval);
     quizTimerInterval = setInterval(() => {
@@ -1687,17 +1715,28 @@ function showResultScreen() {
                 question_id: q.question_id,
                 question_number: idx + 1,
                 question_text: q.question_text,
-                sub_topic: q.sub_topic || 'Chủ đề tổng hợp',
+                sub_topic: q.sub_topic || q.sub_code || 'Chủ đề tổng hợp',
+                sub_topic_label: (Array.isArray(q.lesson_titles) && q.lesson_titles[0]) ? q.lesson_titles[0] : (q.sub_topic_label || q.sub_code || 'Chủ đề tổng hợp'),
+                sub_code: q.sub_code || q.sub_topic || '',
+                lesson_refs: Array.isArray(q.lesson_refs) ? q.lesson_refs : [],
+                lesson_titles: Array.isArray(q.lesson_titles) ? q.lesson_titles : [],
+                difficulty: q.difficulty || '',
                 skill_tag: q.skill_tag || 'C1',
                 dap_an_chon: studentAns || 'Chưa trả lời',
                 dap_an_dung: q.answer,
-                explanation: q.explanation || 'Không có giải thích chi tiết.'
+                explanation: q.explanation || q.hint || 'Không có giải thích chi tiết.'
             });
         }
         quizAnsweredLog.push({
             question_id: q.question_id,
+            exam_id: q.exam_id ?? activeExamContext?.examId ?? null,
             question_text: q.question_text,
             skill_tag: q.skill_tag || 'C1',
+            sub_code: q.sub_code || q.sub_topic || '',
+            lesson_refs: Array.isArray(q.lesson_refs) ? q.lesson_refs : [],
+            difficulty: q.difficulty || '',
+            assessment_track: q.assessment_track || activeExamContext?.assessmentTrack || 'standard',
+            include_in_standard_competency: q.include_in_standard_competency !== false,
             source_topic_id: q.source_topic_id,
             diem: q.diem ?? 0.5,
             isCorrect,
@@ -1761,6 +1800,12 @@ function renderReportTopicsBreakdown() {
     if (!container) return;
 
     const isRoadmap = !!activeRoadmapContext;
+    const isExam = !!activeExamContext;
+    const minItems = isExam
+        ? Number(activeExamContext?.assessmentPolicy?.competency_min_questions_per_exam || 3)
+        : 1;
+    const unmeasuredLabel = activeExamContext?.assessmentPolicy?.unmeasured_label || 'Chưa đánh giá';
+    const insufficientLabel = activeExamContext?.assessmentPolicy?.insufficient_data_label || 'Chưa đủ dữ liệu';
     const skillKeys = ['C1', 'C2', 'C3', 'C4', 'C5', 'C6'];
     const skillStats = {};
     skillKeys.forEach(k => {
@@ -1768,7 +1813,7 @@ function renderReportTopicsBreakdown() {
     });
 
     activeQuestionsList.forEach((q, idx) => {
-        let rawTag = String(q.skill_tag || 'TOAN_C1').toUpperCase();
+        let rawTag = String(q.skill_tag || q.competency || 'TOAN_C1').toUpperCase();
         let m = rawTag.match(/C([1-6])/);
         let tag = m ? 'C' + m[1] : 'C1';
 
@@ -1782,31 +1827,61 @@ function renderReportTopicsBreakdown() {
     });
 
     let html = '';
+    if (isExam && activeExamContext?.assessmentTrack === 'advanced') {
+        html += `
+            <div class="sm:col-span-2 lg:col-span-3 bg-indigo-50 border border-indigo-200 rounded-2xl p-3 text-xs md:text-sm font-bold text-indigo-800">
+                🏅 Đây là <strong>nhánh HSG / nâng cao</strong>. Kết quả năng lực ở đây dùng để theo dõi mức độ thử thách nâng cao, không dùng làm chuẩn tối thiểu của hồ sơ năng lực phổ thông.
+            </div>`;
+    }
+
     skillKeys.forEach(k => {
         const data = skillStats[k];
-        const pct = isRoadmap
-            ? (data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0)
-            : (data.maxScore > 0 ? Math.round((data.earnedScore / data.maxScore) * 100) : 0);
-        const isPassed = pct >= 50;
-        const badgeClass = isPassed ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-purple-50 text-purple-700 border border-purple-200';
-        const badgeText = isPassed ? 'Đạt yêu cầu' : 'Cần luyện tập thêm';
-        const barColor = isPassed ? 'bg-gradient-to-r from-amber-400 to-purple-400' : 'bg-gradient-to-r from-pink-400 to-purple-400';
-        const scoreLine = isRoadmap
-            ? `<span>Số câu đúng: <strong class="text-pink-600">${data.correct}/${data.total} câu</strong></span>`
-            : `<span>Điểm đạt: <strong class="text-pink-600">${data.earnedScore.toFixed(1)} / ${data.maxScore.toFixed(1)}đ</strong></span>`;
+        const hasAnyData = data.total > 0;
+        const enoughData = data.total >= minItems;
+        const pct = enoughData ? Math.round((data.correct / data.total) * 100) : null;
+
+        let badgeClass, badgeText, barColor, scoreLine, pctText, barWidth, cardClass;
+        if (!hasAnyData) {
+            badgeClass = 'bg-slate-100 text-slate-500 border border-slate-200';
+            badgeText = unmeasuredLabel;
+            barColor = 'bg-slate-200';
+            scoreLine = '<span class="text-slate-400">Đề này không đo năng lực này</span>';
+            pctText = '--';
+            barWidth = 0;
+            cardClass = 'bg-slate-50/60 border-slate-200';
+        } else if (!enoughData) {
+            badgeClass = 'bg-slate-100 text-slate-600 border border-slate-200';
+            badgeText = insufficientLabel;
+            barColor = 'bg-slate-300';
+            scoreLine = `<span>Số câu đúng: <strong class="text-slate-600">${data.correct}/${data.total} câu</strong></span>`;
+            pctText = '--';
+            barWidth = 0;
+            cardClass = 'bg-slate-50/70 border-slate-200';
+        } else {
+            const isPassed = pct >= 50;
+            badgeClass = isPassed
+                ? 'bg-amber-100 text-amber-800 border border-amber-200'
+                : 'bg-purple-50 text-purple-700 border border-purple-200';
+            badgeText = isPassed ? 'Đạt yêu cầu' : 'Cần luyện tập thêm';
+            barColor = isPassed ? 'bg-gradient-to-r from-amber-400 to-purple-400' : 'bg-gradient-to-r from-pink-400 to-purple-400';
+            scoreLine = `<span>Số câu đúng: <strong class="text-pink-600">${data.correct}/${data.total} câu</strong></span>`;
+            pctText = `${pct}%`;
+            barWidth = pct;
+            cardClass = 'bg-pink-50/40 border-pink-100';
+        }
 
         html += `
-            <div class="bg-pink-50/40 border border-pink-100 rounded-2xl p-3 flex flex-col justify-between space-y-2">
-                <div class="flex items-center justify-between">
+            <div class="${cardClass} border rounded-2xl p-3 flex flex-col justify-between space-y-2">
+                <div class="flex items-center justify-between gap-2">
                     <span class="font-black text-slate-800 text-xs sm:text-sm">${SKILL_TAXONOMY[k].name}</span>
-                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${badgeClass}">${badgeText}</span>
+                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold shrink-0 ${badgeClass}">${badgeText}</span>
                 </div>
-                <div class="flex items-center justify-between text-xs font-bold text-slate-600">
+                <div class="flex items-center justify-between text-xs font-bold text-slate-600 gap-2">
                     ${scoreLine}
-                    <span class="font-math font-black">${pct}%</span>
+                    <span class="font-math font-black ${pct == null ? 'text-slate-400' : ''}">${pctText}</span>
                 </div>
-                <div class="w-full bg-pink-100 rounded-full h-2 overflow-hidden">
-                    <div class="${barColor} h-full rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+                    <div class="${barColor} h-full rounded-full transition-all duration-500" style="width: ${barWidth}%"></div>
                 </div>
             </div>
         `;
@@ -1835,6 +1910,11 @@ function openReviewWrongModal() {
                         <p class="text-purple-600"><i class="fa-solid fa-xmark mr-1"></i> Đáp án con chọn: <strong>${escapeHtml(item.dap_an_chon)}</strong></p>
                         <p class="text-emerald-700"><i class="fa-solid fa-check mr-1"></i> Đáp án đúng chuẩn: <strong>${escapeHtml(item.dap_an_dung)}</strong></p>
                     </div>
+                    ${Array.isArray(item.lesson_titles) && item.lesson_titles.length ? `
+                    <div class="p-2.5 bg-sky-50/80 border border-sky-200 rounded-xl text-xs text-sky-900 font-semibold flex items-start gap-2">
+                        <i class="fa-solid fa-book-open text-sky-600 mt-0.5"></i>
+                        <span><strong>Nên ôn lại:</strong> ${escapeHtml(item.lesson_titles.join(' · '))}${item.sub_code ? ` <span class="text-sky-600">(${escapeHtml(item.sub_code)})</span>` : ''}</span>
+                    </div>` : ''}
                     <div class="p-2.5 bg-amber-50/80 border border-amber-200 rounded-xl text-xs text-amber-900 font-semibold flex items-start gap-2">
                         <i class="fa-solid fa-lightbulb text-amber-600 mt-0.5"></i>
                         <span><strong>Lời giải sư phạm:</strong> ${escapeHtml(item.explanation)}</span>
@@ -1858,13 +1938,20 @@ async function saveExamResultToSheet() {
     const { categoryKey, examIndex } = activeExamContext;
     const thoiGianLamBai = quizStartTime ? formatDuration(Date.now() - quizStartTime) : '';
     
-    const skillScores = { C1: 0, C2: 0, C3: 0, C4: 0, C5: 0, C6: 0 };
+    // Mỗi đề chỉ đánh giá những năng lực thật sự có câu hỏi trong đề.
+    // Lưu cả số câu đúng và tổng số câu của từng năng lực để 0/0 được hiểu là
+    // "chưa có dữ liệu", tuyệt đối không biến thành 0% năng lực.
+    const skillScores = { C1: 0, C2: 0, C3: 0, C4: 0, C5: 0, C6: 0 }; // điểm có trọng số, giữ tương thích cũ
+    const skillCorrect = { C1: 0, C2: 0, C3: 0, C4: 0, C5: 0, C6: 0 };
+    const skillTotal = { C1: 0, C2: 0, C3: 0, C4: 0, C5: 0, C6: 0 };
     quizAnsweredLog.forEach(item => {
         let rawTag = String(item.skill_tag || 'C1').toUpperCase();
         let m = rawTag.match(/C([1-6])/);
         let tag = m ? 'C' + m[1] : 'C1';
-
-        if (item.isCorrect && skillScores[tag] !== undefined) {
+        if (skillTotal[tag] === undefined) return;
+        skillTotal[tag]++;
+        if (item.isCorrect) {
+            skillCorrect[tag]++;
             skillScores[tag] += (item.diem || 0.5);
         }
     });
@@ -1875,6 +1962,10 @@ async function saveExamResultToSheet() {
         hoTen: currentUser.hoTen,
         lop: currentUser.lop,
         examCategory: categoryKey,
+        examId: activeExamContext?.examId ?? null,
+        assessmentTrack: activeExamContext?.assessmentTrack || 'standard',
+        includeInStandardCompetency: activeExamContext?.includeInStandardCompetency !== false,
+        scope: activeExamContext?.scope || '',
         sheetName: examFileMap[categoryKey]?.sheet || 'LichSuBaiThiHK1',
         deSo: examIndex + 1,
         thoiGianLamBai,
@@ -1892,7 +1983,10 @@ async function saveExamResultToSheet() {
     // Ghi điểm từng nhóm năng lực vào ĐÚNG tên cột khai báo trong SKILL_TAXONOMY (C1_NhanBiet, C2_PhepTinh...)
     // — không hard-code tên cột, tránh lệch dữ liệu nếu sau này đổi lại taxonomy.
     Object.keys(SKILL_TAXONOMY).forEach(k => {
-        payload[SKILL_TAXONOMY[k].sheetCol] = skillScores[k].toFixed(1);
+        // Hai cột này là cặp correct/attempted. Nếu total = 0 thì lịch sử hiển thị --,
+        // không coi năng lực chưa được hỏi là học sinh làm sai.
+        payload[SKILL_TAXONOMY[k].sheetCol] = skillCorrect[k];
+        payload[SKILL_TAXONOMY[k].totalCol] = skillTotal[k];
     });
     try { await callAppsScript('saveExamResult', payload); } catch (e) {}
 }
@@ -2075,13 +2169,16 @@ function renderHistoryReport(rows, sheetName) {
     });
 
     const skillKeys = ['C1', 'C2', 'C3', 'C4', 'C5', 'C6'];
-    const skillAverages = isWeekly
-        ? { C1: 0, C2: 0, C3: 0, C4: 0, C5: 0, C6: 0 }
-        : { C1: 85, C2: 78, C3: 92, C4: 70, C5: 80, C6: 75 };
+    const skillAverages = { C1: 0, C2: 0, C3: 0, C4: 0, C5: 0, C6: 0 };
     const touchedSkills = [];
+    const hasCompetencyTotals = rows.some(r => skillKeys.some(k => {
+        const total = Number(r[SKILL_TAXONOMY[k].totalCol]);
+        return Number.isFinite(total) && total > 0;
+    }));
 
-    if (rows.length && isWeekly) {
-        // Tiến trình tuần: % = tổng số câu đúng / tổng số câu đã làm THẬT của nhóm kỹ năng đó
+    if (rows.length && hasCompetencyTotals) {
+        // Dùng đúng correct/attempted cho cả Bài tập và Đề thi. Nhóm không xuất hiện
+        // trong đề có total = 0 nên không tham gia trung bình và không bị xem là 0%.
         skillKeys.forEach((k) => {
             let sumCorrect = 0, sumTotal = 0;
             rows.forEach(r => {
@@ -2092,19 +2189,6 @@ function renderHistoryReport(rows, sheetName) {
             });
             if (sumTotal > 0) {
                 skillAverages[k] = Math.min(100, Math.round((sumCorrect / sumTotal) * 100));
-                touchedSkills.push(k);
-            }
-        });
-    } else if (rows.length) {
-        skillKeys.forEach((k) => {
-            const colName = SKILL_TAXONOMY[k].sheetCol;
-            const vals = rows.map(r => {
-                const val = r[`diem${k}`] ?? r[colName] ?? r[`diem_${k.toLowerCase()}`] ?? r[k];
-                return (val !== undefined && val !== null && val !== '--') ? Number(val) : 0;
-            });
-            const sum = vals.reduce((a, b) => a + b, 0);
-            if (vals.length > 0) {
-                skillAverages[k] = Math.min(100, Math.round((sum / (vals.length * 1.5)) * 100)) || 75;
                 touchedSkills.push(k);
             }
         });
@@ -2119,7 +2203,7 @@ function renderHistoryReport(rows, sheetName) {
             labels: skillKeys.map(k => SKILL_TAXONOMY[k].name),
             datasets: [{
                 label: 'Độ thành thạo (%)',
-                data: skillKeys.map(k => skillAverages[k]),
+                data: skillKeys.map(k => touchedSkills.includes(k) ? skillAverages[k] : null),
                 backgroundColor: ['#f472b6', '#fb7185', '#f59e0b', '#a855f7', '#ec4899', '#e11d48'],
                 borderRadius: 8,
                 borderSkipped: false,
@@ -2144,7 +2228,7 @@ function renderHistoryReport(rows, sheetName) {
             },
             plugins: {
                 legend: { display: false },
-                tooltip: { callbacks: { label: (ctx) => ` Độ thành thạo: ${ctx.raw}%` } }
+                tooltip: { callbacks: { label: (ctx) => ctx.raw == null ? ' Chưa đủ dữ liệu' : ` Độ thành thạo: ${ctx.raw}%` } }
             }
         },
         plugins: [{
@@ -2152,6 +2236,7 @@ function renderHistoryReport(rows, sheetName) {
             afterDatasetsDraw(chart) {
                 const { ctx } = chart;
                 chart.data.datasets[0].data.forEach((val, i) => {
+                    if (val == null) return;
                     const meta = chart.getDatasetMeta(0).data[i];
                     if (!meta) return;
                     ctx.save();
@@ -2263,8 +2348,14 @@ function renderHistoryTable(rows, sheetName) {
     let summaryCells = '';
     let bodyRows = '';
 
-    if (isWeekly) {
-        // Tổng hợp: % = tổng câu đúng / tổng câu đã làm THẬT của đúng nhóm kỹ năng đó
+    const hasCompetencyTotals = rows.some(r => skillKeys.some(k => {
+        const total = Number(r[SKILL_TAXONOMY[k].totalCol]);
+        return Number.isFinite(total) && total > 0;
+    }));
+
+    if (hasCompetencyTotals) {
+        // Tổng hợp: % = tổng câu đúng / tổng câu đã làm THẬT của đúng nhóm năng lực đó.
+        // Áp dụng cho cả bài tập lẫn đề thi mới.
         const agg = {};
         skillKeys.forEach(k => { agg[k] = { correct: 0, total: 0 }; });
         rows.forEach(r => {
@@ -2296,7 +2387,7 @@ function renderHistoryTable(rows, sheetName) {
             bodyRows += `
                 <tr class="hover:bg-pink-50/30 transition-colors">
                     <td class="py-2.5 px-2">${idx + 1}</td>
-                    <td class="py-2.5 px-2 font-black">Tuần ${r.tuan || (idx + 1)}</td>
+                    <td class="py-2.5 px-2 font-black">${isWeekly ? `Tuần ${r.tuan || (idx + 1)}` : (r.deSo ? `Đề ${r.deSo}` : `Đề ${idx + 1}`)}</td>
                     <td class="py-2.5 px-2 font-black text-purple-600">${itemDiem}</td>
                     ${skillCells}
                     <td class="py-2.5 px-2 text-gray-500">${dateStr}</td>
@@ -2305,10 +2396,9 @@ function renderHistoryTable(rows, sheetName) {
             `;
         });
     } else {
-        skillKeys.forEach((k, i) => {
-            const sum = rows.reduce((acc, r) => acc + getScoreVal(r, i + 1, SKILL_TAXONOMY[k].sheetCol), 0);
-            summaryCells += `<td class="py-2 px-1">${(sum / totalRows).toFixed(1)}</td>`;
-        });
+        // Dữ liệu đề thi cũ chưa có cột tổng số câu theo năng lực: không suy đoán %
+        // vì dễ biến "chưa được hỏi" thành "làm sai". Chỉ giữ tổng điểm lịch sử.
+        skillKeys.forEach(() => { summaryCells += `<td class="py-2 px-1 text-gray-300">--</td>`; });
 
         rows.forEach((r, idx) => {
             const itemDiem = r.tongDiem || r.score || '--';
@@ -2316,8 +2406,8 @@ function renderHistoryTable(rows, sheetName) {
             const durationStr = r.thoiGianLamBai || '--';
 
             let examSkillCells = '';
-            skillKeys.forEach((k, i) => {
-                examSkillCells += `<td class="py-2 px-1">${getScoreVal(r, i + 1, SKILL_TAXONOMY[k].sheetCol)}</td>`;
+            skillKeys.forEach(() => {
+                examSkillCells += `<td class="py-2 px-1 text-gray-300">--</td>`;
             });
 
             bodyRows += `
