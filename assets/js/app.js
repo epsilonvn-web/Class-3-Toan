@@ -566,18 +566,18 @@ async function renderExamHubGrid() {
 // MINI GAME TOÁN 3 — HUB 12 GAME + LAZY LOAD
 // ==========================================
 const MINIGAME_LIST = [
-    { id: 'balance-scale', title: '1. Balance Scale', desc: 'Cân bằng hai vế bằng tư duy phép tính', icon: '⚖️', ready: true },
-    { id: 'number-hunt', title: '2. Number Hunt', desc: 'Săn con số đúng theo yêu cầu', icon: '🔎', ready: false },
-    { id: 'math-train', title: '3. Math Train', desc: 'Ghép toa để hoàn thành phép tính', icon: '🚂', ready: false },
-    { id: 'target-number', title: '4. Target Number', desc: 'Tính nhanh để chạm số mục tiêu', icon: '🎯', ready: false },
-    { id: 'number-river', title: '5. Number River', desc: 'Nhảy qua đúng kết quả để qua sông', icon: '🐸', ready: false },
-    { id: 'missing-number', title: '6. Missing Number', desc: 'Tìm số còn thiếu trong phép tính', icon: '🧩', ready: false },
-    { id: 'pattern-detective', title: '7. Pattern Detective', desc: 'Phá án quy luật dãy số', icon: '🕵️', ready: false },
-    { id: 'shape-builder', title: '8. Shape Builder', desc: 'Ghép hình và khám phá hình học', icon: '📐', ready: false },
-    { id: 'time-master', title: '9. Time Master', desc: 'Chinh phục đồng hồ và thời gian', icon: '🕐', ready: false },
-    { id: 'little-shop', title: '10. Little Shop', desc: 'Mua bán, tính tiền và tiền thừa', icon: '🛒', ready: false },
-    { id: 'math-factory', title: '11. Math Factory', desc: 'Phân loại số và phép tính vào đúng máy', icon: '🏭', ready: false },
-    { id: 'math-race', title: '12. Math Race', desc: 'Đua xe bằng phản xạ tính toán', icon: '🏎️', ready: false }
+    { id: 'sudoku', title: '1. Sudoku trí tuệ', desc: '9 cấp độ từ 4×4 đến 9×9 · luyện tập trung và suy luận', icon: '🔢', ready: true },
+    { id: 'number-hunt', title: '2. Săn số 100 000', desc: 'Bắn mục tiêu số đang chuyển động · đọc, so sánh, làm tròn', icon: '🎯', ready: true },
+    { id: 'math-train', title: '3. Tàu nhân chia', desc: 'Kéo kiện hàng kết quả vào toa · bảng nhân chia và phép tính', icon: '🚂', ready: true },
+    { id: 'target-number', title: '4. Xưởng biểu thức', desc: 'Vận hành máy theo đúng thứ tự tính rồi nhập kết quả', icon: '⚙️', ready: true },
+    { id: 'missing-number', title: '5. Thợ săn X', desc: 'Đặt X lên cân thăng bằng · tìm thành phần chưa biết', icon: '⚖️', ready: true },
+    { id: 'number-river', title: '6. Dòng sông phân số', desc: 'Điều khiển ếch nhảy qua lá sen phân số đúng', icon: '🐸', ready: true },
+    { id: 'shape-builder', title: '7. Kiến trúc sư hình học', desc: 'Xây và thay đổi kích thước hình để đạt chu vi, diện tích', icon: '🏗️', ready: true },
+    { id: 'time-master', title: '8. Đồng hồ & lịch', desc: 'Xoay kim đồng hồ, tính thời điểm và khoảng thời gian', icon: '🕐', ready: true },
+    { id: 'little-shop', title: '9. Siêu thị Toán 3', desc: 'Ghép tờ tiền vào khay · thanh toán và trả tiền thừa', icon: '🛒', ready: true },
+    { id: 'math-factory', title: '10. Trạm đo lường', desc: 'Kéo vạch thước, mức nước, quả cân · luyện đổi đơn vị', icon: '📏', ready: true },
+    { id: 'pattern-detective', title: '11. Thám tử dữ liệu', desc: 'Kéo cột biểu đồ, mở khóa quy luật và suy luận dữ liệu', icon: '🕵️', ready: true },
+    { id: 'math-race', title: '12. Đường đua Toán 3', desc: 'Chuyển làn né cổng sai · phản xạ kiến thức tổng hợp', icon: '🏎️', ready: true }
 ];
 
 const MINIGAME_PALETTES = [
@@ -596,23 +596,66 @@ const MINIGAME_PALETTES = [
 ];
 
 const GAME_SCRIPT_MAP = {
-    'balance-scale': 'assets/js/games/balance-scale.js',
+    'sudoku': 'assets/js/games/sudoku.js',
     'number-hunt': 'assets/js/games/number-hunt.js',
     'math-train': 'assets/js/games/math-train.js',
     'target-number': 'assets/js/games/target-number.js',
-    'number-river': 'assets/js/games/number-river.js',
     'missing-number': 'assets/js/games/missing-number.js',
-    'pattern-detective': 'assets/js/games/pattern-detective.js',
+    'number-river': 'assets/js/games/number-river.js',
     'shape-builder': 'assets/js/games/shape-builder.js',
     'time-master': 'assets/js/games/time-master.js',
     'little-shop': 'assets/js/games/little-shop.js',
     'math-factory': 'assets/js/games/math-factory.js',
+    'pattern-detective': 'assets/js/games/pattern-detective.js',
     'math-race': 'assets/js/games/math-race.js'
 };
+const GAME_STOPPER_MAP = {
+    'sudoku': 'stopSudokuGame',
+    'number-hunt': 'stopNumberHuntGame',
+    'math-train': 'stopMathTrainGame',
+    'target-number': 'stopTargetNumberGame',
+    'missing-number': 'stopMissingNumberGame',
+    'number-river': 'stopNumberRiverGame',
+    'shape-builder': 'stopShapeBuilderGame',
+    'time-master': 'stopTimeMasterGame',
+    'little-shop': 'stopLittleShopGame',
+    'math-factory': 'stopMathFactoryGame',
+    'pattern-detective': 'stopPatternDetectiveGame',
+    'math-race': 'stopMathRaceGame'
+};
+const GAME_STARTER_MAP = {
+    'sudoku': 'startSudokuGame',
+    'number-hunt': 'startNumberHuntGame',
+    'math-train': 'startMathTrainGame',
+    'target-number': 'startTargetNumberGame',
+    'missing-number': 'startMissingNumberGame',
+    'number-river': 'startNumberRiverGame',
+    'shape-builder': 'startShapeBuilderGame',
+    'time-master': 'startTimeMasterGame',
+    'little-shop': 'startLittleShopGame',
+    'math-factory': 'startMathFactoryGame',
+    'pattern-detective': 'startPatternDetectiveGame',
+    'math-race': 'startMathRaceGame'
+};
+
+let currentMiniGameId = null;
+
+function stopActiveMiniGame_() {
+    if (currentMiniGameId) {
+        const stopperName = GAME_STOPPER_MAP[currentMiniGameId];
+        const stopper = stopperName ? window[stopperName] : null;
+        if (typeof stopper === 'function') {
+            try { stopper(); } catch (_) {}
+        }
+    }
+    currentMiniGameId = null;
+}
+
 const loadedGameScripts = {};
 
 function openMiniGameHub() {
     if (!requirePremium('Mini Game')) return;
+    stopActiveMiniGame_();
     setAppShellRootMode_(true);
     setMainTabActive_('games');
     stopSpeaking();
@@ -624,8 +667,8 @@ function openMiniGameHub() {
     grid.innerHTML = MINIGAME_LIST.map((g, idx) => {
         const p = MINIGAME_PALETTES[idx % MINIGAME_PALETTES.length];
         return `
-            <div onclick="openGamePlay('${g.id}')" class="${p[0]} ${p[1]} border-2 rounded-[26px] p-3.5 md:p-4 min-h-[132px] flex flex-col items-center justify-between text-center cursor-pointer relative shadow-sm pastel-btn group">
-                ${!g.ready ? '<span class="absolute top-2 right-2 bg-slate-100 text-slate-500 text-[10px] font-black px-2 py-0.5 rounded-full border border-slate-200">Sắp ra mắt</span>' : '<span class="absolute top-2 right-2 bg-emerald-100 text-emerald-700 text-[10px] font-black px-2 py-0.5 rounded-full border border-emerald-200">Chơi ngay</span>'}
+            <div onclick="openGamePlay('${g.id}')" class="${p[0]} ${p[1]} border-2 rounded-[26px] p-3.5 md:p-4 min-h-[148px] flex flex-col items-center justify-between text-center cursor-pointer relative shadow-sm pastel-btn group">
+                <span class="absolute top-2 right-2 bg-emerald-100 text-emerald-700 text-[10px] font-black px-2 py-0.5 rounded-full border border-emerald-200">Chơi ngay</span>
                 <div class="text-4xl group-hover:scale-110 transition-transform mt-1">${g.icon}</div>
                 <div class="w-full">
                     <h3 class="font-extrabold ${p[2]} text-base leading-tight">${g.title}</h3>
@@ -640,7 +683,7 @@ function loadGameScript(src) {
     if (loadedGameScripts[src]) return Promise.resolve();
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = src;
+        script.src = src + (src.includes('?') ? '&' : '?') + 'v=' + Date.now();
         script.onload = () => { loadedGameScripts[src] = true; resolve(); };
         script.onerror = () => reject(new Error(`Không tải được file game: ${src}`));
         document.body.appendChild(script);
@@ -649,28 +692,37 @@ function loadGameScript(src) {
 
 async function openGamePlay(gameId) {
     if (!requirePremium('Mini Game')) return;
+    stopActiveMiniGame_();
     setAppShellRootMode_(false);
     stopSpeaking();
     inMiniGameFlow = true;
     const game = MINIGAME_LIST.find(g => g.id === gameId);
     if (!game) return;
-    if (!game.ready) {
-        alert(`Game "${game.title}" đang được xây dựng. Cô Ong Vàng sẽ mở game này ở bản cập nhật sau nhé!`);
-        return;
-    }
+
     const title = document.getElementById('game-play-title');
     if (title) title.innerHTML = `<span>${game.icon}</span><span class="truncate">${game.title}</span>`;
     updateNavTabs('Mini Game', '🎮', game.title);
     switchAppView('view-game-play');
+
     const container = document.getElementById('game-play-container');
     if (container) container.innerHTML = '<p class="text-center text-gray-400 font-bold py-8"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang tải game...</p>';
+
     try {
         await loadGameScript(GAME_SCRIPT_MAP[gameId]);
     } catch (e) {
-        if (container) container.innerHTML = '<p class="text-center text-purple-500 font-bold py-8">Không tải được game, bé thử lại nhé!</p>';
+        if (container) container.innerHTML = '<p class="text-center text-purple-500 font-bold py-8">Không tải được game. Con kiểm tra lại thư mục assets/js/games nhé!</p>';
         return;
     }
-    if (gameId === 'balance-scale' && typeof startBalanceScaleGame === 'function') startBalanceScaleGame();
+
+    const starterName = GAME_STARTER_MAP[gameId];
+    const starter = starterName ? window[starterName] : null;
+    if (typeof starter !== 'function') {
+        if (container) container.innerHTML = '<p class="text-center text-purple-500 font-bold py-8">Game đã tải nhưng chưa tìm thấy hàm khởi động.</p>';
+        return;
+    }
+
+    currentMiniGameId = gameId;
+    starter();
 }
 
 // ==========================================
@@ -3016,6 +3068,7 @@ function refreshMainTabLocksToan3_(){
     ['bai-hoc-lock-icon','roadmap-lock-icon','review-lock-icon','exam-lock-icon','minigame-lock-icon'].forEach(id=>document.getElementById(id)?.classList.toggle('hidden',unlocked));
 }
 function openMainTab(tabName){
+    if(tabName!=='games') stopActiveMiniGame_();
     stopSpeaking(); clearInterval(quizTimerInterval);
     if(tabName==='discover'){goHome();return;}
     if(tabName==='lessons'){if(!requirePremium('Bài học'))return;setMainTabActive_('lessons');clickLessonModule(1);return;}
@@ -3044,6 +3097,7 @@ function updateNavTabs(level2Title, level2Icon, level3Title, level4Title){
     if(tab4){const t4=document.getElementById('header-level4-title');if(level4Title){if(t4)t4.textContent=level4Title;tab4.classList.remove('hidden');tab4.classList.add('flex');}else{tab4.classList.add('hidden');tab4.classList.remove('flex');}}
 }
 function goHome(){
+    stopActiveMiniGame_();
     setAppShellRootMode_(true);
     stopSpeaking();clearInterval(quizTimerInterval);inMiniGameFlow=false;activeTopicId=null;activeExamContext=null;activeRoadmapContext=null;pendingTopicQuiz=null;
     setMainTabActive_('discover');updateNavTabs(null,null,null);renderDashboardGrid();switchAppView('view-dashboard-grid');refreshMainTabLocksToan3_();
