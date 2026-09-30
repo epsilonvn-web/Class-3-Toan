@@ -598,7 +598,7 @@ const MINIGAME_PALETTES = [
 ];
 
 const GAME_SCRIPT_MAP = {
-    'sudoku': 'assets/js/games/sudoku.js?v=20260930-wide-numpad-side',
+    'sudoku': 'assets/js/games/sudoku.js?v=20260930-wide-numpad-side-font2',
     'number-hunt': 'assets/js/games/number-hunt.js',
     'math-train': 'assets/js/games/math-train.js',
     'target-number': 'assets/js/games/target-number.js',
@@ -658,6 +658,8 @@ const loadedGameScripts = {};
 function openMiniGameHub() {
     if (!requirePremium('Mini Game')) return;
     stopActiveMiniGame_();
+    const gameContainer = document.getElementById('game-play-container');
+    if (gameContainer && gameContainer.parentElement) gameContainer.parentElement.style.maxWidth = '';
     setAppShellRootMode_(true);
     setMainTabActive_('games');
     stopSpeaking();
@@ -707,7 +709,12 @@ async function openGamePlay(gameId) {
     switchAppView('view-game-play');
 
     const container = document.getElementById('game-play-container');
-    if (container) container.innerHTML = '<p class="text-center text-gray-400 font-bold py-8"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang tải game...</p>';
+    if (container) {
+        // Match Toán 2: Sudoku uses the wide play area so the 9x9 board can reach ~620px
+        // while keeping the instruction/numpad panel beside it. Other games keep the default shell width.
+        if (container.parentElement) container.parentElement.style.maxWidth = gameId === 'sudoku' ? '72rem' : '';
+        container.innerHTML = '<p class="text-center text-gray-400 font-bold py-8"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang tải game...</p>';
+    }
 
     try {
         await loadGameScript(GAME_SCRIPT_MAP[gameId]);
