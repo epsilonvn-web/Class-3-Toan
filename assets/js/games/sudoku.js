@@ -141,7 +141,7 @@
     style.textContent = `
       .sdk-shell{width:100%;max-width:1120px;margin:0 auto;font-family:inherit;font-size:16px}
       .sdk-toolbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
-      .sdk-level{border:2px solid #e9d5ff;background:#fff;border-radius:16px;padding:10px 11px;font-weight:900;font-size:16px;line-height:1.25;color:#6d28d9;transition:.18s}
+      .sdk-level{border:2px solid #e9d5ff;background:#fff;border-radius:16px;padding:10px 11px;font-weight:900;font-size:18px;line-height:1.25;color:#6d28d9;transition:.18s}.sdk-level>div{font-size:16px!important;line-height:1.2!important}
       .sdk-level:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(109,40,217,.10)}
       .sdk-level.is-active{background:linear-gradient(135deg,#ec4899,#8b5cf6);color:#fff;border-color:#a855f7;box-shadow:0 6px 16px rgba(168,85,247,.22)}
       .sdk-play-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:start}.sdk-board-card{min-width:0}.sdk-side{position:sticky;top:8px}.sdk-board{--n:4;--box-rows:2;--box-cols:2;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));width:min(100%,620px);aspect-ratio:1/1;margin:0 auto;border:3px solid #7c3aed;border-radius:16px;overflow:hidden;background:#7c3aed;box-shadow:0 10px 28px rgba(124,58,237,.16)}
@@ -160,12 +160,12 @@
       .sdk-numpad-wrap{margin-top:2px;padding-top:10px;border-top:1px solid #dbeafe}.sdk-numpad-title{text-align:center;font-size:15px;font-weight:900;color:#475569;margin-bottom:8px}.sdk-numpad{display:grid;gap:9px;width:100%;margin:0}.sdk-numpad .sdk-clear{grid-column:1/-1;min-height:46px;font-size:16px;color:#64748b}
       .sdk-num{min-height:62px;border-radius:15px;border:2px solid #ddd6fe;background:#fff;color:#6d28d9;font-weight:900;font-size:28px;box-shadow:0 3px 9px rgba(76,29,149,.07);transition:.15s}
       .sdk-num:hover{background:#f5f3ff;transform:translateY(-1px)}
-      .sdk-action{min-height:44px;border-radius:14px;padding:9px 13px;font-weight:900;font-size:15px;transition:.15s}
+      .sdk-action{min-height:44px;border-radius:14px;padding:9px 13px;font-weight:900;font-size:15px;transition:.15s}.sdk-rule-title{font-size:18px!important;line-height:1.3}.sdk-rule-body{font-size:16px!important;line-height:1.65}.sdk-tip-title{font-size:17px!important;line-height:1.35}.sdk-tip-body{font-size:16px!important;line-height:1.65}
       .sdk-progress{height:8px;border-radius:999px;background:#f1f5f9;overflow:hidden}
       .sdk-progress>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#ec4899,#8b5cf6);transition:width .25s ease}
       @keyframes sdk-shake{0%,100%{transform:translateX(0)}30%{transform:translateX(-4px)}70%{transform:translateX(4px)}}
       @keyframes sdk-pop{0%{transform:scale(.88)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
-      @media(max-width:900px){.sdk-play-grid{grid-template-columns:1fr}.sdk-side{position:static}.sdk-board{width:min(92vw,620px)}.sdk-numpad{max-width:520px;margin:0 auto}.sdk-numpad-wrap{border-top:0;border-bottom:1px solid #dbeafe;padding-top:0;padding-bottom:12px}.sdk-side .sdk-numpad-wrap{order:-1}}@media(max-width:640px){.sdk-board{width:min(92vw,440px);border-radius:14px}.sdk-toolbar{grid-template-columns:1fr 1fr}.sdk-level{padding:9px 7px;font-size:14px}.sdk-cell{font-size:clamp(22px,7.2vw,34px)}.sdk-num{min-height:54px;font-size:23px}}
+      @media(max-width:900px){.sdk-play-grid{grid-template-columns:1fr}.sdk-side{position:static}.sdk-board{width:min(92vw,620px)}.sdk-numpad{max-width:520px;margin:0 auto}.sdk-numpad-wrap{border-top:0;border-bottom:1px solid #dbeafe;padding-top:0;padding-bottom:12px}.sdk-side .sdk-numpad-wrap{order:-1}}@media(max-width:640px){.sdk-board{width:min(92vw,440px);border-radius:14px}.sdk-toolbar{grid-template-columns:1fr 1fr}.sdk-level{padding:9px 7px;font-size:16px}.sdk-level>div{font-size:14px!important}.sdk-rule-title{font-size:17px!important}.sdk-rule-body,.sdk-tip-body{font-size:15px!important}.sdk-tip-title{font-size:16px!important}.sdk-cell{font-size:clamp(22px,7.2vw,34px)}.sdk-num{min-height:54px;font-size:23px}}
     `;
     document.head.appendChild(style);
   }
@@ -216,12 +216,12 @@
 
           <aside class="sdk-side rounded-3xl border-2 border-sky-100 bg-gradient-to-b from-sky-50/60 to-white p-3 md:p-4 shadow-sm space-y-3 flex flex-col">
             <div>
-              <div class="font-black text-sky-800 text-sm mb-1">🎯 Cách chơi</div>
-              <div id="sudoku-rule-text" class="text-xs font-bold text-slate-600 leading-relaxed"></div>
+              <div class="sdk-rule-title font-black text-sky-800 mb-1">🎯 Cách chơi</div>
+              <div id="sudoku-rule-text" class="sdk-rule-body font-bold text-slate-600"></div>
             </div>
             <div class="rounded-2xl border border-purple-100 bg-white p-3">
-              <div class="font-black text-purple-700 text-sm">Mẹo nhỏ</div>
-              <p class="text-xs font-bold text-slate-600 mt-1 leading-relaxed">Hãy nhìn hàng, cột và ô nhỏ. Số nào đã có rồi thì mình loại ra nhé!</p>
+              <div class="sdk-tip-title font-black text-purple-700">Mẹo nhỏ</div>
+              <p class="sdk-tip-body font-bold text-slate-600 mt-1">Hãy nhìn hàng, cột và ô nhỏ. Số nào đã có rồi thì mình loại ra nhé!</p>
             </div>
             <div class="grid grid-cols-2 gap-2">
               <button onclick="sudokuNewGame()" class="sdk-action bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-sm"><i class="fa-solid fa-rotate mr-1"></i> Ván mới</button>
