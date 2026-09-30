@@ -598,7 +598,7 @@ const MINIGAME_PALETTES = [
 ];
 
 const GAME_SCRIPT_MAP = {
-    'sudoku': 'assets/js/games/sudoku.js',
+    'sudoku': 'assets/js/games/sudoku.js?v=20260930-wide-numpad-side',
     'number-hunt': 'assets/js/games/number-hunt.js',
     'math-train': 'assets/js/games/math-train.js',
     'target-number': 'assets/js/games/target-number.js',
