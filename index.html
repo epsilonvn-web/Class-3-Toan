@@ -231,7 +231,7 @@
            Chi presentation/layout; khong doi engine, data, permission.
            ========================================================= */
         body { background:#fff !important; }
-        #screen-dashboard { max-width:72rem !important; background:transparent !important; }
+        #screen-dashboard { max-width:82rem !important; background:transparent !important; }
         .app-main-header{
             display:grid !important;
             grid-template-columns:auto minmax(0,1fr) auto;
@@ -295,7 +295,7 @@
         #header-level2-title,#header-level3-title,#header-level4-title{font-size:12px !important;font-weight:900 !important;}
         #header-level3-tab > span,#header-level4-tab > span{color:#c084fc !important;font-size:13px !important;}
 
-        #app-footer{width:100%;max-width:72rem;min-height:76px;margin:10px auto 0;padding:0 14px;border-radius:0;background-image:url('footer-bg.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;color:#1827f2;border:0;box-shadow:none;}
+        #app-footer{width:100%;max-width:82rem;min-height:76px;margin:10px auto 0;padding:0 14px;border-radius:0;background-image:url('footer-bg.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;color:#1827f2;border:0;box-shadow:none;}
         #app-footer .footer-title{font-size:17px;font-weight:900;line-height:1.35;text-shadow:0 1px 0 #fff;}
         #app-footer .footer-sub{font-size:13px;font-weight:800;line-height:1.35;color:#1827f2;text-shadow:0 1px 0 #fff;}
 
@@ -467,7 +467,7 @@
             background-position:center !important;
             background-repeat:no-repeat !important;
             width:calc(100% - 16px) !important;
-            max-width:calc(72rem - 16px) !important;
+            max-width:calc(82rem - 16px) !important;
         }
         @media (max-width:767px){
             #app-footer{
@@ -591,6 +591,66 @@
                 line-height:1.4 !important;
             }
         }
+
+
+        /* =========================================================
+           TOAN 3 - TANG CO CHU TOAN CHUONG TRINH 2026-10-01
+           Chi tang typography; khong doi engine/data/business logic.
+           ========================================================= */
+        @media (min-width:768px){
+            /* Cac utility text cua Tailwind trong toan bo app */
+            #screen-dashboard [class~="text-[10px]"]{font-size:12px !important;}
+            #screen-dashboard [class~="text-[11px]"]{font-size:13.5px !important;}
+            #screen-dashboard .text-xs{font-size:14px !important;line-height:1.35 !important;}
+            #screen-dashboard .text-sm{font-size:16px !important;line-height:1.4 !important;}
+            #screen-dashboard .text-base{font-size:18px !important;line-height:1.42 !important;}
+            #screen-dashboard .text-lg{font-size:20px !important;line-height:1.35 !important;}
+            #screen-dashboard .text-xl{font-size:22px !important;line-height:1.3 !important;}
+            #screen-dashboard .text-2xl{font-size:26px !important;line-height:1.2 !important;}
+
+            /* Header + breadcrumb */
+            .main-module-tab{font-size:17px !important;}
+            #header-level2-title,#header-level3-title,#header-level4-title{font-size:15px !important;}
+            #header-level3-tab > span,#header-level4-tab > span{font-size:15px !important;}
+            #header-star-box > div > span:first-child{font-size:13px !important;}
+            #star-green-count,#star-red-count{font-size:16px !important;}
+
+            /* Trang Kham pha */
+            #view-dashboard-grid .pastel-card h3{font-size:1.28rem !important;line-height:1.22 !important;}
+            #view-dashboard-grid .pastel-card > div:last-child{font-size:15.5px !important;line-height:1.4 !important;}
+
+            /* Trang chon muc con */
+            #lecture-content{font-size:19px !important;line-height:1.55 !important;}
+            #lecture-subtopics-list button > span:first-child{font-size:17px !important;line-height:1.45 !important;}
+            #lecture-subtopics-list button > span:last-child{font-size:13.5px !important;}
+            #view-lecture > div:last-child button{font-size:15px !important;}
+
+            /* Footer */
+            #app-footer .footer-title{font-size:19px !important;}
+            #app-footer .footer-sub{font-size:15px !important;}
+        }
+
+        @media (max-width:767px){
+            #screen-dashboard [class~="text-[10px]"]{font-size:11px !important;}
+            #screen-dashboard [class~="text-[11px]"]{font-size:12.5px !important;}
+            #screen-dashboard .text-xs{font-size:13px !important;line-height:1.35 !important;}
+            #screen-dashboard .text-sm{font-size:15px !important;line-height:1.4 !important;}
+            #screen-dashboard .text-base{font-size:16.5px !important;line-height:1.42 !important;}
+            #screen-dashboard .text-lg{font-size:18.5px !important;line-height:1.35 !important;}
+            #screen-dashboard .text-xl{font-size:21px !important;line-height:1.3 !important;}
+            #screen-dashboard .text-2xl{font-size:24px !important;line-height:1.2 !important;}
+
+            .main-module-tab{font-size:15.5px !important;}
+            #header-level2-title,#header-level3-title,#header-level4-title{font-size:12.5px !important;}
+            #view-dashboard-grid .pastel-card h3{font-size:1.12rem !important;line-height:1.22 !important;}
+            #view-dashboard-grid .pastel-card > div:last-child{font-size:14.5px !important;line-height:1.4 !important;}
+            #lecture-content{font-size:16.5px !important;line-height:1.5 !important;}
+            #lecture-subtopics-list button > span:first-child{font-size:15.5px !important;line-height:1.4 !important;}
+            #lecture-subtopics-list button > span:last-child{font-size:12.5px !important;}
+            #app-footer .footer-title{font-size:15px !important;}
+            #app-footer .footer-sub{font-size:13px !important;}
+        }
+
 </style>
 </head>
 <body class="p-1 md:p-2 w-full" style="padding-top:0;padding-bottom:max(0.25rem,env(safe-area-inset-bottom));padding-left:max(0.25rem,env(safe-area-inset-left));padding-right:max(0.25rem,env(safe-area-inset-right));">
@@ -667,7 +727,7 @@
         </div>
 
         <!-- 2. KHUNG CHÍNH CHUẨN TỶ LỆ 16:9 / 16:10 -->
-        <div id="screen-dashboard" class="w-full max-w-5xl flex flex-col space-y-1.5 md:space-y-2 p-1 md:p-2" style="max-width: 72rem !important;">
+        <div id="screen-dashboard" class="w-full max-w-5xl flex flex-col space-y-1.5 md:space-y-2 p-1 md:p-2" style="max-width: 82rem !important;">
             
             <header class="app-main-header w-full">
                 <button id="btn-header-home" onclick="goHome()" title="Về trang chủ" class="flex items-center justify-center bg-white border border-pink-300 shadow-sm shrink-0 overflow-hidden p-0 transition-shadow duration-200 hover:border-pink-400 hover:shadow-[0_0_18px_rgba(244,114,182,0.65)]">
@@ -1190,7 +1250,66 @@
         </div>
     </footer>
 
-    <!-- NẠP ENGINE JAVASCRIPT ĐỒNG BỘ -->
-    <script src="assets/js/app.js?v=11.0-split-games"></script>
+    <!-- NẠP ENGINE JAVASCRIPT - BUILD V15, TU DONG LOAI CACHE/SERVICE WORKER CU -->
+    <script>
+    (async function bootToan3V15(){
+        const BUILD = '20261001-topic1-learning-v15';
+        const CLEAN_KEY = 'toan3_clean_' + BUILD;
+        const EXPECTED_BUILD = BUILD;
+
+        async function clearOldRuntime(){
+            try {
+                if ('serviceWorker' in navigator) {
+                    const regs = await navigator.serviceWorker.getRegistrations();
+                    await Promise.all(regs.map(reg => reg.unregister()));
+                }
+            } catch (e) { console.warn('SW cleanup:', e); }
+            try {
+                if ('caches' in window) {
+                    const keys = await caches.keys();
+                    // Khong xoa cache cua app khac tren cung origin; chi xoa cache co ten lien quan Toan 3 neu co.
+                    const own = keys.filter(k => /toan[-_ ]?3|class[-_ ]?3[-_ ]?toan|epsilon.*toan3/i.test(k));
+                    await Promise.all(own.map(k => caches.delete(k)));
+                }
+            } catch (e) { console.warn('Cache cleanup:', e); }
+        }
+
+        // Lan dau cua build moi: go SW cu roi BAT BUOC tai lai trang mot lan.
+        // Dieu nay cat dut trang hien tai khoi worker cu truoc khi nap app.js moi.
+        if (sessionStorage.getItem(CLEAN_KEY) !== '1') {
+            sessionStorage.setItem(CLEAN_KEY, '1');
+            await clearOldRuntime();
+            const u = new URL(location.href);
+            u.searchParams.set('ee_build', BUILD);
+            u.searchParams.set('ee_cb', String(Date.now()));
+            location.replace(u.toString());
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = 'assets/js/app.js?v=' + encodeURIComponent(BUILD) + '&cb=' + Date.now();
+        script.async = false;
+        script.onload = async () => {
+            // Neu van bi worker cu tra ve app.js cu, build sentinel se khong khop.
+            if (window.__TOAN3_APP_BUILD__ !== EXPECTED_BUILD) {
+                const retryKey = 'toan3_retry_' + BUILD;
+                const retries = Number(sessionStorage.getItem(retryKey) || 0);
+                if (retries < 2) {
+                    sessionStorage.setItem(retryKey, String(retries + 1));
+                    await clearOldRuntime();
+                    const u = new URL(location.href);
+                    u.searchParams.set('ee_build', BUILD);
+                    u.searchParams.set('ee_retry', String(retries + 1));
+                    u.searchParams.set('ee_cb', String(Date.now()));
+                    location.replace(u.toString());
+                    return;
+                }
+                console.error('Dang nap nham app.js cu. Expected:', EXPECTED_BUILD, 'Actual:', window.__TOAN3_APP_BUILD__);
+            }
+        };
+        script.onerror = () => console.error('Khong nap duoc assets/js/app.js');
+        document.body.appendChild(script);
+    })();
+    </script>
 </body>
 </html>
